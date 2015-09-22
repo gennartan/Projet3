@@ -382,8 +382,7 @@ Un grand réacteur à l'avantage d'être stable (il fallait moins souvent remett
 	\subsection*{d) Comparaison d'un procédé en continu par rapport à un procédé en batch}
 Un procédé en continu est se déroule dans des conditions identiques tout au long du déroulement (températures, pression, quantité de soluté, quantité de solvant, ...). Il y a toujours le même apport en solvant et soluté à l'entrée du réacteur, et le même produit qui en sort fini.
 
-Un procédé en bach, aussi appelé procédé discontinu est surtout utilisé de manière expérimentale, lors que des petites quantités, précises sont requises. Dans ce genre de procédé, les conditions peuvent changer (température, pression, masses, ...).
-
+Un procédé en bach, aussi appelé procédé discontinu est surtout utilisé dans
 \begin{table}[h]\centering
 \begin{tabular}{|m{0.48\textwidth}|m{0.48\textwidth}|}\hline
 	\rowcolor{Gray}	
@@ -394,6 +393,9 @@ Un procédé en bach, aussi appelé procédé discontinu est surtout utilisé de
 	- Production sans arrêt & - Changement de température possible \\\hline
 \end{tabular}
 \end{table}
+\noindent Le procédé en continu se déroule dans des conditions identiques tout au long du déroulement. Il est fort utilisé dans l'industrie pétrochimique et gazière.
+
+\noindent Le procédé discontinu est surtout utilisé dans des procédés expérimentaux. On peut par exemple changer la température pendant la réaction, ce qui n'est pas possible pour un procédé en continu.
 
 	\subsection*{e) Que se passerait-il si le procédé ce déroulerait lentement ?}
 La phase transitoire serait très longue.
