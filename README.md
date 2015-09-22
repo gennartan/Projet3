@@ -1,4 +1,5 @@
 # Projet3 2015-2016 Ecole polytechnique de Louvain
-Adrien Couplet
-Antoine Gennart
-Juline Girard
+
+@Authors : Adrien Couplet / Juline Girard / Antoine Gennart / Paul / Anthony Gatin / Brice / Pierre / Gregory 
+
+@Description : Synthèse de l'amoniac
