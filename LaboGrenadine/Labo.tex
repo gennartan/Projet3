@@ -15,6 +15,7 @@
 \usepackage{subfig, float, caption}
 \usepackage{array}
 \usepackage{color, colortbl}
+\usepackage{hyperref}
 
 \pgfplotsset{compat=1.11}
 
@@ -145,8 +146,9 @@
 			\begin{figure}[h]
 				\centering
 				\includegraphics[width=1.0\textwidth]{pictures/refractometre.jpg}
-				\caption{Fonctionnement d'un réfractomètre \label{refractometrie}}
+				\caption{Fonctionnement d'un réfracomètre\label{refractometrie}\protect\footnotemark}
 			\end{figure}
+			\footnotetext{Source : \url{http://www.mesurez.com/refractometre-principe-mode-emploi.html}}
 		\subsubsection{Méthode utilisée}
 			\begin{enumerate}
 				\item Prélevement régulier du mélange dans le réacteur (systématiquement au même endroit, au fond au bord).
@@ -161,8 +163,9 @@
 
 \section{Résultats}
 	\subsection{Calcul du débit}
-	\begin{table}[h]
+	\begin{table}[h!]
 		\centering
+		\begin{footnotesize}
 		\subfloat{
 			\centering
 			\begin{tabular}{|c|c|c|}\hline
@@ -203,17 +206,16 @@
 				\multicolumn{2}{|c|}{\textbf{Moyenne}} & 3.3 \\ \hline
 			\end{tabular}
 		}
+		\end{footnotesize}
 		\caption{Tableaux des mesures de débits \label{mesures}}
 	\end{table}		
-
 \subsection{Graphique}
-\phantom[
 \begin{figure}[h!]
 	\begin{minipage}[m]{.3\textwidth}
-		\centering\begin{footnotesize}
+		\centering\begin{scriptsize}
 		\begin{tabular}{|c|c|}\hline\rowcolor{Gray}
 			Temps & Taux \\ \rowcolor{Gray}
-			$[s]$ & $[^\circ B]$ \\ \hline
+			$[min]$ & $[^\circ B]$ \\ \hline
 			0 & 0.2 \\
 			1 & 1.4 \\
 			2 & 2.3 \\
@@ -231,17 +233,17 @@
 			35 & 5.9 \\
 			40 & 6.2 \\
 			45 & 5.9 \\ \hline
-		\end{tabular}\end{footnotesize}
+		\end{tabular}\end{scriptsize}
 	\end{minipage}
 	\begin{minipage}[m]{.5\textwidth}
 		\centering
 		\begin{tikzpicture}
 			\begin{axis}[
-				height=7cm,
+				height=6cm,
 				width=10cm,
 				grid=major,
 				legend pos=south east,
-				xlabel={Temps $[s]$},
+				xlabel={Temps $[min]$},
 				ylabel={Taux de saccharose $[^\circ B]$},
 			]
 			\addplot coordinates {
@@ -269,13 +271,12 @@
 	\end{minipage}
 	\caption{Taux de saccharose par rapport au temps (Grenadine) \label{grenad}}
 \end{figure}
-
 \begin{figure}[h!]
 	\begin{minipage}[m]{.3\textwidth}
-		\centering\begin{footnotesize}
+		\centering\begin{scriptsize}
 		\begin{tabular}{|c|c|}\hline \rowcolor{Gray}
 			Temps & Taux \\ \rowcolor{Gray}
-			$[s]$ & $[^\circ B]$ \\ \hline
+			$[min]$ & $[^\circ B]$ \\ \hline
 			0 & 0.0 \\
 			1 & 2.0 \\
 			2 & 3.0 \\
@@ -293,17 +294,17 @@
 			35 & 9.0 \\
 			40 & 9.0 \\
 			45 & 9.0 \\ \hline
-		\end{tabular}\end{footnotesize}
+		\end{tabular}\end{scriptsize}
 	\end{minipage}
 	\begin{minipage}[m]{.5\textwidth}
 		\centering
 		\begin{tikzpicture}
 			\begin{axis}[
-				height=7cm,
+				height=6cm,
 				width=10cm,
 				grid=major,
 				legend pos=south east,
-				xlabel={Temps $[s]$},
+				xlabel={Temps $[min]$},
 				ylabel={Taux de saccharose $[^\circ B]$},
 			]
 
@@ -382,7 +383,7 @@ Un grand réacteur à l'avantage d'être stable (il fallait moins souvent remett
 	\subsection*{d) Comparaison d'un procédé en continu par rapport à un procédé en batch}
 Un procédé en continu est se déroule dans des conditions identiques tout au long du déroulement (températures, pression, quantité de soluté, quantité de solvant, ...). Il y a toujours le même apport en solvant et soluté à l'entrée du réacteur, et le même produit qui en sort fini.
 
-Un procédé en bach, aussi appelé procédé discontinu est surtout utilisé de manière expérimentale, lors que des petites quantités, précises sont requises. Dans ce genre de procédé, les conditions peuvent changer (température, pression, masses, ...).
+Un procédé en batch, aussi appelé procédé discontinu est surtout utilisé de manière expérimentale, lors que des petites quantités, précises sont requises. Dans ce genre de procédé, les conditions peuvent changer (température, pression, masses, ...).
 
 \begin{table}[h]\centering
 \begin{tabular}{|m{0.48\textwidth}|m{0.48\textwidth}|}\hline
