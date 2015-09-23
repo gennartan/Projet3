@@ -15,8 +15,10 @@
 \usepackage{subfig, float, caption}
 \usepackage{array}
 \usepackage{color, colortbl}
-\usepackage{hyperref}
+\usepackage{hyperref, siunitx}
 
+
+\DeclareSIUnit\brix{B}
 \pgfplotsset{compat=1.11}
 
 %Color defining
@@ -107,11 +109,11 @@
 \section{Matériel et méthode}
 	\subsection{Matériel}
 		\begin{itemize}
-			\item Bouteille de grenadine (1L) x3
-			\item Bouteille de sirop de Menthe (1L) x3
+			\item Bouteille de grenadine (\SI{1}{\liter}) x3
+			\item Bouteille de sirop de Menthe (\SI{1}{\liter}) x3
 			\item Tubes à transvaser x6
-			\item Réservoirs (21cm x 20xcm x 18 cm) x4
-			\item Petit réacteur CSTR (Berlin gradué avec évacuation à 920 ml dans notre cas) x2
+			\item Réservoirs (\SI{21}{\centi\meter} x \SI{20}{\centi\meter} x \SI{18}{\centi\meter}) x4
+			\item Petit réacteur CSTR (Berlin gradué avec évacuation à (\SI{920}{\milli\liter} dans notre cas) x2
 			\item Mélangeur magnétique x2
 			\item Chronomètre x2
 			\item Pipettes $\pm$40
@@ -129,7 +131,7 @@
 			\begin{enumerate}
 				\item Lancement de l'écoulement par appel d'air dans le tube.
 				\item Le liquide s'écoule dans un tube gradué. L'opération est chronométrée.
-				\item Tous les 10 ml le temps est noté. 
+				\item Tous les (\SI{10}{\milli\liter} le temps est noté. 
 				\item Le débit correspond à $\frac{V}{t}$
 				\item Pour le résultat final, nous prenons la valeur moyenne des débits mesurés.
 			\end{enumerate}
@@ -137,7 +139,7 @@
 			
 	\subsection{Mesure par réfractométrie}
 		\subsubsection{Principe de fonctionnement}
-			La réfractométrie est une technique de mesure de l'indice de réfraction d'un matériau. Le réfractomètre utilisé pour nos mesures est de type portable et mesure en degrés Brix ($^{\circ}$B) la fraction de saccharose en g pour 100g de liquide. La mesure se fait à l'aide d'un prisme à indice de réfraction élevé. Sur base du phénomène de réfraction, la lumière, au passage de l'échantillon au prisme, est déviée de sa trajectoire. (Voir figure \ref{refractometrie})
+			La réfractométrie est une technique de mesure de l'indice de réfraction d'un matériau. Le réfractomètre utilisé pour nos mesures est de type portable et mesure en degrés Brix ($^{\circ}$B) la fraction de saccharose en \si{\gram} pour (\SI{100}{\gram} de liquide. La mesure se fait à l'aide d'un prisme à indice de réfraction élevé. Sur base du phénomène de réfraction, la lumière, au passage de l'échantillon au prisme, est déviée de sa trajectoire. (Voir figure \ref{refractometrie})
 			\begin{itemize}
 				\item La réfraction est grande lorsque la teneur en sucre de l'échantillon est faible.
 				\item Inversement, la réfraction est faible lorsque la teneur en sucre est élevée.
@@ -172,7 +174,7 @@
 				\rowcolor{Gray}	
 				\multicolumn{3}{|c|}{\textbf{Débit menthe (soluté)}} \\ \hline
 				Temps & Volume & Débit \\ 
-				$[s]$ & $[ml]$ & $[ml/s]$ \\ \hline
+				$\si{\second}$ & $\si{\milli\liter}$ & $\si{\milli\liter\per\second}$ \\ \hline
 				52 & 20 & 0.38 \\
 				98 & 30 & 0.31 \\
 				105 & 40 & 0.38 \\ \hline
@@ -185,7 +187,7 @@
 				\rowcolor{Gray}	
 				\multicolumn{3}{|c|}{\textbf{Débit grenadine (soluté)}} \\ \hline
 				Temps & Volume & Débit \\ 
-				$[s]$ & $[ml]$ & $[ml/s]$ \\ \hline
+				$\si{\second}$ & $\si{\milli\liter}$ & $\si{\milli\liter\per\second}$ \\ \hline
 				59 & 20 & 0.34 \\
 				93 & 30 & 0.32 \\
 				126 & 40 & 0.32 \\ \hline
@@ -198,7 +200,7 @@
 				\rowcolor{Gray}	
 				\multicolumn{3}{|c|}{\textbf{Débit eau (solvant)}} \\ \hline
 				Temps & Volume & Débit \\ 
-				$[s]$ & $[ml]$ & $[ml/s]$ \\ \hline
+				$\si{\second}$ & $\si{\milli\liter}$ & $\si{\milli\liter\per\second}$ \\ \hline
 				9 & 30 & 3 \\
 				12 & 40 & 3.3 \\
 				15 & 50 & 3.3 \\
@@ -215,7 +217,7 @@
 		\centering\begin{scriptsize}
 		\begin{tabular}{|c|c|}\hline\rowcolor{Gray}
 			Temps & Taux \\ \rowcolor{Gray}
-			$[min]$ & $[^\circ B]$ \\ \hline
+			$\si{\minute}$ & $\si{\degree\brix}$ \\ \hline
 			0 & 0.2 \\
 			1 & 1.4 \\
 			2 & 2.3 \\
@@ -243,8 +245,8 @@
 				width=10cm,
 				grid=major,
 				legend pos=south east,
-				xlabel={Temps $[min]$},
-				ylabel={Taux de saccharose $[^\circ B]$},
+				xlabel={Temps $\si{\minute}$},
+				ylabel={Taux de saccharose $\si{\degree\brix}$},
 			]
 			\addplot coordinates {
 				(0, 0.2)
@@ -276,7 +278,7 @@
 		\centering\begin{scriptsize}
 		\begin{tabular}{|c|c|}\hline \rowcolor{Gray}
 			Temps & Taux \\ \rowcolor{Gray}
-			$[min]$ & $[^\circ B]$ \\ \hline
+			$\si{\minute}$ & $\si{\degree\brix}$ \\ \hline
 			0 & 0.0 \\
 			1 & 2.0 \\
 			2 & 3.0 \\
@@ -304,8 +306,8 @@
 				width=10cm,
 				grid=major,
 				legend pos=south east,
-				xlabel={Temps $[min]$},
-				ylabel={Taux de saccharose $[^\circ B]$},
+				xlabel={Temps $\si{\minute}$},
+				ylabel={Taux de saccharose $\si{\degree\brix}$},
 			]
 
 			\addplot coordinates {
@@ -340,32 +342,32 @@
 			V_\text{total} &= V_\text{initial} + V_\text{sortie} \\
 						   &= 0.920 + ( 2.1 \cdot 2.1 \cdot 1.75 ) \\
 						   &= 0.920 + 7.715 \\
-						   &= 8.6375\ L \\
-			V_\text{débit} &= (0.33 + 3.3) \cdot 45 \cdot 60 = 10.721\ L 
+						   &= \SI{8.6375}{\liter} \\
+			V_\text{débit} &= (0.33 + 3.3) \cdot 45 \cdot 60 = \SI{10.721}{\liter}
 		\end{align*}
 		On remarque que les résultats obtenus sont fort différents mais appartiennent au même ordre de grandeur.
 	\paragraph*{Bilan de masse (mélange grenadine)}\mbox{} \\
 		\begin{table}[h]
 			\centering
 			\begin{tabular}{|l|l|}\hline
-				Résultats mesurés par réfractométrie & 5.9g de sucre pour 100ml d'eau\\\hline
-				Selon les ingrédients & 68.8g de sucre pour 100ml de grenadine.\\\hline
-				Selon les débits & 5.7g de sucre pour 100ml de mélange\\\hline
+				Résultats mesurés par réfractométrie & \SI{5.9}{\liter} de sucre pour \SI{100}{\milli\liter} d'eau\\\hline
+				Selon les ingrédients & \SI{68.8}{\gram} de sucre pour \SI{100}{\milli\liter} de grenadine.\\\hline
+				Selon les débits & \SI{5.7}{\gram} de sucre pour \SI{100}{\milli\liter} de mélange\\\hline
 			\end{tabular}
 		\end{table}
-		$$D_v = 0.33\ ml/s \Rightarrow D_{m,\text{sucre}} = 0.227\ g/s \qquad V_\text{total} = 10.721\ L$$
-		$$m_\text{sucre} = D_{m,\text{sucre}} \cdot 45 \cdot 60 = 613\ g$$
+		$$D_v = \SI{0.33}{\milli\liter\per\second} \Rightarrow D_{m,\text{sucre}} = \SI{0.227}{\gram\per\second} \qquad V_\text{total} = \SI{10.721}{\liter}$$
+		$$m_\text{sucre} = D_{m,\text{sucre}} \cdot 45 \cdot 60 = \SI{613}{\gram}$$
 	\paragraph*{Bilan de masse (mélange menthe)}\mbox{} \\
 		\begin{table}[h]
 			\centering
 			\begin{tabular}{|l|l|}\hline
-				Résultats mesurés par réfractométrie & 9.0g de sucre pour 100ml d'eau\\\hline
-				Selon les ingrédients & 68.8g de sucre pour 100ml de menthe.\\\hline
-				Selon les débits & 6.5g de sucre pour 100ml de mélange\\\hline
+				Résultats mesurés par réfractométrie & \SI{9.0}{\gram} de sucre pour \SI{100}{\milli\liter} d'eau\\\hline
+				Selon les ingrédients & \SI{68.8}{\gram} de sucre pour \SI{100}{\milli\liter} de menthe.\\\hline
+				Selon les débits & \SI{6.5}{\gram} de sucre pour \SI{100}{\milli\liter} de mélange\\\hline
 			\end{tabular}
 		\end{table}
-		$$D_v = 0.38\ ml/s \Rightarrow D_{m,\text{sucre}} = 0.261\ g/s \qquad V_\text{total} = 10.856\ L$$
-		$$m_\text{sucre} = D_{m,\text{sucre}} \cdot 45 \cdot 60 = 705.8\ g$$
+		$$D_v = \SI{0.38}{\milli\liter\per\second} \Rightarrow D_{m,\text{sucre}} = \SI{0.261}{\gram\per\second} \qquad V_\text{total} = \SI{10.856}{\liter}$$
+		$$m_\text{sucre} = D_{m,\text{sucre}} \cdot 45 \cdot 60 = \SI{705.8}{\gram}$$
 		
 		
 
