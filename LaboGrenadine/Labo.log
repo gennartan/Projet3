@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2015.9.21)  23 SEP 2015 09:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2015.9.21)  23 SEP 2015 09:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1071,8 +1071,7 @@ Variant \prop_get:NVNTF already defined; not changing it on line 382
 Package: translator 2010/06/12 ver 1.10
 
 (/usr/share/texmf-dist/tex/latex/beamer/translator/translator-language-mappings
-.tex)))
-No file Labo.aux.
+.tex))) (./Labo.aux)
 \openout1 = `Labo.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
@@ -1090,7 +1089,7 @@ LaTeX Font Info:    ... okay on input line 27.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 27.
 LaTeX Font Info:    ... okay on input line 27.
 LaTeX Font Info:    Try loading font information for T1+lmr on input line 27.
-(/usr/share/texmf-dist/tex/latex/lm/t1lmr.fd
+ (/usr/share/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 *geometry* driver: auto-detecting
@@ -1184,6 +1183,8 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 27.
 LaTeX Info: Redefining \pageref on input line 27.
 LaTeX Info: Redefining \nameref on input line 27.
+ (./Labo.out)
+(./Labo.out)
 \@outlinefile=\write4
 \openout4 = `Labo.out'.
 
@@ -1251,7 +1252,7 @@ LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 27.
 (/usr/share/texmf-dist/tex/latex/lm/ot1lmtt.fd
 File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-<pictures/logo.JPG, id=7, 642.14906pt x 889.07156pt>
+<pictures/logo.JPG, id=51, 642.14906pt x 889.07156pt>
 File: pictures/logo.JPG Graphic file (type jpg)
  <use pictures/logo.JPG>
 Package pdftex.def Info: pictures/logo.JPG used on input line 43.
@@ -1264,13 +1265,14 @@ File: uni-0.def 2013/05/13 UCS: Unicode data U+0000..U+00FF
 LaTeX Font Warning: Font shape `T1/lmr/bx/sc' undefined
 (Font)              using `T1/lmr/bx/n' instead on input line 58.
 
+(./Labo.toc)
 \tf@toc=\write5
 \openout5 = `Labo.toc'.
 
-[1
+ [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./pictures/logo.JPG>]
-<pictures/materiel.png, id=17, 1000.48781pt x 777.65532pt>
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./pictures/logo.JPG>] <pic
+tures/materiel.png, id=74, 1000.48781pt x 777.65532pt>
 File: pictures/materiel.png Graphic file (type png)
 
 <use pictures/materiel.png>
@@ -1284,11 +1286,7 @@ l.137 			\end{enumerate}
                          [1
 
  <./pictures/materiel.png>]
-
-LaTeX Warning: Reference `refractometrie' on page 2 undefined on input line 142
-.
-
-<pictures/refractometre.jpg, id=34, 479.7925pt x 155.58125pt>
+<pictures/refractometre.jpg, id=86, 479.7925pt x 155.58125pt>
 File: pictures/refractometre.jpg Graphic file (type jpg)
 
 <use pictures/refractometre.jpg>
@@ -1319,17 +1317,7 @@ Overfull \hbox (40.2096pt too wide) in paragraph at lines 334--335
  [][] 
  []
 
-[3]
-
-LaTeX Warning: Reference `grenad' on page 4 undefined on input line 376.
-
-
-LaTeX Warning: Reference `menth' on page 4 undefined on input line 376.
-
-
-LaTeX Warning: Reference `mesures' on page 4 undefined on input line 376.
-
-[4]
+[3] [4]
 Overfull \hbox (6.9863pt too wide) in paragraph at lines 391--399
  [][] 
  []
@@ -1340,31 +1328,19 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 407.
  (./Labo.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 407.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 407.
+Package rerunfilecheck Info: File `Labo.out' has not changed.
+(rerunfilecheck)             Checksum: 9F9AB5882B0833B058A66D32459C5475;698.
 
-
-Package rerunfilecheck Warning: File `Labo.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Labo.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  9F9AB5882B0833B058A66D32459C5475;698.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 407.
  ) 
 Here is how much of TeX's memory you used:
- 37576 strings out of 493089
- 864041 string characters out of 6140694
- 990465 words of memory out of 5000000
- 40437 multiletter control sequences out of 15000+600000
+ 37596 strings out of 493089
+ 864271 string characters out of 6140694
+ 990720 words of memory out of 5000000
+ 40449 multiletter control sequences out of 15000+600000
  90591 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,23n,103p,10371b,2541s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1382,10 +1358,10 @@ ist/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf-dist/fonts/type1/public/lm
 /lmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/share/
 texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf-dist/fonts/type1/p
 ublic/lm/lmtt9.pfb>
-Output written on Labo.pdf (6 pages, 546800 bytes).
+Output written on Labo.pdf (6 pages, 548266 bytes).
 PDF statistics:
- 167 PDF objects out of 1000 (max. 8388607)
- 138 compressed objects within 2 object streams
+ 216 PDF objects out of 1000 (max. 8388607)
+ 187 compressed objects within 2 object streams
  50 named destinations out of 1000 (max. 500000)
- 28 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 116 words of extra memory for PDF output out of 10000 (max. 10000000)
 
