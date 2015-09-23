@@ -8,6 +8,7 @@
 \usepackage{babel}
 \usepackage{float}
 \usepackage{fullpage}
+\usepackage{amsmath}
 
 
 \title{Thématique 2 : Gestion de la production}
@@ -30,6 +31,45 @@
 			\end{tabular}
 		\end{table}
 	\section{Aspect thermique}
+		\paragraph*{Données}
+			\begin{itemize}
+				\item Température réacteur : $\SI{500}{\celsius}$
+				\item Débit eau : $\SI{630}{\meter^3\per\hour}$
+				\item Température eau (amont réacteur) : $\SI{20}{\celsius}$
+			\end{itemize}	
+		\paragraph*{Calculs}
+			Nous utilisons les données de la table II du document "La thermodynamique technique". Cette table nous fourni les chaleurs molaires moyennes à pression constante $|\mu c_p|_0^t$ des principaux gaz en \si{\kilo\joule\per\kilo\mol\kelvin}. La chaleur molaire moyenne dans l'intervalle 0 à $t\si{\celsius}$ y est définie par la relation :
+			$$ |\mu c_p|_0^t = \frac{1}{t}\int_0^t\mu c_pdt $$
+			Pour chaque molécule de la réaction nous calculons la chaleur molaire de \SIrange{25}{500}{\celsius} à l'aide de la formule : 
+			$$ \int_{25}^{500} c_{p,m} = (500\cdot|\mu c_p|_0^{500})-(25\cdot|\mu c_p|_0^{25}) $$
+			Nous obtenons donc : 
+			\begin{table}[h!]\centering\renewcommand{\arraystretch}{2}
+			\begin{tabular}{lll}
+				$\int_{25}^{500} c_{p,m,\text{\chemform{NH_3}}}$ &= $(500\cdot42.42)-(25\cdot35.26)$ &= \SI{20238.5}{\joule\per\mol} \\
+				$\int_{25}^{500} c_{p,m,\text{\chemform{H_2}}}$ &= $(500\cdot29.25)-(25\cdot28.62)$ &= \SI{13909.5}{\joule\per\mol} \\
+				$\int_{25}^{500} c_{p,m,\text{\chemform{N_2}}}$ &= $(500\cdot29.86)-(25\cdot29.12)$ &= \SI{14202.25}{\joule\per\mol} 
+			\end{tabular}
+			\end{table}
+			
+			\noindent À ces résultats nous ajoutons les données de la table VII du document cité plus haut. Cette table nous fourni les chaleurs de réaction dans les conditions standard de quelques transformations chimiques importantes : 
+			$$C_{p,298}^0 = -\Delta\mu H_{298}^0$$
+			Pour chaque molécule nous calculons sa variation d'enthalpie à \SI{500}{\celsius} à l'aide de la formule :
+			$$ n\cdot\Delta H(500) = n\cdot\left(-C_{p,298}^0+\int_{25}^{500}c_{p,m}\right) $$
+			Nous obtenons donc : 
+			\begin{table}[h!]\centering\renewcommand{\arraystretch}{2}
+				\begin{tabular}{lll}
+					$2\cdot\Delta H_{\text{\chemform{NH_3}}}(500)$ &= $2\cdot(-46200+20238.5)$ &= \SI{-57923}{\joule\per\mol} \\
+					$3\cdot\Delta H_{\text{\chemform{H_2}}}(500)$ &= $3\cdot(0+13909.5)$ &= \SI{41728.5}{\joule\per\mol} \\
+					$\Delta H_{\text{\chemform{N_2}}}(500)$ &= $(0+14202.25)$ &= \SI{14202.25}{\joule\per\mol} 
+				\end{tabular}
+			\end{table}
+
+			\noindent Nous pouvons ensuite calculer la variation d'enthalpie totale de la réaction : 
+			\begin{align*}
+				\Delta H = 2\Delta H_{\text{\chemform{NH_3}}} - 3\Delta H_{\text{\chemform{H_2}}} - \Delta H_{\text{\chemform{N_2}}} &= \SI{-108}{\kilo\joule\per\mol} \text{ pour \chemform{2NH_3}} \\ 
+				&= \SI{-54}{\kilo\joule\per\mol} \text{ pour \chemform{NH_3}}
+			\end{align*}
+
 	\section{Réactions ATR I et WGS}
 		ATR I :
 		\begin{chemmath}
