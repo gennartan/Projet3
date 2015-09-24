@@ -69,7 +69,15 @@
 				\Delta H = 2\Delta H_{\text{\chemform{NH_3}}} - 3\Delta H_{\text{\chemform{H_2}}} - \Delta H_{\text{\chemform{N_2}}} &= \SI{-108}{\kilo\joule\per\mol} \text{ pour \chemform{2NH_3}} \\ 
 				&= \SI{-54}{\kilo\joule\per\mol} \text{ pour \chemform{NH_3}}
 			\end{align*}
-
+			La formation d'une mole de \chemform{NH_3} produit donc \SI{54}{\kilo\joule\per\mol}. En sachant que nous produisons \SI{83.3e6}{\mol} par jour, nous pouvons calculer l'énergie totale dégagée par jour :
+			$$ \num{83.3e6}\cdot\num{54} = \SI{4.50e9}{\kilo\joule}\text{ par jour} $$
+			Pour refroidir le réacteur, nous avons un échangeur de chaleur avec un débit d'eau à \SI{20}{\celsius} à \SI{630000}{\liter\per\hour}. Cela nous fait donc \SI{15.12e6}{\liter} par jour. En sachant qu'il faut \SI{4.185}{\kilo\joule} pour augmenter de \SI{1}{\celsius} \SI{1}{\liter} d'eau, il nous faudrait pour chauffer toute l'eau d'un degré une énergie totale de : 
+		   $$ \num{15.12e6}\cdot\num{4.185} = \SI{63.28e6}{\kilo\joule} $$	
+		   Enfin, la variation de température nous est donnée par le rapport entre l'énergie dégagée par la réaction et l'énergie nécessaire pour chauffer un litre d'eau d'un degré :
+		   $$ \frac{\num{4.50e9}}{\num{63.28e6}} = \SI{71.11}{\celsius} $$
+		   En additionnant cette variation avec la température initiale de l'eau, nous obtenons la température de l'eau à la sortie de l'échangeur :
+		   $$ \num{71.11} + \num{20.00} = \SI{91.11}{\celsius} $$
+		  
 	\section{Réactions ATR I et WGS}
 		ATR I :
 		\begin{chemmath}
