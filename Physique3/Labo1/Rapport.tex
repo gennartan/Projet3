@@ -1,10 +1,10 @@
 \documentclass[a4paper,11pt]{article}
-\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry} % marges
 
 % French
 \usepackage[utf8x]{inputenc}
 \usepackage[french]{babel}
 \usepackage[T1]{fontenc}
+\usepackage{fullpage}
 
 
 % Packages à importer
@@ -14,14 +14,6 @@
 \usepackage{siunitx, enumitem, listings, rotating}
 \usepackage{fancyhdr, url, ifthen, multirow}
 
-
-%Java highlight
-\newcommand{\n}{\lstinline|\n|}
-\lstset{language=Java}
-\lstset{xleftmargin=5pt, xrightmargin=5pt, breaklines=true}
-\usepackage{courier}
-\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
-
 \begin{document}
 %-----------------------------------------------------------
 % page de couverture
@@ -30,29 +22,39 @@
 
 \fancyhf{} %clear all headers and footers fields
 \fancyhead[R]{\thepage} %prints the page number on the right side of the header
-\fancyhead[L]{Rapport de laboratoire}
+\fancyhead[L]{Rapport de laboratoire CSTR}
 
 
 \pagestyle{fancy}
 \thispagestyle{empty}
+\begin{titlepage}
 \begin{center}
 
 \includegraphics[width=0.15\textwidth]{images/logo.JPG}~\\[1cm]
 
 \textsc{\LARGE Université Catholique de Louvain}\\[1.5cm]
 
-\textsc{\Large Projet 2}\\[0.5cm]
+\textsc{\Large LFSAB1203 Physique 3}\\[0.5cm]
 
 % Title
 \HRule \\[0.4cm]
-{ \huge \bfseries Rapport de laboratoire \\[0.4cm] }
+{ \huge \bfseries Rapport de labo 1\\[0.4cm] }
 
 \HRule \\[1.5cm]
 
 % Author and supervisor
 \begin{minipage}{0.4\textwidth}
 \begin{flushleft} \large
-Groupe \textsc{11.64} \\
+\textbf{Groupe \textsc{11.64}} \\
+\textsc{Asselberghs} Paul \\
+\textsc{Bertin} Brice \\
+\textsc{Couplet} Adrien \\
+\textsc{Crepeulandt} Grégory \\
+\textsc{Gatin} Anthony \\
+\textsc{Gennart} Antoine \\
+\textsc{Gillard} Juline \\
+\textsc{Martin} Pierre
+
 
 \end{flushleft}
 \end{minipage}
@@ -63,16 +65,26 @@ Groupe \textsc{11.64} \\
 \end{flushright}
 \end{minipage}
 
+\setcounter{tocdepth}{2}
+\tableofcontents % table des matières, totalement automatique ;)
+
 \vfill
 
 % Bottom of the page
 {\large \today}
 \end{center}
+\end{titlepage}
 %-----------------------------------------------------------
+% début du document numéroté
+\clearpage
 \pagenumbering{arabic}
- \tableofcontents % table des matières, totalement automatique ;)
+\newpage
+%-----------------------------------------------------------
+
+\thispagestyle{empty}
 
 
+%\newpage
 
 \section{Mesures et même certains calculs} 
 \begin{table}[!h]

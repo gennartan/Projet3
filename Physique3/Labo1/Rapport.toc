@@ -1,0 +1,6 @@
+\select@language {french}
+\contentsline {section}{\numberline {1}Mesures et m\IeC {\^e}me certains calculs}{1}
+\contentsline {subsection}{\numberline {1.1}Trouver l'indice de r\IeC {\'e}fraction de la lucite}{1}
+\contentsline {subsection}{\numberline {1.2}L'angle de r\IeC {\'e}flexion total}{1}
+\contentsline {subsection}{\numberline {1.3}Comprendre le concept de polarisation}{1}
+\contentsline {section}{\numberline {2}Observation de l'\IeC {\'e}tat de polarisation de l'onde r\IeC {\'e}fl\IeC {\'e}chie}{2}
