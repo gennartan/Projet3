@@ -1,6 +1,28 @@
 \documentclass[french, a4]{article}
+
 \usepackage{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+
+\usepackage{fullpage}
+\usepackage{float}
+
+\usepackage{chemist}
+\usepackage{siunitx}
+
+\DeclareSIUnit\jour{j}
 
 \begin{document}
-
+\section{Zone de combustion}
+\begin{table}[h]
+	\centering\renewcommand{\arraystretch}{1.1}
+	\begin{tabular}{|l|ccccccc|}\hline
+		& \chemform{CH_4} & + & \chemform{2O_2} & $\longrightarrow$ & \chemform{CO_2} & + & \chemform{2H_2O} \\\hline
+		$m \,[\si{\tonne\per\day}]$ & 800&&    &&    && \\
+		$M \,[\si{\gram\per\mol}]$  & 16 && 32 && 44 && 18 \\
+		$n_i \,[\si{\mega\mol}]$    & 50 && 30 && 0  && 0  \\
+		$n_f \,[\si{\mega\mol}]$	& 35 && 0  && 15 && 30 \\
+		$n_f \,[\si{\tonne\per\day}]$ & 560 && 0 && 660 && 540 \\\hline
+	\end{tabular}
+\end{table}
 \end{document}
