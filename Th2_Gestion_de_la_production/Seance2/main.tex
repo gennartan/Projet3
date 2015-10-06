@@ -1,0 +1,52 @@
+\documentclass[a4paper,french]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{chemist}
+\usepackage{siunitx}
+\usepackage{lmodern}
+\usepackage{babel}
+\usepackage{float}
+\usepackage{fullpage}
+\usepackage{amsmath}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\DeclareSIUnit\jour{j}
+
+\title{Thématique 2 : Gestion de la production}
+\author{Groupe 12.64}
+\date{Séance 2 : 30/09/2015\\Dernière mise à jour: \today}
+
+\begin{document}
+	\maketitle	
+	\section{Set de paramètres}
+		\begin{table}[h]\centering\renewcommand{\arraystretch}{1.1}
+			\begin{tabular}{L{4cm}cccL{7cm}}\hline
+				Parameter & Value & Unit & Ref. & Comment \\\hline
+				\chemform{O_2}$/$\chemform{CH_4} & \num{0.6} & - &  & Molar feed ratio \\
+				\chemform{H_2O}$/$\chemform{CH_4} & \num{1.5} & - &  & Molar feed ratio \\
+				Temperature in the ATR reforming zone & \num{1200} & K & & Optimal temperature for kinetic/catalyst operation (assumed constant for the whole zone) \\
+				Pressure in the ATR & \num{50} & bar & & Assumed constant (no pressure drop) \\\hline
+			\end{tabular}
+			\caption{Nominal operating conditions in simplified \chemform{NH_3} flowsheet}
+		\end{table}
+	
+	\section{Bilan de matière}
+		\subsection{1A Zone de combustion}
+			\begin{table}[h]\centering\renewcommand{\arraystretch}{1.1}
+				\begin{tabular}{l|ccccccc}\hline
+					& \chemform{CH_4} & + & \chemform{2O_2} & \chemform{\longrightarrow} & \chemform{CO_2} & + & \chemform{2H_2O} \\
+					Masse molaire (\si[per-mode=symbol]{\gram\per\mol}) & 16.0 & & 32.0 & & 44.0 & & 18.0\\\hline
+					\textbf{Avant réaction} \\
+					Débit molaire (\si[per-mode=symbol]{\mega\mol\per\jour}) & 50.0 && 30.0 && - && -\\
+					Débit massique (\si[per-mode=symbol]{\tonne\per\jour}) & 800 & & 960 & & - & & -\\\hline\hline
+					\textbf{Après réaction} \\
+					Débit molaire (\si[per-mode=symbol]{\mega\mol\per\jour}) & 35.0 && 0 && 15.0 && 30.0\\
+					Débit massique (\si[per-mode=symbol]{\tonne\per\jour}) & 560 & & 0 & & 660 & & 540\\\hline
+				\end{tabular}
+				\caption{Bilan de la réaction (dans la zone de combustion 1A)}
+			\end{table}	
+			\subsubsection*{Raisonnement}
+				Le débit massique du \chemform{CH_4} est donné. En convertissant ce débit en débit molaire et en multipliant par le ratio \chemform{O_2}$/$\chemform{CH_4}, nous obtenons le débit molaire de l'\chemform{O_2}.
+				$$D_{n,\text{\chemform{O_2}}} = \frac{D_{m,\text{\chemform{CH_4}}}}{M_\text{\chemform{CH_4}}}\cdot\num{0.6} = \SI[per-mode=symbol]{30}{\mega\mole\per\jour}$$
+\end{document}
