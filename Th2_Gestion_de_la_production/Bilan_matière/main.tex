@@ -55,6 +55,27 @@ On considère la réaction comme étant complète avec un excès de \chemform{CH
 	\end{tabular}
 \end{table}
 \section{Zone de reformage}
+Deux équilibres chimiques ont lieu simultanément dans la zone de reformage. Notamment : 
+\begin{chemeqn}CH_4+H_2O \rightleftharpoons 3H_2 + CO\end{chemeqn}
+\begin{chemeqn}CO + H_2O \rightleftharpoons H_2 + CO_2\end{chemeqn}
+\begin{table}[H]
+	\centering\renewcommand{\arraystretch}{1.1}
+	\begin{tabular}{l|ccccccc}
+		& \chemform{CH_4} & + & \chemform{H_2O} & $\rightleftharpoons$ & \chemform{3H_2} & + & \chemform{CO} \\\hline 
+		$\dot{n_0}$ & $\dotc{n}{CH_4}$ && $\dotc{n}{H_2O}$ && 0 && 0 \\
+	   	$\dot{n_f}$ & $\dotc{n}{CH_4}-\xi$ && $\dotc{n}{H_2O}-\xi-\gamma$ && $3\xi+\gamma$ && $\xi-\gamma$ \\	
+	\end{tabular}
+	\caption{\label{tab:reformage1}Avancement du premier équilibre chimique}
+\end{table}
+\begin{table}[H]
+	\centering\renewcommand{\arraystretch}{1.1}
+	\begin{tabular}{l|ccccccc}
+		& \chemform{CO} & + & \chemform{H_2O} & $\rightleftharpoons$ & \chemform{H_2} & + & \chemform{CO_2} \\\hline 
+		$\dot{n_0}$ & 0 && $\dotc{n}{H_2O}$ && 0 && $\dotc{n}{CO_2}$ \\
+	   	$\dot{n_f}$ & $\xi-\gamma$ && $\dotc{n}{H_2O}-\xi-\gamma$ && $3\xi+\gamma$ && $\dotc{n}{CO_2}+\gamma$ \\	
+	\end{tabular}
+	\caption{\label{tab:reformage2}Avancement du deuxième équilibre chimique}
+\end{table}
 Deux équations à deux inconnues $\xi$ et $\gamma$:
 $$K_1 = \frac{(\xi-\gamma)(3\xi+\gamma)^3}{(\dotc{n}{CH_4}+\dotc{n}{H_2O}+2\xi-\gamma)^2}\cdot\frac{p_t^2}{p_0^2}\cdot\frac{1}{(\dotc{n}{H_2O}-\xi-\gamma)(\dotc{n}{CH_4}-\gamma)}$$
 $$K_2 = \frac{(\dotc{n}{CO_2}+\gamma)(3\xi+\gamma)}{(\xi-\gamma)(\dotc{n}{H_2O}-\xi-\gamma)}$$
