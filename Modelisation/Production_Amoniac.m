@@ -29,10 +29,10 @@ N_O2 = RapO2CH4 * N_CH4; % [mol/j]
 O2 = M_O2 * N_O2; % [t/j]
 
 N_H20 = RapH20CH4 * N_CH4; % [mol/j]
-H20 = M_H20 * N_H20
+H20 = M_H20 * N_H20;
 
 
-[CH4, H20, CO2, CO, H2] = ATR(N_O2, N_CH4, N_H20); % Calcul des rections dans l'ATR
+[CH4, H20, CO2, CO, H2] = ATR(N_O2, N_CH4, N_H20); % Calcul d'erections dans l'ATR
 
 
 function [CH4, H20, CO2, CO, H2] = ATR(N_O2, N_CH4, N_H20)
@@ -54,16 +54,30 @@ N_reac = min(N_CH4, N_O2/2); % [mol] nombre de mol reagissant (par unité de mol
 N_O2 = N_O2 - 2*N_reac;
 N_CH4 = N_CH4 - N_reac;
 N_H20 = N_H20 + 2*N_reac;
-N_CO2 = N_reac;
+N_CO2 = N_reac
 
 O2 = M_O2 * N_O2;
 CH4 = M_CH4 * N_CH4;
 H20 = M_H20 * N_H20;
 CO2 = M_CO2 * N_CO2;
 
-% Deuxieme reaction : Reformage
+% Deuxieme reactio1n : Reformage
 %          |  CH4      +    H20      <-->   3* H2    +    CO
-% -----------------------------------------------------------------------
+% ----------------------------------------------------------------------
+%  n(reac) |
+K1 = 10^((-11650/Tref_ATR)+13.076); % [bar^2]
+
+%          |   CO     +    2* H20    <-->    H2     +     CO2
+% ----------------------------------------------------------------------
+%          |
+K2 = 10^((1910/Tref_ATR)-1.764);
+
+syms x y
+S = solve([K1==((x-y) * (3*x+y)^3 * (P_ATR/10^5)^2)  /  ((N_CH4+N_H20+2*x-y) * (N_H20-x-y)*(N_CH4-y)),  K2 == ((N_CO2+y)*(3*x+y))  /  ((x-y)*(N_H20-x-y))], [x, y], 'ReturnConditions', true);
+S.x
+S.y
+
+H2 =2;
 
 end % ATR
 end % Production_Amoniac
