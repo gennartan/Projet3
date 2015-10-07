@@ -10,6 +10,7 @@
 
 \usepackage{chemist}
 \usepackage{siunitx}
+\usepackage{amsmath}
 
 \DeclareSIUnit\jour{j}
 \sisetup{per-mode=fraction, fraction-function=\nicefrac}
@@ -46,6 +47,7 @@ Nous commencons par la zone de combustion où se produit la réaction chimique s
 		CH_4 + 2O_2 \longrightarrow CO_2 + 2H_2O
 	\end{chemeqn}
 On considère la réaction comme étant complète avec un excès de \chemform{CH_4}. 
+
 \begin{table}[h]
 	\centering\renewcommand{\arraystretch}{1.2}
 	\begin{tabular}{|l|ccccccc|}\hline
@@ -54,29 +56,58 @@ On considère la réaction comme étant complète avec un excès de \chemform{CH
 		$\dot{n}_f \,[\si{\mega\mol\per\jour}]$	& $\dotc{n}{CH_4}-\dotc{n}{CO_2}$ && 0  && $\dotc{n}{CO_2}$ && $2\dotc{n}{CO_2}$ \\\hline
 	\end{tabular}
 \end{table}
+
 \section{Zone de reformage}
 Deux équilibres chimiques ont lieu simultanément dans la zone de reformage. Notamment : 
 \begin{chemeqn}CH_4+H_2O \rightleftharpoons 3H_2 + CO\end{chemeqn}
 \begin{chemeqn}CO + H_2O \rightleftharpoons H_2 + CO_2\end{chemeqn}
+
 \begin{table}[H]
 	\centering\renewcommand{\arraystretch}{1.1}
 	\begin{tabular}{l|ccccccc}
 		& \chemform{CH_4} & + & \chemform{H_2O} & $\rightleftharpoons$ & \chemform{3H_2} & + & \chemform{CO} \\\hline 
 		$\dot{n_0}$ & $\dotc{n}{CH_4}$ && $\dotc{n}{H_2O}$ && 0 && 0 \\
-	   	$\dot{n_f}$ & $\dotc{n}{CH_4}-\xi$ && $\dotc{n}{H_2O}-\xi-\gamma$ && $3\xi+\gamma$ && $\xi-\gamma$ \\	
+	   	$\dot{n_f}$ & $\dotc{n}{CH_4}-\xi$ && $\dotc{n}{H_2O}-\xi-\beta$ && $3\xi+\beta$ && $\xi-\beta$ \\	
 	\end{tabular}
 	\caption{\label{tab:reformage1}Avancement du premier équilibre chimique}
 \end{table}
+
 \begin{table}[H]
 	\centering\renewcommand{\arraystretch}{1.1}
 	\begin{tabular}{l|ccccccc}
 		& \chemform{CO} & + & \chemform{H_2O} & $\rightleftharpoons$ & \chemform{H_2} & + & \chemform{CO_2} \\\hline 
 		$\dot{n_0}$ & 0 && $\dotc{n}{H_2O}$ && 0 && $\dotc{n}{CO_2}$ \\
-	   	$\dot{n_f}$ & $\xi-\gamma$ && $\dotc{n}{H_2O}-\xi-\gamma$ && $3\xi+\gamma$ && $\dotc{n}{CO_2}+\gamma$ \\	
+	   	$\dot{n_f}$ & $\xi-\beta$ && $\dotc{n}{H_2O}-\xi-\beta$ && $3\xi+\beta$ && $\dotc{n}{CO_2}+\beta$ \\	
 	\end{tabular}
 	\caption{\label{tab:reformage2}Avancement du deuxième équilibre chimique}
 \end{table}
-Deux équations à deux inconnues $\xi$ et $\gamma$:
-$$K_1 = \frac{(\xi-\gamma)(3\xi+\gamma)^3}{(\dotc{n}{CH_4}+\dotc{n}{H_2O}+2\xi-\gamma)^2}\cdot\frac{p_t^2}{p_0^2}\cdot\frac{1}{(\dotc{n}{H_2O}-\xi-\gamma)(\dotc{n}{CH_4}-\gamma)}$$
-$$K_2 = \frac{(\dotc{n}{CO_2}+\gamma)(3\xi+\gamma)}{(\xi-\gamma)(\dotc{n}{H_2O}-\xi-\gamma)}$$
+
+On calcule ensuite pour chaque équilibre la constante d'équilibre :
+\begin{align}
+K_1 &= \frac{(\xi-\beta)(3\xi+\beta)^3}{(\dotc{n}{CH_4}+\dotc{n}{H_2O}+2\xi-\beta)^2}\cdot\frac{p_t^2}{p_0^2}\cdot\frac{1}{(\dotc{n}{H_2O}-\xi-\beta)(\dotc{n}{CH_4}-\beta)}\\
+K_2 &= \frac{(\dotc{n}{CO_2}+\beta)(3\xi+\beta)}{(\xi-\beta)(\dotc{n}{H_2O}-\xi-\beta)}
+\end{align}
+
+Au final, nous obtenons à la sortie de la zone de reformage les débits suivants :
+\begin{align*}
+	\dotc{n'}{CH_4} &= \dotc{n}{CH_4}-\xi\\
+	\dotc{n'}{H_2O} &= \dotc{n}{H_2O}-\xi-\beta\\
+	\dotc{n'}{CO_2} &= \dotc{n}{CO_2}+\beta\\
+	\dotc{n'}{CO}   &= \xi-\beta\\
+	\dotc{n'}{H_2}  &= 3\xi+\beta
+\end{align*}
+
+\section{Water Gas Shift (WGS)}
+La réaction complète suivante à lieu dans water gas shift :
+\begin{chemeqn}CO + H_2O + \longrightarrow CO_2 + H_2\end{chemeqn}
+
+\begin{table}[h]
+	\centering\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{|l|ccccccc|}\hline
+		& \chemform{CO} & + & \chemform{H_2O} & $\longrightarrow$ & \chemform{CO_2} & + & \chemform{H_2} \\\hline
+		$\dot{n}_i$ & $\dotc{n}{CO}$ && $\dotc{n}{H_2O}$ && $\dotc{n}{CO_2}$  && $\dotc{n}{H_2}$  \\
+		$\dot{n}_f$	& 0 && $\dotc{n}{H_2O}-\dotc{n}{CO}$ && $\dotc{n}{CO_2}-\dotc{n}{CO}$ && $\dotc{n}{H_2}-\dotc{n}{CO}$ \\\hline
+	\end{tabular}
+\end{table}
+
 \end{document}

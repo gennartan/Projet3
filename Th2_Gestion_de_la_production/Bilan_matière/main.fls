@@ -67,6 +67,12 @@ INPUT /usr/share/texmf-dist/tex/latex/beamer/translator/translator.sty
 INPUT /usr/share/texmf-dist/tex/latex/beamer/translator/translator.sty
 INPUT /usr/share/texmf-dist/tex/latex/beamer/translator/translator-language-mappings.tex
 INPUT /usr/share/texmf-dist/tex/latex/beamer/translator/translator-language-mappings.tex
+INPUT /usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
+INPUT /usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
+INPUT /usr/share/texmf-dist/tex/latex/amsmath/amsbsy.sty
+INPUT /usr/share/texmf-dist/tex/latex/amsmath/amsbsy.sty
+INPUT /usr/share/texmf-dist/tex/latex/amsmath/amsopn.sty
+INPUT /usr/share/texmf-dist/tex/latex/amsmath/amsopn.sty
 INPUT main.aux
 INPUT main.aux
 OUTPUT main.aux
@@ -78,6 +84,8 @@ INPUT /usr/share/texmf-dist/tex/latex/beamer/translator/dicts/translator-basic-d
 INPUT /usr/share/texmf-dist/tex/latex/beamer/translator/dicts/translator-basic-dictionary/translator-basic-dictionary-French.dict
 INPUT /usr/share/texmf-dist/tex/latex/siunitx/siunitx-abbreviations.cfg
 INPUT /usr/share/texmf-dist/tex/latex/siunitx/siunitx-abbreviations.cfg
+INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmss10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
@@ -97,6 +105,9 @@ INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmss12.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
@@ -119,6 +130,7 @@ INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
+INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1000.pfb
