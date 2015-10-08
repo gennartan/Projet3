@@ -1,0 +1,122 @@
+\documentclass{beamer}
+ 
+
+\usepackage{lmodern, graphicx, tikz, pgfplots}
+\usepackage{graphicx,amssymb,amstext,amsmath}
+\usepackage{fancyhdr, url, ifthen, multirow}
+\usepackage{subfig, float, caption}
+\usepackage{array}
+\usepackage{color, colortbl}
+\usepackage{hyperref, siunitx}
+
+
+
+\begin{document}
+
+\title[Présentation]{Présentation Laboratoire}
+
+\subtitle[\ldots]{Polarisation des ondes}
+\author{Groupe 11.64}
+\institute[UCL]{Ecole polytechnique de Louvain}
+\date{\today}
+\maketitle
+
+\begin{frame}
+\frametitle{Trouver l'indice de réfraction de la lucite}
+\framesubtitle{Salut cite}
+
+\begin{tabular}{|c|c|c|}
+	\hline
+		Angle d'incidence & Angle de réflexion ($\theta_a$) & Angle de réfraction ($\theta_b$) \\
+	\hline
+		0 & 0 & 0 \\
+		10 & 10 & 7 \\
+		20 & 20 & 14 \\
+		30 & 30 & 20 \\
+		40 & 40 & 26 \\
+		50 & 50 & 31.5 \\
+		60 & 60 & 36 \\
+		70 & 70 & 39 \\
+		80 & 80 & 41.5 \\
+	\hline
+	\end{tabular}
+	
+	Par la relation $ \frac{n_b}{n_a} = \frac{\sin (\theta_a)}{\sin (\theta_b)} $ on trouve que $n_b$\footnote{$n_b$ est la l'indice de réfraction de la lucite et $n_a$ est égal a 1} $= 1.4$ 
+
+\end{frame} 
+
+\begin{frame}
+\frametitle{L'angle de réflexion total et l'angle de Brewster}
+\framesubtitle{total excellium}
+C'est l'angle a partir duquel le faisceau n'est plus du tout réfracté et est totalement réfléchi.
+$$ \sin (\theta_{crit} ) = \frac{n_b}{n_a} $$
+Donc $$ \theta_{crit} = asin (\frac{n_a}{n_b} ) $$
+$$ \theta_{crit} = 45 $$
+
+L'angle de \textbf{Brewster} est l'angle à partir duquel l'onde réfléchie s'annule pour une onde incidente polarisée parallèlement au plan d'incidence.
+
+$$ \tan (\theta_p) = \frac{nb}{na} $$
+$$ \theta_p = 55.6 \deg $$
+
+Par contre pour une onde polarisée perpendiculairement au plan d'incidence, la réflectance n'est pas nulle à l'ange de \textbf{Brewster}.
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Polarisation du faisceau réfléchi en fonction de l'angle d'incidence}
+\framesubtitle{le faisceau spatial}
+Le laser est incliné et polarisé à 45 degré. Nous mesurons l'état de polarisation du faisceau réfléchi.
+\begin{tabular}{|c|c|}
+	\hline
+		Angle d'incidence & Etat de polarisation\footnote{par rapport a la verticale)} \\
+	\hline
+		10 & 45 \\
+		20 & 40 \\
+		30 & 35 \\ 
+		40 & 20 \\
+		50 & 10 \\
+		55 & 0 \\
+		60 & (-)5 \\
+		70 & (-)5 \\
+	\hline
+	\end{tabular}
+	\newline On remarque qu'à l'angle de \textbf{Brewster} le faisceau est polarisé à 0 degré (vertical), et que passé cet angle, le faisceau reste polarisé proche de 0 degré.
+\end{frame}
+
+\begin{frame}
+\frametitle{Et on plot}
+\framesubtitle{Les einss}
+
+\begin{tikzpicture}
+			\begin{axis}[
+				height=6cm,
+				width=10cm,
+				grid=major,
+				legend pos=south east,
+				xlabel={Angle d'incidence},
+				ylabel={Etat de polarisation},
+			]
+			\addplot coordinates {
+				(0, 0.2)
+				(1, 1.4)
+				(2, 2.3)
+				(3, 3.1)
+				(4, 3.8)
+				(5, 4.1)
+				(6, 4.6)
+				(8, 5.0)
+				(10, 5.3)
+				(12, 5.7)
+				(15, 5.4)
+				(20, 5.8)
+				(25, 5.9)
+				(30, 5.9)
+				(35, 5.9)
+				(40, 6.2)
+				(45, 5.9)
+			};
+			\addlegendentry{Taux de saccharose}
+			\end{axis}
+		\end{tikzpicture}
+\end{frame}
+\end{document}

@@ -1,0 +1,150 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry} % marges
+
+% French
+\usepackage[utf8x]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+
+% Packages à importer
+
+\usepackage{lmodern, graphicx, tikz, pgfplots}
+\usepackage{graphicx,amssymb,amstext,amsmath}
+\usepackage{siunitx, enumitem, listings, rotating}
+\usepackage{fancyhdr, url, ifthen, multirow}
+
+
+%Java highlight
+\newcommand{\n}{\lstinline|\n|}
+\lstset{language=Java}
+\lstset{xleftmargin=5pt, xrightmargin=5pt, breaklines=true}
+\usepackage{courier}
+\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+
+\begin{document}
+%-----------------------------------------------------------
+% page de couverture
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\fancyhf{} %clear all headers and footers fields
+\fancyhead[R]{\thepage} %prints the page number on the right side of the header
+\fancyhead[L]{Rapport de laboratoire}
+
+
+\pagestyle{fancy}
+\thispagestyle{empty}
+\begin{center}
+
+\includegraphics[width=0.15\textwidth]{images/logo.JPG}~\\[1cm]
+
+\textsc{\LARGE Université Catholique de Louvain}\\[1.5cm]
+
+\textsc{\Large Projet 2}\\[0.5cm]
+
+% Title
+\HRule \\[0.4cm]
+{ \huge \bfseries Rapport de laboratoire \\[0.4cm] }
+
+\HRule \\[1.5cm]
+
+% Author and supervisor
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+Groupe \textsc{11.64} \\
+
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+%\emph{Tuteur:} \\
+%David \textsc{Cordova}
+\end{flushright}
+\end{minipage}
+
+\vfill
+
+% Bottom of the page
+{\large \today}
+\end{center}
+%-----------------------------------------------------------
+\pagenumbering{arabic}
+ \tableofcontents % table des matières, totalement automatique ;)
+
+
+
+\section{Mesures et même certains calculs} 
+\begin{table}[!h]
+	\begin{center}
+	\begin{tabular}{|c|c|c|}
+	\hline
+		Angle d'incidence & Angle de réflexion & Angle de réfraction \\
+	\hline
+		0 & 0 & 0 \\
+		10 & 10 & 7 \\
+		20 & 20 & 14 \\
+		30 & 30 & 20 \\
+		40 & 40 & 26 \\
+		50 & 50 & 31.5 \\
+		60 & 60 & 36 \\
+		70 & 70 & 39 \\
+		80 & 80 & 41.5 \\
+	\hline
+	\end{tabular}
+	\end{center}
+	\caption{Valeur des angles d'incidences mesurées par pas de 10 degrés (en degrés). Les angles sont tous mesurés par rapport à la normale.}
+\end{table}
+\subsection{Trouver l'indice de réfraction de la lucite}
+
+Selon le Young Freedman (3eme édition p. 1198) on peut obtenir $n$, l'index de réfraction de la lucite grâce à la formule suivante : 
+$$ n_a \cdot \sin (\theta_a) = n_b \cdot \sin (\theta_b)$$
+ou l'indice a correspond a la réflexion, et l'indice b a la réfraction.
+
+On pose comme hypothèse que $n_a$ est égal à l'indice de réflexion du vide (1) donc :
+$$ n_b = \frac{\sin (\theta_a)}{\sin (\theta_b)} $$
+
+Via Matlab, on trouve une valeur approximative de $n_b = 1.4607$
+
+\subsection{L'angle de réflexion total}
+Nous avons mesuré un angle de réfléxion total de $90$ degrés.
+
+Nous pouvons confirmer ce résultat mathématiquement. Car nous savons que :
+$$ \sin (\theta_{crit} ) = \frac{n_a}{n_b} $$
+Donc $$ \theta_{crit} = asin (\frac{n_a}{n_b} ) $$
+$$ \theta_{crit} = 90 \text{ attention terme imaginaire}$$
+
+\subsection{Comprendre le concept de polarisation}
+Une onde est \textit{polarisée linéairement dans la direction y} si il n'y a que des variation dans la direction y. (pareil pour z et pour x)
+
+L'angle de Brewster est égal à :
+$$ \tan (\theta_p) = \frac{nb}{na} $$
+$$ \theta_p = 55.6 \deg $$
+C'est l'angle du rayon incident par rapport à la normale pour que le rayon réfléchi et le rayon réfracté soit perpendiculaire. En laboratoire nous avons mesuré cet angle  à $55 \deg$.
+
+Plus précisément, cet angle représente l'angle d'incidence pour lequel les ondes $\vec{E}$ qui sont dans le plan d'incidence ne sont pas reflétées du tout, mais sont totalement réfractées. i.e. les ondes réfléchies sont totalement polarisées, et les ondes réfractées demeurent presque inchangées (sans doute une perte d'intensité lumineuse dans le plan parallèle au plan d'incidence).
+
+\section{Observation de l'état de polarisation de l'onde réfléchie}
+\begin{table}[!h]
+	\begin{center}
+	\begin{tabular}{|c|c|}
+	\hline
+		Onde réfléchie & Etat de polarisation\footnote{par rapport a la verticale)} \\
+	\hline
+		10 & 45 \\
+		20 & 40 \\
+		30 & 35 \\ 
+		40 & 20 \\
+		50 & 10 \\
+		55 & 0 \\
+		60 & (-)5 \\
+		70 & (-)5 \\
+	\hline
+	\end{tabular}
+	\caption{Etat de polarisation en fonction de l'onde réfléchie}
+	\end{center}
+\end{table}
+
+\end{document}
+
+
