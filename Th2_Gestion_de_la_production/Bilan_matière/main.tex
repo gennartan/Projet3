@@ -41,6 +41,7 @@ Nos paramètres ainsi que leurs valeurs pour le cas précis sont les suivants :
 
 Pour faciliter nos calculs nous considérons le symbole $\dot{n}$ comme étant le nombre de \si{\mega\mol} (\SI{1e6}{\mol}) produit par jour.
 Les débits molaire que nous utilisons dans nos calculs dépendent de la zone dans laquelle ils sont calculés. Par exemple le $\dotc{n}{CH_4}$ de la zone de combustion n'est pas le même que celui de la zone de reformage.
+
 \section{Zone de combustion}
 Nous commencons par la zone de combustion où se produit la réaction chimique suivante :
 	\begin{chemeqn}
@@ -98,7 +99,7 @@ Au final, nous obtenons à la sortie de la zone de reformage les débits suivant
 \end{align*}
 
 \section{Water Gas Shift (WGS)}
-La réaction complète suivante à lieu dans water gas shift :
+La réaction complète suivante à lieu dans le water gas shift :
 \begin{chemeqn}CO + H_2O + \longrightarrow CO_2 + H_2\end{chemeqn}
 
 \begin{table}[h]
@@ -110,4 +111,24 @@ La réaction complète suivante à lieu dans water gas shift :
 	\end{tabular}
 \end{table}
 
+On considère la réaction comme étant complète avec un excès d'\chemform{H_2O}
+
+\section{Condensation et absorption}
+Durant cette étapes aucune réaction chimique n'a lieu. Cette étape permet de retirer tout l'\chemform{H_2O} et le \chemform{CO_2} pour la suite du procédé. On considère que cette étape s'effectue complètement et qu'il ne reste plus aucune trace d'\chemform{H_2O} ou de \chemform{CO_2}.
+
+\section{Synthèse de l'ammoniac}
+La réaction complète suivante a lieu durant la dernière étape du procédé : 
+\begin{chemeqn} 3H_2 + N_2 \longrightarrow 2NH_3 \end{chemeqn}
+
+\begin{table}[h]
+	\centering\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{|l|ccccc|}\hline
+		& \chemform{3H_2} & + & \chemform{N_2} & $\longrightarrow$ & \chemform{2NH_3}\\\hline
+		$\dot{n}_i$ & $\dotc{n}{H_2}$ && $\dotc{n}{N_2}$ && 0 \\
+		$\dot{n}_f$	& $\dotc{n}{H_2}-3\dotc{n}{N_2}$ && 0  && $2\dotc{n}{N_2}$\\\hline
+	\end{tabular}
+\end{table}
+
+
 \end{document}
+
