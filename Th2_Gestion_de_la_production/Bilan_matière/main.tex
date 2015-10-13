@@ -22,25 +22,12 @@
 
 \begin{document}
 \maketitle
+\tableofcontents
 \part{Bilan de matière}
 Dans cette partie nous calculerons pour toutes les étapes du procédé les bilans de matière. À base de ceux-ci nous déterminerons les débits de production d'ammoniac, d'alimentation d'air, ainsi que tous les débits intermédiares entres les unités opérationnelles. Nous étudierons aussi un cas de production d'ammoniac avec des paramètres donnés.
 
-Nos paramètres ainsi que leurs valeurs pour le cas précis sont les suivants :
-\begin{table}[h]
-	\centering\renewcommand{\arraystretch}{1.1}
-	\begin{tabular}{lccl}\hline
-		Paramètre & Valeur & Unité & Description \\\hline
-		$\dotc{m}{CH_4}$ & 800 & \si{\tonne\per\jour} & Débit massique d'alimentation de \chemform{CH_4} \\
-		$\nicefrac{\text{\chemform{O_2}}}{\text{\chemform{CH_4}}}$ & 0.6 & - & Rapport $\nicefrac{\text{\chemform{O_2}}}{\text{\chemform{CH_4}}}$ à l'entrée de l'ATR \\
-		$\nicefrac{\text{\chemform{H_2O}}}{\text{\chemform{CH_4}}}$& 1.5 & - & Rapport $\nicefrac{\text{\chemform{H_2O}}}{\text{\chemform{CH_4}}}$ à l'entrée de l'ATR \\
-		$T_{\text{ATR}}$ & 1200 & \si{\kelvin} & Température de la zone reforming de l'ATR \\
-		$p_{\text{ATR}}$ & 50   & \si{\bar} & Pression d'opération de l'ATR \\\hline
-	\end{tabular}
-	\caption{\label{tab:parametres}Paramètres influant le fonctionnement du procédé}
-\end{table}
-
 Pour faciliter nos calculs nous considérons le symbole $\dot{n}$ comme étant le nombre de \si{\mega\mol} (\SI{1e6}{\mol}) produit par jour.
-Les débits molaire que nous utilisons dans nos calculs dépendent de la zone dans laquelle ils sont calculés. Par exemple le $\dotc{n}{CH_4}$ de la zone de combustion n'est pas le même que celui de la zone de reformage.
+Les débits molaires que nous utilisons dans nos calculs dépendent de la zone dans laquelle ils sont calculés. Par exemple le $\dotc{n}{CH_4}$ de la zone de combustion n'est pas le même que celui de la zone de reformage.
 
 \section{Calcul analytique des débits}
 \subsection{Unité ATR}
@@ -55,8 +42,8 @@ On considère la réaction comme étant complète avec un excès de \chemform{CH
 	\centering\renewcommand{\arraystretch}{1.2}
 	\begin{tabular}{l|ccccccc}
 		& \chemform{CH_4} & + & \chemform{2O_2} & $\longrightarrow$ & \chemform{CO_2} & + & \chemform{2H_2O} \\\hline
-		$\dot{n}_i$ & $\dotc{n}{CH_4}$ && $\dotc{n}{O_2}$ && 0  && 0  \\
-		$\dot{n}_f$	& $\dotc{n}{CH_4}-\dotc{n}{O_2}$ && 0  && $\dotc{n}{O_2}$ && $2\dotc{n}{O_2}$ \\
+		$\dot{n}_i$ & $\dotc{n}{CH_4}$ && $2\dotc{n}{O_2}$ && 0  && $\dotc{n}{H_2O}$  \\
+		$\dot{n}_f$	& $\dotc{n}{CH_4}-\dotc{n}{O_2}$ && 0  && $\dotc{n}{O_2}$ && $\dotc{n}{H_2O}+2\dotc{n}{O_2}$ \\
 	\end{tabular}
 	\caption{\label{tab:combustion}Avancement de la combustion}
 \end{table}
@@ -138,7 +125,46 @@ Durant la dernière étape du procédé, nous synthétisons de l'ammoniac à par
 \end{table}
 
 \subsection{Air séparation unit}
-Maintenant que nous connaissons les quantités nécessaires de \chemform{N_2} ainsi que celles de \chemform{O_2} qui interviennent dans l'ATR, nous pouvons déterminer la quantité d'air entrant dans l'unité de séparation d'air. Dans cette unité rentre de l'air composé de \chemform{O_2}, \chemform{N_2} et \chemform{H_2}.
+Maintenant que nous connaissons les quantités nécessaires de \chemform{N_2} ainsi que celles de \chemform{O_2} qui interviennent dans l'ATR, nous pouvons déterminer la quantité d'air entrant dans l'unité de séparation d'air. Dans cette unité rentre de l'air composé de \chemform{O_2}, \chemform{N_2} et \chemform{H_2O}. En pourcentage cela nous donne : 21\% de \chemform{N_2} et 79\% de \chemform{O_2}. L'eau contenue dans l'air est négligeable et ressort directement après
+séparation.
+Le débit d'air entrant ainsi que les excès seront calculés numériquement dans la section suivante.
+
+\section{Calcul numérique des débits}
+Nos paramètres ainsi que leurs valeurs pour le cas précis sont les suivants :
+\begin{table}[h]
+	\centering\renewcommand{\arraystretch}{1.1}
+	\begin{tabular}{lccl}\hline
+		Paramètre & Valeur & Unité & Description \\\hline
+		$\dotc{m}{CH_4}$ & 800 & \si{\tonne\per\jour} & Débit massique d'alimentation de \chemform{CH_4} \\
+		$\nicefrac{\text{\chemform{O_2}}}{\text{\chemform{CH_4}}}$ & 0.6 & - & Rapport $\nicefrac{\text{\chemform{O_2}}}{\text{\chemform{CH_4}}}$ à l'entrée de l'ATR \\
+		$\nicefrac{\text{\chemform{H_2O}}}{\text{\chemform{CH_4}}}$& 1.5 & - & Rapport $\nicefrac{\text{\chemform{H_2O}}}{\text{\chemform{CH_4}}}$ à l'entrée de l'ATR \\
+		$T_{\text{ATR}}$ & 1200 & \si{\kelvin} & Température de la zone reforming de l'ATR \\
+		$p_{\text{ATR}}$ & 50   & \si{\bar} & Pression d'opération de l'ATR \\\hline
+	\end{tabular}
+	\caption{\label{tab:parametres}Paramètres influant le fonctionnement du procédé}
+\end{table}
+\subsection{ATR}
+\subsubsection{Zone de combustion}
+\begin{table}[h]
+	\centering\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{ll|ccccccc}
+		&& \chemform{CH_4} & + & \chemform{2O_2} & $\longrightarrow$ & \chemform{CO_2} & + & \chemform{2H_2O} \\\hline
+		$\dot{m}_i$ & $[\si{\tonne\per\jour}]$ & 800 && 960 && 0 && 1350 \\
+		$\dot{m}_i$ & $[\si{\kilo\gram\per\second}]$ \\
+		$\dot{n}_i$ & $[\si{\mega\mol\per\jour}]$ & 50 && 30 && 0  && 75  \\\hline	
+		$\dot{m}_f$ & $[\si{\tonne\per\jour}]$ & 560 && 0 && 660 && 1890 \\
+		$\dot{m}_f$ & $[\si{\kilo\gram\per\second}]$ \\
+		$\dot{n}_f$ & $[\si{\mega\mol\per\jour}]$ & 35 && 0 && 15 && 105 \\
+	\end{tabular}
+	\caption{\label{tab:rcombustion}Résultat de la combustion}
+\end{table}
+
+\subsubsection{Zone de reformage}
+
+
+
+
+
 \end{document}
 
 
