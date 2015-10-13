@@ -42,7 +42,9 @@ Nos paramètres ainsi que leurs valeurs pour le cas précis sont les suivants :
 Pour faciliter nos calculs nous considérons le symbole $\dot{n}$ comme étant le nombre de \si{\mega\mol} (\SI{1e6}{\mol}) produit par jour.
 Les débits molaire que nous utilisons dans nos calculs dépendent de la zone dans laquelle ils sont calculés. Par exemple le $\dotc{n}{CH_4}$ de la zone de combustion n'est pas le même que celui de la zone de reformage.
 
-\section{Zone de combustion}
+\section{Calcul analytique des débits}
+\subsection{Unité ATR}
+\subsubsection{Zone de combustion}
 Nous commencons par la zone de combustion où se produit la réaction chimique suivante :
 	\begin{chemeqn}
 		CH_4 + 2O_2 \longrightarrow CO_2 + 2H_2O
@@ -51,15 +53,16 @@ On considère la réaction comme étant complète avec un excès de \chemform{CH
 
 \begin{table}[h]
 	\centering\renewcommand{\arraystretch}{1.2}
-	\begin{tabular}{|l|ccccccc|}\hline
+	\begin{tabular}{l|ccccccc}
 		& \chemform{CH_4} & + & \chemform{2O_2} & $\longrightarrow$ & \chemform{CO_2} & + & \chemform{2H_2O} \\\hline
-		$\dot{n}_i \,[\si{\mega\mol\per\jour}]$ & $\dotc{n}{CH_4}$ && $\dotc{n}{CO_2}$ && 0  && 0  \\
-		$\dot{n}_f \,[\si{\mega\mol\per\jour}]$	& $\dotc{n}{CH_4}-\dotc{n}{CO_2}$ && 0  && $\dotc{n}{CO_2}$ && $2\dotc{n}{CO_2}$ \\\hline
+		$\dot{n}_i$ & $\dotc{n}{CH_4}$ && $\dotc{n}{O_2}$ && 0  && 0  \\
+		$\dot{n}_f$	& $\dotc{n}{CH_4}-\dotc{n}{O_2}$ && 0  && $\dotc{n}{O_2}$ && $2\dotc{n}{O_2}$ \\
 	\end{tabular}
+	\caption{\label{tab:combustion}Avancement de la combustion}
 \end{table}
 
-\section{Zone de reformage}
-Deux équilibres chimiques ont lieu simultanément dans la zone de reformage. Notamment : 
+\subsubsection{Zone de reformage}
+Deux équilibres chimiques ont lieu dans la zone de reformage. Ces deux réactions se déroulant simultanément, on ne peut les considérer séparement : 
 \begin{chemeqn}CH_4+H_2O \rightleftharpoons 3H_2 + CO\end{chemeqn}
 \begin{chemeqn}CO + H_2O \rightleftharpoons H_2 + CO_2\end{chemeqn}
 
@@ -83,11 +86,15 @@ Deux équilibres chimiques ont lieu simultanément dans la zone de reformage. No
 	\caption{\label{tab:reformage2}Avancement du deuxième équilibre chimique}
 \end{table}
 
-On calcule ensuite pour chaque équilibre la constante d'équilibre :
+On déduit ensuite pour chaque équilibre l'expression de la constante d'équilibre :
 \begin{align}
-K_1 &= \frac{(\xi-\beta)(3\xi+\beta)^3}{(\dotc{n}{CH_4}+\dotc{n}{H_2O}+2\xi-\beta)^2}\cdot\frac{p_t^2}{p_0^2}\cdot\frac{1}{(\dotc{n}{H_2O}-\xi-\beta)(\dotc{n}{CH_4}-\beta)}\\
+K_1 &= \frac{(\xi-\beta)(3\xi+\beta)^3}{(\dotc{n}{H_2O}-\xi-\beta)(\dotc{n}{CH_4}-\beta)}\cdot\frac{p_t^2}{(\dotc{n}{CH_4}+\dotc{n}{H_2O}+2\xi-\beta)^2}\\
 K_2 &= \frac{(\dotc{n}{CO_2}+\beta)(3\xi+\beta)}{(\xi-\beta)(\dotc{n}{H_2O}-\xi-\beta)}
 \end{align}
+À partir de formules connues et de la température dans l'ATR donnée en paramètre nous pouvons déterminer les valeurss de $K_1$ et $K_2$ : 
+$$ \begin{cases}K_1 &= 10^{\left(\frac{-11650}{T}+13.076\right)} \\
+				K_2 &= 10^{\left(\frac{1910}{T}-1.764\right)} \end{cases}$$
+Nous avons alors un système de deux équations à deux inconnues ($\xi$ et $\beta$). Nous résolvons ce système à l'aide du logiciel Matlab avec la fonction suivante :
 
 Au final, nous obtenons à la sortie de la zone de reformage les débits suivants :
 \begin{align*}
@@ -98,35 +105,36 @@ Au final, nous obtenons à la sortie de la zone de reformage les débits suivant
 	\dotc{n'}{H_2}  &= 3\xi+\beta
 \end{align*}
 
-\section{Water Gas Shift (WGS)}
-La réaction complète suivante à lieu dans le water gas shift :
-\begin{chemeqn}CO + H_2O + \longrightarrow CO_2 + H_2\end{chemeqn}
+\subsection{Water Gas Shift (WGS)}
+Dans la zone de reformage se déroule déjà une réaction Water Gas Shift. Cette réaction se déroule de manière incomplète mais dans cette unité opérationnelle nous la considérons comme complète : 
+\begin{chemeqn}CO + H_2O \longrightarrow CO_2 + H_2\end{chemeqn}
 
 \begin{table}[h]
 	\centering\renewcommand{\arraystretch}{1.2}
-	\begin{tabular}{|l|ccccccc|}\hline
+	\begin{tabular}{l|ccccccc}
 		& \chemform{CO} & + & \chemform{H_2O} & $\longrightarrow$ & \chemform{CO_2} & + & \chemform{H_2} \\\hline
 		$\dot{n}_i$ & $\dotc{n}{CO}$ && $\dotc{n}{H_2O}$ && $\dotc{n}{CO_2}$  && $\dotc{n}{H_2}$  \\
-		$\dot{n}_f$	& 0 && $\dotc{n}{H_2O}-\dotc{n}{CO}$ && $\dotc{n}{CO_2}-\dotc{n}{CO}$ && $\dotc{n}{H_2}-\dotc{n}{CO}$ \\\hline
+		$\dot{n}_f$	& 0 && $\dotc{n}{H_2O}-\dotc{n}{CO}$ && $\dotc{n}{CO_2}-\dotc{n}{CO}$ && $\dotc{n}{H_2}-\dotc{n}{CO}$ \\
 	\end{tabular}
+	\caption{\label{tab:wgs}Avancement de la réaction Water Gas Shift}
 \end{table}
 
-On considère la réaction comme étant complète avec un excès d'\chemform{H_2O}
 
-\section{Condensation et absorption}
+\subsection{Condensation et absorption}
 Durant cette étapes aucune réaction chimique n'a lieu. Cette étape permet de retirer tout l'\chemform{H_2O} et le \chemform{CO_2} pour la suite du procédé. On considère que cette étape s'effectue complètement et qu'il ne reste plus aucune trace d'\chemform{H_2O} ou de \chemform{CO_2}.
 
-\section{Synthèse de l'ammoniac}
-La réaction complète suivante a lieu durant la dernière étape du procédé : 
+\subsection{Synthèse de l'ammoniac}
+Durant la dernière étape du procédé, nous synthétisons de l'ammoniac à partir d'hydrogène et d'azote :
 \begin{chemeqn} 3H_2 + N_2 \longrightarrow 2NH_3 \end{chemeqn}
 
 \begin{table}[h]
 	\centering\renewcommand{\arraystretch}{1.2}
-	\begin{tabular}{|l|ccccc|}\hline
+	\begin{tabular}{l|ccccc}
 		& \chemform{3H_2} & + & \chemform{N_2} & $\longrightarrow$ & \chemform{2NH_3}\\\hline
 		$\dot{n}_i$ & $\dotc{n}{H_2}$ && $\dotc{n}{N_2}$ && 0 \\
-		$\dot{n}_f$	& $\dotc{n}{H_2}-3\dotc{n}{N_2}$ && 0  && $2\dotc{n}{N_2}$\\\hline
+		$\dot{n}_f$	& $\dotc{n}{H_2}-3\dotc{n}{N_2}$ && 0  && $2\dotc{n}{N_2}$\\
 	\end{tabular}
+	\caption{\label{tab:synthese}Avancement de la synthèse de l'ammoniac}
 \end{table}
 
 
