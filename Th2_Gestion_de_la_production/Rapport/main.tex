@@ -11,6 +11,7 @@
 \usepackage{chemist}
 \usepackage{siunitx}
 \usepackage{amsmath}
+\usepackage{cases}
 
 \DeclareSIUnit\jour{j}
 \sisetup{per-mode=fraction, fraction-function=\nicefrac}
@@ -27,22 +28,39 @@
 
 \tableofcontents\newpage
 
+\part{Introduction}
+Ce document a pour but d'étudier les bilans de matière et d'énergie d'un procédé alternatif de production d'ammoniac. Nous avons calculé pour chaque unité du procédé les débits d'entrée et de sortie ainsi que l'énergie et les températures dans l'unité de reformage autotherme. À partir des calculs obtenus dans ce document, il nous sera possible de développer un outil de simulation permettant d'étudier l'influence de paramètres sur le fonctionnement du procédé. 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{pictures/procede.pdf}
+	\caption{\label{fig:procede}Flow-sheet simplifié de la production d'ammoniac avec ATR}
+\end{figure}
 
-Pour faciliter nos calculs nous considérons le symbole $\dot{n}$ comme étant le nombre de \si{\mega\mol} (\SI{1e6}{\mol}) produit par jour.
-Les débits molaires que nous utilisons dans nos calculs dépendent de la zone dans laquelle ils sont calculés. Par exemple le $\dotc{n}{CH_4}$ de la zone de combustion n'est pas le même que celui de la zone de reformage.
-
-%%%% Note à moi même: Ajouter Masse totale ATR
+\section{Hypothèses}
+Avant de commencer les calculs, il est necéssaire de faire quelques hypothèses afin de les simplifier : 
+\begin{enumerate}
+	\item La réaction de combustion de l'ATR (voir partie suivante, équation \ref{eq:combustion}) est considérée complète. Il n'en ressort que du \chemform{CO_2} et de l'\chemform{H_2O}. Normalement, dans le cas d'une combustion incomplète, un manque d'\chemform{O_2} aurait permit la formation de \chemform{CO} qui aurait interferé avec la suite du procédé.
+	\item La réaction dans l'unité Water Gas Shift est considérée complète (équation \ref{eq:wgs}. Il est à noter que la même réaction survient plus tôt dans la zone de reformage mais de manière incomplète (équation \ref{eq:reformage2}). 
+	\item Dans l'unité de condensation et d'absorption nous émettons l'hypothèse que nous retirons uniquement et complètement le \chemform{H_2O} et \chemform{CO_2} du procédé.
+	\item En dehors des unités opérationelles, les réactifs ne réagissent pas entre eux.
+	\item La réaction de synthèse de l'ammoniac (équation \ref{eq:synthese}) est considérée comme complète.
+	\item Les quelconques pertes d'énergie entre les unités opérationelles sont négligeables. 
+	\item Les paramètres initiaux qui nous sont donnés sont considérés comme exacts, sans marge d'erreur.
+\end{enumerate}
 
 \part{Bilan de matière}
-Dans cette partie nous calculerons pour toutes les étapes du procédé les bilans de matière. À base de ceux-ci nous déterminerons les débits de production d'ammoniac, d'alimentation d'air, ainsi que tous les débits intermédiares entres les unités opérationnelles. Nous étudierons aussi un cas de production d'ammoniac avec des paramètres donnés.
-\section{Calcul analytique des débits}
-\subsection{Unité ATR}
-\subsubsection{Zone de combustion}
+Pour faciliter nos calculs nous considérons le symbole $\dot{n}$ comme étant le débit molaire avec comme unité le nombre de \si{\mol} produit par seconde.
+
+Dans cette partie nous calculerons pour toutes les étapes du procédé les bilans de matière. À base de ceux-ci nous déterminerons les débits de production d'ammoniac, d'alimentation d'air, ainsi que tous les débits intermédiares entres les unités opérationnelles.
+
+\section{Méthode de calcul des débits molaires}
+Les débits molaires que nous utilisons dans nos calculs dépendent de l'unité dans laquelle ils sont calculés. Par exemple le $\dotc{n}{CH_4}$ de la zone de combustion n'est pas le même que celui de la zone de reformage. Au début de chaque unité nous reprenons les débits de l'unité précédente.
+\subsection{ATR : zone de combustion}
 Nous commencons par la zone de combustion où se produit la réaction chimique suivante :
 	\begin{chemeqn}
 		CH_4 + 2O_2 \longrightarrow CO_2 + 2H_2O
+		\label{eq:combustion}
 	\end{chemeqn}
-On considère la réaction comme étant complète avec un excès de \chemform{CH_4}. 
 
 \begin{table}[h]
 	\centering\renewcommand{\arraystretch}{1.2}
@@ -54,10 +72,10 @@ On considère la réaction comme étant complète avec un excès de \chemform{CH
 	\caption{\label{tab:combustion}Avancement de la combustion}
 \end{table}
 
-\subsubsection{Zone de reformage}
+\subsection{ATR : Zone de reformage}
 Deux équilibres chimiques ont lieu dans la zone de reformage. Ces deux réactions se déroulant simultanément, on ne peut les considérer séparement : 
-\begin{chemeqn}CH_4+H_2O \rightleftharpoons 3H_2 + CO\end{chemeqn}
-\begin{chemeqn}CO + H_2O \rightleftharpoons H_2 + CO_2\end{chemeqn}
+\begin{chemeqn}CH_4+H_2O \rightleftharpoons 3H_2 + CO\label{eq:reformage1}\end{chemeqn}
+\begin{chemeqn}CO + H_2O \rightleftharpoons H_2 + CO_2\label{eq:reformage2}\end{chemeqn}
 
 \begin{table}[H]
 	\centering\renewcommand{\arraystretch}{1.1}
@@ -66,7 +84,7 @@ Deux équilibres chimiques ont lieu dans la zone de reformage. Ces deux réactio
 		$\dot{n_0}$ & $\dotc{n}{CH_4}$ && $\dotc{n}{H_2O}$ && 0 && 0 \\
 	   	$\dot{n_f}$ & $\dotc{n}{CH_4}-\xi$ && $\dotc{n}{H_2O}-\xi-\beta$ && $3\xi+\beta$ && $\xi-\beta$ \\	
 	\end{tabular}
-	\caption{\label{tab:reformage1}Avancement du premier équilibre chimique}
+	\caption{\label{tab:reformage1}Avancement du premier équilibre chimique ($\xi$)}
 \end{table}
 
 \begin{table}[H]
@@ -76,7 +94,7 @@ Deux équilibres chimiques ont lieu dans la zone de reformage. Ces deux réactio
 		$\dot{n_0}$ & 0 && $\dotc{n}{H_2O}$ && 0 && $\dotc{n}{CO_2}$ \\
 	   	$\dot{n_f}$ & $\xi-\beta$ && $\dotc{n}{H_2O}-\xi-\beta$ && $3\xi+\beta$ && $\dotc{n}{CO_2}+\beta$ \\	
 	\end{tabular}
-	\caption{\label{tab:reformage2}Avancement du deuxième équilibre chimique}
+	\caption{\label{tab:reformage2}Avancement du deuxième équilibre chimique ($\beta$)}
 \end{table}
 
 On déduit ensuite pour chaque équilibre l'expression de la constante d'équilibre :

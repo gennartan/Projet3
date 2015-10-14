@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2015.9.21)  14 OCT 2015 19:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2015.9.21)  14 OCT 2015 22:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -720,57 +720,60 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 \c__siunitx_mathsf_int=\count178
 \c__siunitx_mathtt_int=\count179
-
-LaTeX Warning: File `pictures/logo.JPG' not found on input line 26.
-
-
-./main.tex:26: Package pdftex.def Error: File `pictures/logo.JPG' not found.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.26 ...Juline/Gillard, Pierre/Martin}{}{}{\today}
-                                                  
-Using draft setting for this image.
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 26.
-(/usr/share/texmf-dist/tex/latex/base/t1cmtt.fd
-File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-) (/usr/share/texmf-dist/tex/latex/ucs/data/uni-0.def
+<pictures/logo.JPG, id=1, 856.19875pt x 1185.42876pt>
+File: pictures/logo.JPG Graphic file (type jpg)
+<use pictures/logo.JPG>
+Package pdftex.def Info: pictures/logo.JPG used on input line 26.
+(pdftex.def)             Requested size: 68.28383pt x 94.52873pt.
+(/usr/share/texmf-dist/tex/latex/ucs/data/uni-0.def
 File: uni-0.def 2013/05/13 UCS: Unicode data U+0000..U+00FF
 ) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./main.toc)
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./pictures/logo.JPG>] (./main.toc)
 \tf@toc=\write3
 \openout3 = `main.toc'.
 
 [1
 
-] [2] [3]
+] <pictures/procede.pdf, id=19, 302.13213pt x 362.55852pt>
+File: pictures/procede.pdf Graphic file (type pdf)
+<use pictures/procede.pdf>
+Package pdftex.def Info: pictures/procede.pdf used on input line 34.
+(pdftex.def)             Requested size: 227.62206pt x 273.1519pt.
+
+LaTeX Warning: Reference `eq:wgs' on page 2 undefined on input line 42.
+
+
+LaTeX Warning: Reference `eq:reform2' on page 2 undefined on input line 42.
+
+
+LaTeX Warning: Reference `eq:synthese' on page 2 undefined on input line 45.
+
+[2 <./pictures/procede.pdf>] [3] [4]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[4] [5] [6] (./main.aux)
+[5] [6] [7] (./main.aux)
+
+LaTeX Warning: There were undefined references.
+
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 18922 strings out of 493089
- 375773 string characters out of 6140694
- 408514 words of memory out of 5000000
- 22159 multiletter control sequences out of 15000+600000
- 16220 words of font info for 37 fonts, out of 8000000 for 9000
+ 18918 strings out of 493089
+ 375465 string characters out of 6140694
+ 407347 words of memory out of 5000000
+ 22158 multiletter control sequences out of 15000+600000
+ 15907 words of font info for 36 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,24n,48p,10391b,1021s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on main.pdf (7 pages, 286406 bytes).
+{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on main.pdf (8 pages, 1335779 bytes).
 PDF statistics:
- 117 PDF objects out of 1000 (max. 8388607)
- 85 compressed objects within 1 object stream
+ 122 PDF objects out of 1000 (max. 8388607)
+ 87 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
