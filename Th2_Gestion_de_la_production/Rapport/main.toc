@@ -16,6 +16,9 @@
 \contentsline {subsection}{\numberline {2.3}Condensation et absorption}{5}
 \contentsline {subsection}{\numberline {2.4}Synth\IeC {\`e}se de l'ammoniac}{5}
 \contentsline {subsection}{\numberline {2.5}Calcul des exc\IeC {\`e}s}{5}
-\contentsline {part}{II\hspace {1em}Bilan d'\IeC {\'e}nergie}{6}
-\contentsline {section}{\numberline {3}Calcul analytique}{6}
-\contentsline {subsection}{\numberline {3.1}Zone de combustion}{6}
+\contentsline {part}{II\hspace {1em}Bilan d'\IeC {\'e}nergie dans l'ATR}{6}
+\contentsline {section}{\numberline {3}M\IeC {\'e}thode}{6}
+\contentsline {section}{\numberline {4}R\IeC {\'e}sulats}{6}
+\contentsline {subsection}{\numberline {4.1}Zone de combustion}{6}
+\contentsline {subsection}{\numberline {4.2}Zone de reformage}{6}
+\contentsline {subsection}{\numberline {4.3}Total}{6}

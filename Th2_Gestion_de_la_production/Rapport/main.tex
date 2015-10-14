@@ -23,12 +23,15 @@
 \begin{document}
 \maketitle
 \tableofcontents
-\part{Bilan de matière}
-Dans cette partie nous calculerons pour toutes les étapes du procédé les bilans de matière. À base de ceux-ci nous déterminerons les débits de production d'ammoniac, d'alimentation d'air, ainsi que tous les débits intermédiares entres les unités opérationnelles. Nous étudierons aussi un cas de production d'ammoniac avec des paramètres donnés.
+
 
 Pour faciliter nos calculs nous considérons le symbole $\dot{n}$ comme étant le nombre de \si{\mega\mol} (\SI{1e6}{\mol}) produit par jour.
 Les débits molaires que nous utilisons dans nos calculs dépendent de la zone dans laquelle ils sont calculés. Par exemple le $\dotc{n}{CH_4}$ de la zone de combustion n'est pas le même que celui de la zone de reformage.
 
+%%%% Note à moi même: Ajouter Masse totale ATR
+
+\part{Bilan de matière}
+Dans cette partie nous calculerons pour toutes les étapes du procédé les bilans de matière. À base de ceux-ci nous déterminerons les débits de production d'ammoniac, d'alimentation d'air, ainsi que tous les débits intermédiares entres les unités opérationnelles. Nous étudierons aussi un cas de production d'ammoniac avec des paramètres donnés.
 \section{Calcul analytique des débits}
 \subsection{Unité ATR}
 \subsubsection{Zone de combustion}
@@ -75,7 +78,7 @@ Deux équilibres chimiques ont lieu dans la zone de reformage. Ces deux réactio
 
 On déduit ensuite pour chaque équilibre l'expression de la constante d'équilibre :
 \begin{align}
-K_1 &= \frac{(\xi-\beta)(3\xi+\beta)^3}{(\dotc{n}{H_2O}-\xi-\beta)(\dotc{n}{CH_4}-\beta)}\cdot\frac{p_t^2}{(\dotc{n}{CH_4}+\dotc{n}{H_2O}+2\xi-\beta)^2}\\
+K_1 &= \frac{(\xi-\beta)(3\xi+\beta)^3}{(\dotc{n}{H_2O}-\xi-\beta)(\dotc{n}{CH_4}-\beta)}\cdot\frac{p_t^2}{(\dotc{n}{CH_4}+\dotc{n}{H_2O}+\dotc{n}{CO_2}+2\xi)^2}\\
 K_2 &= \frac{(\dotc{n}{CO_2}+\beta)(3\xi+\beta)}{(\xi-\beta)(\dotc{n}{H_2O}-\xi-\beta)}
 \end{align}
 À partir de formules connues et de la température dans l'ATR donnée en paramètre nous pouvons déterminer les valeurss de $K_1$ et $K_2$ : 
@@ -161,7 +164,7 @@ Nos paramètres ainsi que leurs valeurs pour le cas précis sont les suivants :
 
 \subsubsection{Zone de reformage}
 Suite à la résolution des équations nous obtenons les valeurs suivantes pour $\xi$ et $\beta$ :
-$$\begin{cases}\xi &= \SI{28.452}{\mega\mol\per\jour}\\ \beta &= \SI{1.075}{\mega\mol\per\jour}\end{cases}$$
+$$\begin{cases}\xi &= \SI{28.992}{\mega\mol\per\jour}\\ \beta &= \SI{1.025}{\mega\mol\per\jour}\end{cases}$$
 \begin{table}[h]
 	\centering\renewcommand{\arraystretch}{1.2}
 	\begin{tabular}{ll|ccccccc}
@@ -171,7 +174,7 @@ $$\begin{cases}\xi &= \SI{28.452}{\mega\mol\per\jour}\\ \beta &= \SI{1.075}{\meg
 		$\dot{n}_i$ & $[\si{\mega\mol\per\jour}]$ & 35 && 105 && 0  && 0  \\\hline	
 		$\dot{m}_f$ & $[\si{\tonne\per\jour}]$ &  \\
 		$\dot{m}_f$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_f$ & $[\si{\mega\mol\per\jour}]$ & 6.548 && 75.473 && 86.431 && 27.377 \\
+		$\dot{n}_f$ & $[\si{\mega\mol\per\jour}]$ & 6.008 && 74.983 && 88.001 && 27.967 \\
 	\end{tabular}
 	\caption{\label{tab:rcombustion}Résultat de la combustion}
 \end{table}
@@ -184,7 +187,7 @@ $$\begin{cases}\xi &= \SI{28.452}{\mega\mol\per\jour}\\ \beta &= \SI{1.075}{\meg
 		$\dot{n}_i$ & $[\si{\mega\mol\per\jour}]$ & 0 && 105 && 0  && 15  \\\hline	
 		$\dot{m}_f$ & $[\si{\tonne\per\jour}]$ &  \\
 		$\dot{m}_f$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_f$ & $[\si{\mega\mol\per\jour}]$ & 27.377 && 75.473 && 86.431 && 16.075 \\
+		$\dot{n}_f$ & $[\si{\mega\mol\per\jour}]$ & 27.967 && 74.983 && 88.001 && 16.025 \\
 	\end{tabular}
 	\caption{\label{tab:rcombustion}Résultat de la combustion}
 \end{table}
@@ -195,15 +198,15 @@ $$\begin{cases}\xi &= \SI{28.452}{\mega\mol\per\jour}\\ \beta &= \SI{1.075}{\meg
 		&& \chemform{CO} & + & \chemform{H_2O} & $\longrightarrow$ & \chemform{CO_2} & + & \chemform{H_2} \\\hline
 		$\dot{m}_i$ & $[\si{\tonne\per\jour}]$ & \\
 		$\dot{m}_i$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_i$ & $[\si{\mega\mol\per\jour}]$ & 27.377 && 75.473 && 16.075  && 86.431  \\\hline	
+		$\dot{n}_i$ & $[\si{\mega\mol\per\jour}]$ & 27.967 && 74.983 && 16.025  && 88.001  \\\hline	
 		$\dot{m}_f$ & $[\si{\tonne\per\jour}]$ &  \\
 		$\dot{m}_f$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_f$ & $[\si{\mega\mol\per\jour}]$ & 0 && 48.096 && 43.453 && 113.808\\
+		$\dot{n}_f$ & $[\si{\mega\mol\per\jour}]$ & 0 && 47.016 && 43.992 && 115.969\\
 	\end{tabular}
 	\caption{\label{tab:rcombustion}Résultat de la combustion}
 \end{table}
 \subsection{Condensation et absorption}
-$$\begin{cases} \dotc{n}{H_2O} &= 48.096 \\ \dotc{n}{CO_2} &= 43.453 \end{cases}$$
+$$\begin{cases} \dotc{n}{H_2O} &= 47.016 \\ \dotc{n}{CO_2} &= 43.992 \end{cases}$$
 \subsection{Synthèse de l'ammoniac}
 \begin{table}[H]
 	\centering\renewcommand{\arraystretch}{1.2}
@@ -211,24 +214,58 @@ $$\begin{cases} \dotc{n}{H_2O} &= 48.096 \\ \dotc{n}{CO_2} &= 43.453 \end{cases}
 		&& \chemform{3H_2} & + & \chemform{N_2} & $\longrightarrow$ & \chemform{2NH_3} \\\hline
 		$\dot{m}_i$ & $[\si{\tonne\per\jour}]$ & \\
 		$\dot{m}_i$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_i$ & $[\si{\mega\mol\per\jour}]$ & 113.808 && 37.936 && 0 \\\hline	
+		$\dot{n}_i$ & $[\si{\mega\mol\per\jour}]$ & 115.969 && 38.656 && 0 \\\hline	
 		$\dot{m}_f$ & $[\si{\tonne\per\jour}]$ &  \\
 		$\dot{m}_f$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_f$ & $[\si{\mega\mol\per\jour}]$ & 0 && 0 && 75.872\\
+		$\dot{n}_f$ & $[\si{\mega\mol\per\jour}]$ & 0 && 0 && 77.312\\
 	\end{tabular}
 	\caption{\label{tab:rcombustion}Résultat de la combustion}
 \end{table}
 \subsection{Calcul des excès}
 Pour l'\chemform{O_2} nous remarquons que nous n'avons pas d'excès. Car tout l'\chemform{O_2} présent dans l'air réagit dans l'ATR. 
-Par contre pour le \chemform{N_2} la quantité présente dans l'air est de \SI{112.857}{\mega\mol\per\jour} et nous n'en utilisons que \SI{37.936}{\mega\mol\per\jour}.
-Nous avons donc un excès de \SI{74.921}{\mega\mol\per\jour}.
+Par contre pour le \chemform{N_2} la quantité présente dans l'air est de \SI{112.857}{\mega\mol\per\jour} et nous n'en utilisons que \SI{38.656}{\mega\mol\per\jour}.
+Nous avons donc un excès de \SI{74.201}{\mega\mol\per\jour}.
 \newpage
-\part{Bilan d'énergie}
-\section{Calcul analytique}
+
+\part{Bilan d'énergie dans l'ATR}
+
+\section{Méthode}
+
+%%% Ajouter tableau des propriétés physico-chimique
+
+Afin de déterminer la température d'entrée, on calcule l'enthalpie totale dégagée dans l'ATR et avec la formule \ref{eq:enthalpie} on peut déterminer la température initiale connaissant la température finale. 
+\begin{equation}
+	\Delta H_\text{tot} = c_{p,g}\Delta T
+	\label{eq:enthalpie}
+\end{equation}
+
+\section{Résulats}
 \subsection{Zone de combustion}
+\begin{chemeqn}
+	2O_2 + CH_4 \longrightarrow CO_2 + 2H_2O
+\end{chemeqn}
+$$\Delta H^0_\text{\chemform{CH_4}} = \SI{-803}{\kilo\joule\per\mol}$$
+$$\Delta\dot{H} = \SI{-28.105e9}{\kilo\joule\per\jour}$$
 
+\subsection{Zone de reformage}
+\begin{chemeqn}
+	CH_4 + H_2O \rightleftharpoons 3H_2 + CO
+\end{chemeqn}
+$$\Delta H^0_\text{SMR} = \SI{224.0}{\kilo\joule\per\mol}$$
+$$\Delta\dot{H} = \SI{6.4942e9}{\kilo\jour\per\jour}$$
 
+\begin{chemeqn}
+	CO + H_2O \rightleftharpoons H_2 + CO_2
+\end{chemeqn}
+$$\Delta H^0_\text{WGS} = \SI{-37.3}{\kilo\joule\per\mol}$$
+$$\Delta\dot{H} = \SI{-38.2325e6}{\kilo\jour\per\day}$$
 
+\subsection{Total}
+\begin{align*}
+	\Delta\dot{H}_\text{tot} &= \sum\Delta\dot{H}\\
+							 &= \SI{-26.15e9}{\kilo\joule\per\jour} = \SI{-26.15e12}{\joule\per\jour}
+\end{align*}
+$$T_i = \frac{-\Delta\dot{H}_\text{tot}+c_{p,g}\dot{m}_\text{tot}T_f}{c_{p,g}\dot{m}_\text{tot}}$$
 
 
 \end{document}
