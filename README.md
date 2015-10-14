@@ -1,6 +1,14 @@
-﻿# LFSAB 1503 Projet P3
+﻿# LFSAB1503 Projet P3
 
-### Les membres du groupe 12.64
+#### Deadlines
+
+| Sujet                     | Date       | Heure | Fini? |
+| ------------------------- |:----------:|:-----:|:-----:|
+| Rapport Th2               | 16/10/2015 | 17h00 |  [ ]  | 
+| Préparation labo physique | 19/10/2015 | 14h00 |  [ ]  |
+| Outil de calcul Th2       | 23/10/2015 | 17h00 |  [ ]  |
+
+#### Les membres du groupe 12.64
 
 * Paul Asselberghs
 * Brice Bertin
@@ -12,3 +20,5 @@
 * Virgile Goyens
 * Pierre Martin
 * Yasin Yildirim
+
+
