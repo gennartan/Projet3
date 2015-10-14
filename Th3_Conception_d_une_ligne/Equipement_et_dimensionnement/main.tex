@@ -1,0 +1,65 @@
+\documentclass[french, a4paper, 10pt]{article}
+
+\usepackage{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+
+\usepackage{fullpage}
+\usepackage{float}
+\usepackage{nicefrac}
+
+\usepackage{chemist}
+\usepackage{siunitx}
+\usepackage{amsmath}
+
+\DeclareSIUnit\jour{j}
+\sisetup{per-mode=fraction, fraction-function=\nicefrac}
+\newcommand{\dotc}[2]{\dot{#1}_{\text{\chemform{#2}}}}
+
+\title{Thématique 3 : Equipement et dimensionnement d'une ligne de transfert}
+\author{Groupe 12.64}
+\date{\today}
+
+\begin{document}
+\maketitle
+\section{Contraintes de la ligne de transfert}
+\begin{itemize}
+\item $Pression_{initiale}=5bar$
+\item $\Delta X=300m$
+\item 4 coudes de 90°
+\item Débit 1T/h
+\item $Pression_{finale}=10bar$
+\end{itemize}
+
+\section{Caractéristiques de l'équipement existant}
+\begin{itemize}
+\item Tank hauteur=12m
+\item niveau liquide acceptable=8m
+\item pression de design=15bar
+\item pression de décharge maximum de la pompe et du compresseur 20 bar
+\item débit max de la pompe 2t/h
+\item débit max du compresseur 3t/h
+\end{itemize}
+
+\section{Indications}
+Quelques indications pour nous aider à la résolution de notre cahier des charges
+\begin{itemize}
+\item perte de pression lié à une vanne de contrôle=2bar
+\item perte de pression lié à la présece d'u coude (90°):équivalent à la perte de charge généré par 20*D mètres le long de la ligne de transfert droite, où D est le diamètre de la ligne
+\item Darcy-Weisbach $f_{D}=0.02$
+\end{itemize}
+
+\section{Cahier des charges}
+\subsection{Contrôle automatique du transfert}
+Evite le sur-remplissage du tank
+\subsection{Barrière de sécurité supplémentaire}
+En cas de défaillance du système
+\subsection{Schéma de principe de la ligne de transfert}
+
+\section{Dimensions de la conduite}
+Assurer le transfert et la pression
+
+\section{Mini analyse de risques}
+Grâce à HAZOP sur laquelle nous aurons plus d'information le 18/11
+
+\end{document}
