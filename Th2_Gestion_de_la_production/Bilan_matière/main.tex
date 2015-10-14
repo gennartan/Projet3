@@ -101,7 +101,7 @@ Dans la zone de reformage se déroule déjà une réaction Water Gas Shift. Cett
 	\begin{tabular}{l|ccccccc}
 		& \chemform{CO} & + & \chemform{H_2O} & $\longrightarrow$ & \chemform{CO_2} & + & \chemform{H_2} \\\hline
 		$\dot{n}_i$ & $\dotc{n}{CO}$ && $\dotc{n}{H_2O}$ && $\dotc{n}{CO_2}$  && $\dotc{n}{H_2}$  \\
-		$\dot{n}_f$	& 0 && $\dotc{n}{H_2O}-\dotc{n}{CO}$ && $\dotc{n}{CO_2}-\dotc{n}{CO}$ && $\dotc{n}{H_2}-\dotc{n}{CO}$ \\
+		$\dot{n}_f$	& 0 && $\dotc{n}{H_2O}-\dotc{n}{CO}$ && $\dotc{n}{CO_2}+\dotc{n}{CO}$ && $\dotc{n}{H_2}+\dotc{n}{CO}$ \\
 	\end{tabular}
 	\caption{\label{tab:wgs}Avancement de la réaction Water Gas Shift}
 \end{table}
@@ -181,20 +181,57 @@ $$\begin{cases}\xi &= \SI{28.452}{\mega\mol\per\jour}\\ \beta &= \SI{1.075}{\meg
 		&& \chemform{CO} & + & \chemform{H_2O} & $\rightleftharpoons$ & \chemform{H_2} & + & \chemform{CO_2} \\\hline
 		$\dot{m}_i$ & $[\si{\tonne\per\jour}]$ &  &&  &&  &&  \\
 		$\dot{m}_i$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_i$ & $[\si{\mega\mol\per\jour}]$ & 35 && 105 && 0  && 0  \\\hline	
+		$\dot{n}_i$ & $[\si{\mega\mol\per\jour}]$ & 0 && 105 && 0  && 15  \\\hline	
 		$\dot{m}_f$ & $[\si{\tonne\per\jour}]$ &  \\
 		$\dot{m}_f$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_f$ & $[\si{\mega\mol\per\jour}]$ & 6.548 && 75.473 && 86.431 && 27.377 \\
+		$\dot{n}_f$ & $[\si{\mega\mol\per\jour}]$ & 27.377 && 75.473 && 86.431 && 16.075 \\
 	\end{tabular}
 	\caption{\label{tab:rcombustion}Résultat de la combustion}
 \end{table}
-
-
+\subsection{Water Gas Shift (WGS)}
+\begin{table}[H]
+	\centering\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{ll|ccccccc}
+		&& \chemform{CO} & + & \chemform{H_2O} & $\longrightarrow$ & \chemform{CO_2} & + & \chemform{H_2} \\\hline
+		$\dot{m}_i$ & $[\si{\tonne\per\jour}]$ & \\
+		$\dot{m}_i$ & $[\si{\kilo\gram\per\second}]$ \\
+		$\dot{n}_i$ & $[\si{\mega\mol\per\jour}]$ & 27.377 && 75.473 && 16.075  && 86.431  \\\hline	
+		$\dot{m}_f$ & $[\si{\tonne\per\jour}]$ &  \\
+		$\dot{m}_f$ & $[\si{\kilo\gram\per\second}]$ \\
+		$\dot{n}_f$ & $[\si{\mega\mol\per\jour}]$ & 0 && 48.096 && 43.453 && 113.808\\
+	\end{tabular}
+	\caption{\label{tab:rcombustion}Résultat de la combustion}
+\end{table}
+\subsection{Condensation et absorption}
+$$\begin{cases} \dotc{n}{H_2O} &= 48.096 \\ \dotc{n}{CO_2} &= 43.453 \end{cases}$$
+\subsection{Synthèse de l'ammoniac}
+\begin{table}[H]
+	\centering\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{ll|ccccc}
+		&& \chemform{3H_2} & + & \chemform{N_2} & $\longrightarrow$ & \chemform{2NH_3} \\\hline
+		$\dot{m}_i$ & $[\si{\tonne\per\jour}]$ & \\
+		$\dot{m}_i$ & $[\si{\kilo\gram\per\second}]$ \\
+		$\dot{n}_i$ & $[\si{\mega\mol\per\jour}]$ & 113.808 && 37.936 && 0 \\\hline	
+		$\dot{m}_f$ & $[\si{\tonne\per\jour}]$ &  \\
+		$\dot{m}_f$ & $[\si{\kilo\gram\per\second}]$ \\
+		$\dot{n}_f$ & $[\si{\mega\mol\per\jour}]$ & 0 && 0 && 75.872\\
+	\end{tabular}
+	\caption{\label{tab:rcombustion}Résultat de la combustion}
+\end{table}
+\subsection{Calcul des excès}
+Pour l'\chemform{O_2} nous remarquons que nous n'avons pas d'excès. Car tout l'\chemform{O_2} présent dans l'air réagit dans l'ATR. 
+Par contre pour le \chemform{N_2} la quantité présente dans l'air est de \SI{112.857}{\mega\mol\per\jour} et nous n'en utilisons que \SI{37.936}{\mega\mol\per\jour}.
+Nous avons donc un excès de \SI{74.921}{\mega\mol\per\jour}.
+\newpage
+\part{Bilan d'énergie}
+\section{Calcul analytique}
+\subsection{Zone de combustion}
 
 
 
 
 
 \end{document}
+
 
 
