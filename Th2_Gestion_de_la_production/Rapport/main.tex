@@ -4,7 +4,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8x]{inputenc}
 
-\usepackage{fullpage}
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
 \usepackage{float}
 \usepackage{nicefrac}
 
@@ -16,13 +16,16 @@
 \sisetup{per-mode=fraction, fraction-function=\nicefrac}
 \newcommand{\dotc}[2]{\dot{#1}_{\text{\chemform{#2}}}}
 
+\input{../../macros.tex}
+
 \title{Thématique 2 : Gestion de la production}
 \author{Groupe 12.64}
 \date{\today}
 
 \begin{document}
-\maketitle
-\tableofcontents
+\hypertitle{Thématique 2 : Gestion de la production}{LFSAB1503 Projet 3}{12.64}{Paul/Asselberghs, Brice/Bertin, Adrien/Couplet, Grégory/Creupelandt, Anthony/Gatin, Antoine/Gennart, Juline/Gillard, Pierre/Martin}{}{}{\today}
+
+\tableofcontents\newpage
 
 
 Pour faciliter nos calculs nous considérons le symbole $\dot{n}$ comme étant le nombre de \si{\mega\mol} (\SI{1e6}{\mol}) produit par jour.
