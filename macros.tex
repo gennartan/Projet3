@@ -1,0 +1,71 @@
+\usepackage{etoolbox}
+\newcommand{\ppath}[2][$\;\triangleright\;$]{%
+	  \def\nextitem{\def\nextitem{#1}}% Separator
+	    \renewcommand*{\do}[1]{\nextitem\textsf{##1}}% How to process each item
+		  \docsvlist{#2}% Process list
+	  }
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\fancyhf{} %clear all headers and footers fields
+\fancyhead[R]{\thepage} %prints the page number on the right side of the header
+\fancyhead[L]{Rapport de laboratoire CSTR}
+
+
+\pagestyle{fancy}
+\thispagestyle{empty}
+\begin{titlepage}
+\begin{center}
+
+\includegraphics[width=0.15\textwidth]{pictures/logo.JPG}~\\[1cm]
+
+\textsc{\LARGE Université Catholique de Louvain}\\[1.5cm]
+
+\textsc{\Large Projet 3}\\[0.5cm]
+
+% Title
+\HRule \\[0.4cm]
+{ \huge \bfseries Rapport de laboratoire CSTR\\[0.4cm] }
+
+\HRule \\[1.5cm]
+
+% Author and supervisor
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\textbf{Groupe \textsc{11.64}} \\
+\textsc{Asselberghs} Paul \\
+\textsc{Bertin} Brice \\
+\textsc{Couplet} Adrien \\
+\textsc{Crepeulandt} Grégory \\
+\textsc{Gatin} Anthony \\
+\textsc{Gennart} Antoine \\
+\textsc{Gillard} Juline \\
+\textsc{Martin} Pierre
+
+
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+%\emph{Tuteur:} \\
+%David \textsc{Cordova}
+\end{flushright}
+\end{minipage}
+
+\setcounter{tocdepth}{2}
+\tableofcontents % table des matières, totalement automatique ;)
+
+\vfill
+
+% Bottom of the page
+{\large \today}
+\end{center}
+\end{titlepage}
+%-----------------------------------------------------------
+% début du document numéroté
+\clearpage
+\pagenumbering{arabic}
+\newpage
+%-----------------------------------------------------------
+
+\thispagestyle{empty}
