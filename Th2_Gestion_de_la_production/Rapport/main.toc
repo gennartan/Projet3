@@ -1,24 +1,23 @@
 \select@language {french}
-\contentsline {part}{I\hspace {1em}Introduction}{2}
-\contentsline {section}{\numberline {1}Hypoth\IeC {\`e}ses}{2}
-\contentsline {part}{II\hspace {1em}Bilan de mati\IeC {\`e}re}{2}
-\contentsline {section}{\numberline {2}M\IeC {\'e}thode de calcul des d\IeC {\'e}bits molaires}{3}
-\contentsline {subsection}{\numberline {2.1}ATR : zone de combustion}{3}
-\contentsline {subsection}{\numberline {2.2}ATR : Zone de reformage}{3}
-\contentsline {subsection}{\numberline {2.3}Water Gas Shift (WGS)}{4}
-\contentsline {subsection}{\numberline {2.4}Condensation et absorption}{4}
-\contentsline {subsection}{\numberline {2.5}Synth\IeC {\`e}se de l'ammoniac}{5}
-\contentsline {subsection}{\numberline {2.6}Air s\IeC {\'e}paration unit}{5}
-\contentsline {section}{\numberline {3}Calcul num\IeC {\'e}rique des d\IeC {\'e}bits}{5}
-\contentsline {subsection}{\numberline {3.1}ATR}{5}
-\contentsline {subsubsection}{\numberline {3.1.1}Zone de combustion}{5}
-\contentsline {subsubsection}{\numberline {3.1.2}Zone de reformage}{5}
-\contentsline {subsection}{\numberline {3.2}Water Gas Shift (WGS)}{6}
-\contentsline {subsection}{\numberline {3.3}Condensation et absorption}{6}
-\contentsline {subsection}{\numberline {3.4}Synth\IeC {\`e}se de l'ammoniac}{6}
-\contentsline {subsection}{\numberline {3.5}Calcul des exc\IeC {\`e}s}{7}
-\contentsline {part}{III\hspace {1em}Bilan d'\IeC {\'e}nergie dans l'ATR}{8}
-\contentsline {section}{\numberline {4}M\IeC {\'e}thode}{8}
-\contentsline {section}{\numberline {5}R\IeC {\'e}sultats}{8}
-\contentsline {subsection}{\numberline {5.1}Calcul de la temp\IeC {\'e}rature d'entr\IeC {\'e}e dans l'ATR}{8}
-\contentsline {subsection}{\numberline {5.2}Calcul de la temp\IeC {\'e}rature maximale dans la zone de combustion}{8}
+\contentsline {part}{I\hspace {1em}Introduction}{2}{part.1}
+\contentsline {section}{\numberline {1}Propri\IeC {\'e}t\IeC {\'e}s et hypoth\IeC {\`e}ses physico-chimique}{2}{section.1}
+\contentsline {part}{II\hspace {1em}Bilan de mati\IeC {\`e}re}{4}{part.2}
+\contentsline {section}{\numberline {2}M\IeC {\'e}thode de calcul des d\IeC {\'e}bits molaires}{4}{section.2}
+\contentsline {subsection}{\numberline {2.1}ATR : zone de combustion}{4}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}ATR : Zone de reformage}{4}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Water Gas Shift (WGS)}{6}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Condensation et absorption}{6}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Synth\IeC {\`e}se de l'ammoniac}{6}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}Air s\IeC {\'e}paration unit}{6}{subsection.2.6}
+\contentsline {section}{\numberline {3}Calcul num\IeC {\'e}rique des d\IeC {\'e}bits}{7}{section.3}
+\contentsline {subsection}{\numberline {3.1}ATR : zone de combustion}{7}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Zone de reformage}{7}{subsubsection.3.1.1}
+\contentsline {subsection}{\numberline {3.2}Water Gas Shift (WGS)}{8}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Condensation et absorption}{8}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Synth\IeC {\`e}se de l'ammoniac}{8}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Calcul des exc\IeC {\`e}s}{8}{subsection.3.5}
+\contentsline {part}{III\hspace {1em}Bilan d'\IeC {\'e}nergie dans l'ATR}{9}{part.3}
+\contentsline {section}{\numberline {4}M\IeC {\'e}thode}{9}{section.4}
+\contentsline {section}{\numberline {5}R\IeC {\'e}sultats}{9}{section.5}
+\contentsline {subsection}{\numberline {5.1}Calcul de la temp\IeC {\'e}rature d'entr\IeC {\'e}e dans l'ATR}{9}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Calcul de la temp\IeC {\'e}rature finale dans la zone de combustion}{9}{subsection.5.2}

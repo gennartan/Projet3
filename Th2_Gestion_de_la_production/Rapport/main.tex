@@ -5,6 +5,8 @@
 \usepackage[utf8x]{inputenc}
 
 \usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{url}
+\usepackage{hyperref}
 \usepackage{float}
 \usepackage{nicefrac}
 
@@ -24,8 +26,9 @@
 \begin{document}
 \hypertitle{Thématique 2 : Gestion de la production}{LFSAB1503 Projet 3}{12.64}{Paul/Asselberghs, Brice/Bertin, Adrien/Couplet, Grégory/Creupelandt, Anthony/Gatin, Antoine/Gennart, Juline/Gillard, Pierre/Martin}{}{}{\today}
 
-\tableofcontents\newpage
+\tableofcontents
 
+\newpage
 \part{Introduction}
 Ce document a pour but d'étudier les bilans de matière et d'énergie d'un procédé alternatif de production d'ammoniac. Nous avons calculé pour chaque unité du procédé les débits d'entrée et de sortie ainsi que l'énergie et les températures dans l'unité de reformage autotherme. À partir des calculs obtenus dans ce document, il nous sera possible de développer un outil de simulation permettant d'étudier l'influence de paramètres sur le fonctionnement du procédé. 
 \begin{figure}[h]
@@ -34,7 +37,7 @@ Ce document a pour but d'étudier les bilans de matière et d'énergie d'un proc
 	\caption{\label{fig:procede}Flow-sheet simplifié de la production d'ammoniac avec ATR}
 \end{figure}
 
-\section{Hypothèses}
+\section{Propriétés et hypothèses physico-chimique}
 Avant de commencer les calculs, il est necéssaire de faire quelques hypothèses afin de les simplifier : 
 \begin{enumerate}
 	\item La réaction de combustion de l'ATR (voir partie suivante, équation \ref{eq:combustion}) est considérée complète. Il n'en ressort que du \chemform{CO_2} et de l'\chemform{H_2O}. Normalement, dans le cas d'une combustion incomplète, un manque d'\chemform{O_2} aurait permit la formation de \chemform{CO} qui aurait interferé avec la suite du procédé.
@@ -44,22 +47,37 @@ Avant de commencer les calculs, il est necéssaire de faire quelques hypothèses
 	\item La réaction de synthèse de l'ammoniac (équation \ref{eq:synthese}) est considérée comme complète.
 	\item Les quelconques pertes d'énergie entre les unités opérationelles sont négligeables. 
 	\item Les paramètres initiaux qui nous sont donnés sont considérés comme exacts, sans marge d'erreur.
+	\item L'unité de séparation de l'air effectue une séparation complète.
 \end{enumerate}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{lccp{6cm}}\hline
+		\textbf{Paramètre} & \textbf{Valeur} & \textbf{Unité} & \textbf{Description} \\\hline
+		$K_{\text{SMR}}$ & $10^{\left(\frac{-11650}{T}+13.076\right)}$ & - & Constante d'équilibre du reformage du méthane (\textbf{S}team \textbf{M}ethane \textbf{R}eforming). La température $T$ est en \si{K}.\\
+		$K_{\text{WGS}}$ & $10^{\left(\frac{1910}{T}-1.764\right)}$ & - & Constante d'équilibre de la réaction du gaz à l'eau (\textbf{W}ater-\textbf{G}as \textbf{S}hift). La température $T$ est en \si{K}.\\
+		$\Delta H^0_{\text{\chemform{CH4},comb},\SI{1200}{\kelvin}}$ & -803 & \si{\kilo\joule\per\mol} & Variation d'enthalpie de l'oxidation complète du méthane en \chemform{CO_2} et \chemform{H_2O} à \SI{1200}{\kelvin}. On peut considérer cette valeur constante pour les températures que nous atteindrons. \\
+		$\Delta H^0_{\text{SMR},\SI{948}{\kelvin}}$ & 224.0 & \si{\kilo\joule\per\mol} & Variation d'enthalpie du reformage du méthane à \SI{948}{\kelvin}. On peut considérer cette valeur constante pour les températures que nous atteindrons. \\
+		$\Delta H^0_{\text{WGS},\SI{948}{\kelvin}}$ & -37.3 & \si{\kilo\joule\per\mol} & Variation d'enthalpie de la réaction du gaz à l'eau à \SI{948}{\kelvin}. On peut considérer cette valeur constante pour les températures que nous atteindrons. \\
+		$c_{p,g}$ & 2500 & \si{\joule\per\kilo\gram\per\kelvin} & Capacité thermique moyenne du mélange gazeux de l'ATR. On peut considérer cette valeur constante.\\\hline
+	\end{tabular}
+	\caption{\label{tab:proprietes}Propriétés physico-chimiques et hypothèses nécessaires pour les bilans de matière et d'énergies}
+\end{table}
 
+
+\newpage
 \part{Bilan de matière}
-Pour faciliter nos calculs nous considérons le symbole $\dot{n}$ comme étant le débit molaire avec comme unité le nombre de \si{\mol} produit par seconde.
-
-Dans cette partie nous calculerons pour toutes les étapes du procédé les bilans de matière. À base de ceux-ci nous déterminerons les débits de production d'ammoniac, d'alimentation d'air, ainsi que tous les débits intermédiares entres les unités opérationnelles.
+Pour faciliter nos calculs nous considérons le symbole $\dot{n}$ comme étant le débit molaire avec comme unité le nombre de mol produit par seconde (\si{\mol\per\second}).
+Nous commencerons par calculer pour toutes les étapes du procédé les bilans de matière. À base de ceux-ci nous déterminerons les débits de production d'ammoniac, d'alimentation d'air, ainsi que tous les débits intermédiares entres les unités opérationnelles.
+Deuxièmement nous étudierons ce bilan avec des paramètres donnés. 
 
 \section{Méthode de calcul des débits molaires}
-Les débits molaires que nous utilisons dans nos calculs dépendent de l'unité dans laquelle ils sont calculés. Par exemple le $\dotc{n}{CH_4}$ de la zone de combustion n'est pas le même que celui de la zone de reformage. Au début de chaque unité nous reprenons les débits de l'unité précédente.
+Les débits molaires que nous utilisons dans nos calculs dépendent de l'unité dans laquelle ils sont calculés. Par exemple le $\dotc{n}{CH_4}$ de la zone de combustion n'est pas le même que celui de la zone de reformage. Au début de chaque unité nous reprenons les débits de l'unité précédente. Nous rappelons au lecteur que le symbole $\dot{n}_i$ correspond au débit molaire en entrée (avant réaction) et $\dot{n}_f$ au débit molaire en sortie (après réaction).
 \subsection{ATR : zone de combustion}
-Nous commencons par la zone de combustion où se produit la réaction chimique suivante :
-	\begin{chemeqn}
-		CH_4 + 2O_2 \longrightarrow CO_2 + 2H_2O
-		\label{eq:combustion}
-	\end{chemeqn}
-
+Nous commencons par la zone de combustion où se produit une combustion du méthane dans le dioxygène :
+\begin{chemeqn}
+	CH_4 + 2O_2 \longrightarrow CO_2 + 2H_2O
+	\label{eq:combustion}
+\end{chemeqn}
 \begin{table}[h]
 	\centering\renewcommand{\arraystretch}{1.2}
 	\begin{tabular}{l|ccccccc}
@@ -67,14 +85,18 @@ Nous commencons par la zone de combustion où se produit la réaction chimique s
 		$\dot{n}_i$ & $\dotc{n}{CH_4}$ && $2\dotc{n}{O_2}$ && 0  && $\dotc{n}{H_2O}$  \\
 		$\dot{n}_f$	& $\dotc{n}{CH_4}-\dotc{n}{O_2}$ && 0  && $\dotc{n}{O_2}$ && $\dotc{n}{H_2O}+2\dotc{n}{O_2}$ \\
 	\end{tabular}
-	\caption{\label{tab:combustion}Avancement de la combustion}
+	\caption{\label{tab:combustion}Avancement de la combustion du méthane}
 \end{table}
 
 \subsection{ATR : Zone de reformage}
-Deux équilibres chimiques ont lieu dans la zone de reformage. Ces deux réactions se déroulant simultanément, on ne peut les considérer séparement : 
-\begin{chemeqn}CH_4+H_2O \rightleftharpoons 3H_2 + CO\label{eq:reformage1}\end{chemeqn}
-\begin{chemeqn}CO + H_2O \rightleftharpoons H_2 + CO_2\label{eq:reformage2}\end{chemeqn}
-
+Nous passons ensuite au reformage à la vapeur du méthane (en anglais: \textit{steam methane reforming}, SMR). Cette étape est constituée de deux réactions incomplètes : 
+\begin{enumerate}
+	\item La réaction incomplète du méthane avec l'eau permettant de produire l'hydrogène nécessaire à la suite du procédé : 
+		\begin{chemeqn}CH_4+H_2O \rightleftharpoons 3H_2 + CO\label{eq:reformage1}\end{chemeqn}
+	\item La réaction incomplète du gaz à l'eau (WGS) due au monoxyde de carbone réagissant avec l'eau. Cette réaction produit elle aussi de l'hydrogène :
+		\begin{chemeqn}CO + H_2O \rightleftharpoons H_2 + CO_2\label{eq:reformage2}\end{chemeqn}
+\end{enumerate}
+Les deux réactions se produisent simultanément, il est donc impossible de les considérer de manière individuelle.
 \begin{table}[H]
 	\centering\renewcommand{\arraystretch}{1.1}
 	\begin{tabular}{l|ccccccc}
@@ -84,7 +106,6 @@ Deux équilibres chimiques ont lieu dans la zone de reformage. Ces deux réactio
 	\end{tabular}
 	\caption{\label{tab:reformage1}Avancement du premier équilibre chimique ($\xi$)}
 \end{table}
-
 \begin{table}[H]
 	\centering\renewcommand{\arraystretch}{1.1}
 	\begin{tabular}{l|ccccccc}
@@ -94,17 +115,27 @@ Deux équilibres chimiques ont lieu dans la zone de reformage. Ces deux réactio
 	\end{tabular}
 	\caption{\label{tab:reformage2}Avancement du deuxième équilibre chimique ($\beta$)}
 \end{table}
-
 On déduit ensuite pour chaque équilibre l'expression de la constante d'équilibre :
 \begin{align}
-K_1 &= \frac{(\xi-\beta)(3\xi+\beta)^3}{(\dotc{n}{H_2O}-\xi-\beta)(\dotc{n}{CH_4}-\beta)}\cdot\frac{p_t^2}{(\dotc{n}{CH_4}+\dotc{n}{H_2O}+\dotc{n}{CO_2}+2\xi)^2}\\
-K_2 &= \frac{(\dotc{n}{CO_2}+\beta)(3\xi+\beta)}{(\xi-\beta)(\dotc{n}{H_2O}-\xi-\beta)}
+K_\text{SMR} &= \frac{(\xi-\beta)(3\xi+\beta)^3}{(\dotc{n}{H_2O}-\xi-\beta)(\dotc{n}{CH_4}-\beta)}\cdot\frac{p_t^2}{(\dotc{n}{CH_4}+\dotc{n}{H_2O}+\dotc{n}{CO_2}+2\xi)^2}\\
+K_\text{WGS} &= \frac{(\dotc{n}{CO_2}+\beta)(3\xi+\beta)}{(\xi-\beta)(\dotc{n}{H_2O}-\xi-\beta)}
 \end{align}
-À partir de formules connues et de la température dans l'ATR donnée en paramètre nous pouvons déterminer les valeurss de $K_1$ et $K_2$ : 
-$$ \begin{cases}K_1 &= 10^{\left(\frac{-11650}{T}+13.076\right)} \\
-				K_2 &= 10^{\left(\frac{1910}{T}-1.764\right)} \end{cases}$$
-Nous avons alors un système de deux équations à deux inconnues ($\xi$ et $\beta$). Nous résolvons ce système à l'aide du logiciel Matlab\textsuperscript{\textregistered} avec la fonction suivante :
-\lstinputlisting[style=Matlab-editor, basicstyle=\footnotesize\ttfamily, tabsize=4, caption=Code Matlab\textsuperscript{\textregistered} pour résoudre le système]{ressources/reformage.m}
+À partir des propriétés physico-chimiques (table \ref{tab:proprietes}) et de la température dans l'ATR donnée en paramètre nous pouvons déterminer les valeurss de $K_\text{SMR}$ et $K_{WGS}$ : 
+\begin{align}
+	K_\text{SMR} &= 10^{\left(\frac{-11650}{T}+13.076\right)} \\
+	K_\text{WGS} &= 10^{\left(\frac{1910}{T}-1.764\right)} 
+\end{align}
+Nous avons alors un système de deux équations à deux inconnues ($\xi$ et $\beta$) 
+\begin{equation}
+	\left\{
+	\begin{aligned}
+		10^{\left(\frac{-11650}{T}+13.076\right)} &= \frac{(\xi-\beta)(3\xi+\beta)^3}{(\dotc{n}{H_2O}-\xi-\beta)(\dotc{n}{CH_4}-\beta)}\cdot\frac{p_t^2}{(\dotc{n}{CH_4}+\dotc{n}{H_2O}+\dotc{n}{CO_2}+2\xi)^2}\\
+		10^{\left(\frac{1910}{T}-1.764\right)}    &= \frac{(\dotc{n}{CO_2}+\beta)(3\xi+\beta)}{(\xi-\beta)(\dotc{n}{H_2O}-\xi-\beta)}
+	\end{aligned}
+	\right.
+\end{equation}
+que nous résolvons à l'aide du logiciel Matlab\textsuperscript{\textregistered} avec la fonction suivante :
+\lstinputlisting[style=Matlab-editor, basicstyle=\scriptsize\ttfamily, tabsize=4, caption=Code Matlab\textsuperscript{\textregistered} pour résoudre le système\label{lst:matlab}]{ressources/reformage.m}
 Au final, nous obtenons à la sortie de la zone de reformage les débits suivants :
 \begin{table}[H]
 	\centering\renewcommand{\arraystretch}{1.1}
@@ -117,9 +148,8 @@ Au final, nous obtenons à la sortie de la zone de reformage les débits suivant
 \end{table}
 
 \subsection{Water Gas Shift (WGS)}
-Dans la zone de reformage se déroule déjà une réaction Water Gas Shift. Cette réaction se déroule de manière incomplète mais dans cette unité opérationnelle nous la considérons comme complète : 
-\begin{chemeqn}CO + H_2O \longrightarrow CO_2 + H_2\end{chemeqn}
-
+Comme énoncé dans les hypothèses, la même réaction du gaz à l'eau (WGS) que dans la zone de reformage se produit. La seule différence est que cette fois-ci la réaction est complète. Cette étape nous permet d'éliminer complètement le monoxyde de carbone présent dans les réactifs. 
+\begin{chemeqn}CO + H_2O \longrightarrow CO_2 + H_2\label{eq:wgs}\end{chemeqn}
 \begin{table}[h]
 	\centering\renewcommand{\arraystretch}{1.2}
 	\begin{tabular}{l|ccccccc}
@@ -132,13 +162,12 @@ Dans la zone de reformage se déroule déjà une réaction Water Gas Shift. Cett
 
 
 \subsection{Condensation et absorption}
-Durant cette étapes aucune réaction chimique n'a lieu. Cette étape permet de retirer tout l'\chemform{H_2O} et le \chemform{CO_2} pour la suite du procédé. On considère que cette étape s'effectue complètement et qu'il ne reste plus aucune trace d'\chemform{H_2O} ou de \chemform{CO_2}.
+Durant cette étapes aucune réaction chimique n'a lieu. Cette étape permet de retirer tout l'\chemform{H_2O} et le \chemform{CO_2} pour la suite du procédé. On considère que cette étape s'effectue complètement et qu'il ne reste plus aucune trace d'\chemform{H_2O} ou de \chemform{CO_2}. On connait alors les débits molaires de ces deux réactifs qui sortent du procédé. Ceux-ci sont égaux aux débits sortants de l'unité WGS.
 
 \subsection{Synthèse de l'ammoniac}
-Durant la dernière étape du procédé, nous synthétisons de l'ammoniac à partir d'hydrogène et d'azote :
+La dernière étape du procédé consiste à synthétiser l'ammoniac à partir de diazote (\chemform{N_2}), obtenu après séparation de l'air, et de dihydrogène (\chemform{H_2}). Cette étape porte aussi le nom de procédé Haber. 
 \begin{chemeqn} 3H_2 + N_2 \longrightarrow 2NH_3 \end{chemeqn}
-
-\begin{table}[h]
+\begin{table}[H]
 	\centering\renewcommand{\arraystretch}{1.2}
 	\begin{tabular}{l|ccccc}
 		& \chemform{3H_2} & + & \chemform{N_2} & $\longrightarrow$ & \chemform{2NH_3}\\\hline
@@ -147,55 +176,56 @@ Durant la dernière étape du procédé, nous synthétisons de l'ammoniac à par
 	\end{tabular}
 	\caption{\label{tab:synthese}Avancement de la synthèse de l'ammoniac}
 \end{table}
+Avec des paramètres donnés, nous essayerons d'introduire dans la réaction un débit molaire de \chemform{N_2} égal à celui de l'\chemform{H_2}. Le but étant de n'avoir aucun excès d'\chemform{H_2}.
 
 \subsection{Air séparation unit}
 Maintenant que nous connaissons les quantités nécessaires de \chemform{N_2} ainsi que celles de \chemform{O_2} qui interviennent dans l'ATR, nous pouvons déterminer la quantité d'air entrant dans l'unité de séparation d'air. Dans cette unité rentre de l'air composé de \chemform{O_2}, \chemform{N_2} et \chemform{H_2O}. En pourcentage cela nous donne : 21\% de \chemform{N_2} et 79\% de \chemform{O_2}. L'eau contenue dans l'air est négligeable et ressort directement après
 séparation.
 Le débit d'air entrant ainsi que les excès seront calculés numériquement dans la section suivante.
 
+\newpage
 \section{Calcul numérique des débits}
-Nos paramètres ainsi que leurs valeurs pour le cas précis sont les suivants :
+Tout en gardant les même propriétés physico-chimiques et hypothèses, nos paramètres ainsi que leurs valeurs pour le cas précis sont les suivants :
 \begin{table}[h]
 	\centering\renewcommand{\arraystretch}{1.1}
 	\begin{tabular}{lccl}\hline
-		Paramètre & Valeur & Unité & Description \\\hline
+		\textbf{Paramètre} & \textbf{Valeur} & \textbf{Unité} & \textbf{Description} \\\hline
 		$\dotc{m}{CH_4}$ & 800 & \si{\tonne\per\jour} & Débit massique d'alimentation de \chemform{CH_4} \\
-		$\nicefrac{\text{\chemform{O_2}}}{\text{\chemform{CH_4}}}$ & 0.6 & - & Rapport $\nicefrac{\text{\chemform{O_2}}}{\text{\chemform{CH_4}}}$ à l'entrée de l'ATR \\
-		$\nicefrac{\text{\chemform{H_2O}}}{\text{\chemform{CH_4}}}$& 1.5 & - & Rapport $\nicefrac{\text{\chemform{H_2O}}}{\text{\chemform{CH_4}}}$ à l'entrée de l'ATR \\
+		$\nicefrac{\text{\chemform{O_2}}}{\text{\chemform{CH_4}}}$ & 0.6 & - & Rapport molaire $\nicefrac{\text{\chemform{O_2}}}{\text{\chemform{CH_4}}}$ à l'entrée de l'ATR \\
+		$\nicefrac{\text{\chemform{H_2O}}}{\text{\chemform{CH_4}}}$& 1.5 & - & Rapport molaire $\nicefrac{\text{\chemform{H_2O}}}{\text{\chemform{CH_4}}}$ à l'entrée de l'ATR \\
 		$T_{\text{ATR}}$ & 1200 & \si{\kelvin} & Température de la zone reforming de l'ATR \\
 		$p_{\text{ATR}}$ & 50   & \si{\bar} & Pression d'opération de l'ATR \\\hline
 	\end{tabular}
 	\caption{\label{tab:parametres}Paramètres influant le fonctionnement du procédé}
 \end{table}
-\subsection{ATR}
-\subsubsection{Zone de combustion}
+\subsection{ATR : zone de combustion}
 \begin{table}[h]
 	\centering\renewcommand{\arraystretch}{1.2}
 	\begin{tabular}{ll|ccccccc}
 		&& \chemform{CH_4} & + & \chemform{2O_2} & $\longrightarrow$ & \chemform{CO_2} & + & \chemform{2H_2O} \\\hline
 		$\dot{m}_i$ & $[\si{\tonne\per\jour}]$ & 800 && 960 && 0 && 1350 \\
-		$\dot{m}_i$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_i$ & $[\si{\mega\mol\per\jour}]$ & 50 && 30 && 0  && 75  \\\hline	
+		$\dot{m}_i$ & $[\si{\kilo\gram\per\second}]$ & 9.259\\
+		$\dot{n}_i$ & $[\si{\mol\per\second}]$ & 578.704 && 347.222 && 0  && 868.056  \\\hline	
 		$\dot{m}_f$ & $[\si{\tonne\per\jour}]$ & 560 && 0 && 660 && 1890 \\
 		$\dot{m}_f$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_f$ & $[\si{\mega\mol\per\jour}]$ & 35 && 0 && 15 && 105 \\
+		$\dot{n}_f$ & $[\si{\mol\per\second}]$ & 35 && 0 && 15 && 105 \\
 	\end{tabular}
 	\caption{\label{tab:rcombustion}Résultat de la combustion}
 \end{table}
 
 \subsubsection{Zone de reformage}
 Suite à la résolution des équations nous obtenons les valeurs suivantes pour $\xi$ et $\beta$ :
-$$\begin{cases}\xi &= \SI{28.992}{\mega\mol\per\jour}\\ \beta &= \SI{1.025}{\mega\mol\per\jour}\end{cases}$$
+$$\begin{cases}\xi &= \SI{28.992}{\mol\per\second}\\ \beta &= \SI{1.025}{\mol\per\second}\end{cases}$$
 \begin{table}[h]
 	\centering\renewcommand{\arraystretch}{1.2}
 	\begin{tabular}{ll|ccccccc}
 		&& \chemform{CH_4} & + & \chemform{H_2O} & $\rightleftharpoons$ & \chemform{3H_2} & + & \chemform{CO} \\\hline
 		$\dot{m}_i$ & $[\si{\tonne\per\jour}]$ &  &&  &&  &&  \\
 		$\dot{m}_i$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_i$ & $[\si{\mega\mol\per\jour}]$ & 35 && 105 && 0  && 0  \\\hline	
+		$\dot{n}_i$ & $[\si{\mol\per\second}]$ & 35 && 105 && 0  && 0  \\\hline	
 		$\dot{m}_f$ & $[\si{\tonne\per\jour}]$ &  \\
 		$\dot{m}_f$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_f$ & $[\si{\mega\mol\per\jour}]$ & 6.008 && 74.983 && 88.001 && 27.967 \\
+		$\dot{n}_f$ & $[\si{\mol\per\second}]$ & 6.008 && 74.983 && 88.001 && 27.967 \\
 	\end{tabular}
 	\caption{\label{tab:rcombustion}Résultat de la combustion}
 \end{table}
@@ -205,10 +235,10 @@ $$\begin{cases}\xi &= \SI{28.992}{\mega\mol\per\jour}\\ \beta &= \SI{1.025}{\meg
 		&& \chemform{CO} & + & \chemform{H_2O} & $\rightleftharpoons$ & \chemform{H_2} & + & \chemform{CO_2} \\\hline
 		$\dot{m}_i$ & $[\si{\tonne\per\jour}]$ &  &&  &&  &&  \\
 		$\dot{m}_i$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_i$ & $[\si{\mega\mol\per\jour}]$ & 0 && 105 && 0  && 15  \\\hline	
+		$\dot{n}_i$ & $[\si{\mol\per\second}]$ & 0 && 105 && 0  && 15  \\\hline	
 		$\dot{m}_f$ & $[\si{\tonne\per\jour}]$ &  \\
 		$\dot{m}_f$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_f$ & $[\si{\mega\mol\per\jour}]$ & 27.967 && 74.983 && 88.001 && 16.025 \\
+		$\dot{n}_f$ & $[\si{\mol\per\second}]$ & 27.967 && 74.983 && 88.001 && 16.025 \\
 	\end{tabular}
 	\caption{\label{tab:rcombustion}Résultat de la combustion}
 \end{table}
@@ -219,10 +249,10 @@ $$\begin{cases}\xi &= \SI{28.992}{\mega\mol\per\jour}\\ \beta &= \SI{1.025}{\meg
 		&& \chemform{CO} & + & \chemform{H_2O} & $\longrightarrow$ & \chemform{CO_2} & + & \chemform{H_2} \\\hline
 		$\dot{m}_i$ & $[\si{\tonne\per\jour}]$ & \\
 		$\dot{m}_i$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_i$ & $[\si{\mega\mol\per\jour}]$ & 27.967 && 74.983 && 16.025  && 88.001  \\\hline	
+		$\dot{n}_i$ & $[\si{\mol\per\second}]$ & 27.967 && 74.983 && 16.025  && 88.001  \\\hline	
 		$\dot{m}_f$ & $[\si{\tonne\per\jour}]$ &  \\
 		$\dot{m}_f$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_f$ & $[\si{\mega\mol\per\jour}]$ & 0 && 47.016 && 43.992 && 115.969\\
+		$\dot{n}_f$ & $[\si{\mol\per\second}]$ & 0 && 47.016 && 43.992 && 115.969\\
 	\end{tabular}
 	\caption{\label{tab:rcombustion}Résultat de la combustion}
 \end{table}
@@ -235,17 +265,17 @@ $$\begin{cases} \dotc{n}{H_2O} &= 47.016 \\ \dotc{n}{CO_2} &= 43.992 \end{cases}
 		&& \chemform{3H_2} & + & \chemform{N_2} & $\longrightarrow$ & \chemform{2NH_3} \\\hline
 		$\dot{m}_i$ & $[\si{\tonne\per\jour}]$ & \\
 		$\dot{m}_i$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_i$ & $[\si{\mega\mol\per\jour}]$ & 115.969 && 38.656 && 0 \\\hline	
+		$\dot{n}_i$ & $[\si{\mol\per\second}]$ & 115.969 && 38.656 && 0 \\\hline	
 		$\dot{m}_f$ & $[\si{\tonne\per\jour}]$ &  \\
 		$\dot{m}_f$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_f$ & $[\si{\mega\mol\per\jour}]$ & 0 && 0 && 77.312\\
+		$\dot{n}_f$ & $[\si{\mol\per\second}]$ & 0 && 0 && 77.312\\
 	\end{tabular}
 	\caption{\label{tab:rcombustion}Résultat de la combustion}
 \end{table}
 \subsection{Calcul des excès}
 Pour l'\chemform{O_2} nous remarquons que nous n'avons pas d'excès. Car tout l'\chemform{O_2} présent dans l'air réagit dans l'ATR. 
-Par contre pour le \chemform{N_2} la quantité présente dans l'air est de \SI{112.857}{\mega\mol\per\jour} et nous n'en utilisons que \SI{38.656}{\mega\mol\per\jour}.
-Nous avons donc un excès de \SI{74.201}{\mega\mol\per\jour}.
+Par contre pour le \chemform{N_2} la quantité présente dans l'air est de \SI{112.857}{\mol\per\second} et nous n'en utilisons que \SI{38.656}{\mol\per\second}.
+Nous avons donc un excès de \SI{74.201}{\mol\per\second}.
 \newpage
 
 \part{Bilan d'énergie dans l'ATR}
