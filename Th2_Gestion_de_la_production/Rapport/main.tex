@@ -13,15 +13,13 @@
 \usepackage{amsmath}
 \usepackage{cases}
 
+\usepackage[numbered,framed]{matlab-prettifier}
+
 \DeclareSIUnit\jour{j}
 \sisetup{per-mode=fraction, fraction-function=\nicefrac}
 \newcommand{\dotc}[2]{\dot{#1}_{\text{\chemform{#2}}}}
 
 \input{../../macros.tex}
-
-\title{Thématique 2 : Gestion de la production}
-\author{Groupe 12.64}
-\date{\today}
 
 \begin{document}
 \hypertitle{Thématique 2 : Gestion de la production}{LFSAB1503 Projet 3}{12.64}{Paul/Asselberghs, Brice/Bertin, Adrien/Couplet, Grégory/Creupelandt, Anthony/Gatin, Antoine/Gennart, Juline/Gillard, Pierre/Martin}{}{}{\today}
@@ -105,16 +103,18 @@ K_2 &= \frac{(\dotc{n}{CO_2}+\beta)(3\xi+\beta)}{(\xi-\beta)(\dotc{n}{H_2O}-\xi-
 À partir de formules connues et de la température dans l'ATR donnée en paramètre nous pouvons déterminer les valeurss de $K_1$ et $K_2$ : 
 $$ \begin{cases}K_1 &= 10^{\left(\frac{-11650}{T}+13.076\right)} \\
 				K_2 &= 10^{\left(\frac{1910}{T}-1.764\right)} \end{cases}$$
-Nous avons alors un système de deux équations à deux inconnues ($\xi$ et $\beta$). Nous résolvons ce système à l'aide du logiciel Matlab avec la fonction suivante :
-
+Nous avons alors un système de deux équations à deux inconnues ($\xi$ et $\beta$). Nous résolvons ce système à l'aide du logiciel Matlab\textsuperscript{\textregistered} avec la fonction suivante :
+\lstinputlisting[style=Matlab-editor, basicstyle=\footnotesize\ttfamily, tabsize=4, caption=Code Matlab\textsuperscript{\textregistered} pour résoudre le système]{ressources/reformage.m}
 Au final, nous obtenons à la sortie de la zone de reformage les débits suivants :
-\begin{align*}
-	\dotc{n'}{CH_4} &= \dotc{n}{CH_4}-\xi\\
-	\dotc{n'}{H_2O} &= \dotc{n}{H_2O}-\xi-\beta\\
-	\dotc{n'}{CO_2} &= \dotc{n}{CO_2}+\beta\\
-	\dotc{n'}{CO}   &= \xi-\beta\\
-	\dotc{n'}{H_2}  &= 3\xi+\beta
-\end{align*}
+\begin{table}[H]
+	\centering\renewcommand{\arraystretch}{1.1}
+	\begin{tabular}{l|ccccc}
+		& \chemform{CH_4} & \chemform{H_2O} & \chemform{CO_2} & \chemform{CO} & \chemform{H_2}\\\hline
+		$\dot{n_0}$ & $\dotc{n}{CH_4}$ & $\dotc{n}{H_2O}$ & $\dotc{n}{CO_2}$ & 0 & 0 \\
+		$\dot{n_f}$ & $\dotc{n}{CH_4}-\xi$ & $\dotc{n}{H_2O}-\xi-\beta$ & $\dotc{n}{CO_2}+\beta$ & $\xi-\beta$ & $3\xi+\beta$
+	\end{tabular}
+	\caption{\label{tab:reformagetotal}Débits molaires d'entrée et de sortie de la zone de reformage}
+\end{table}
 
 \subsection{Water Gas Shift (WGS)}
 Dans la zone de reformage se déroule déjà une réaction Water Gas Shift. Cette réaction se déroule de manière incomplète mais dans cette unité opérationnelle nous la considérons comme complète : 

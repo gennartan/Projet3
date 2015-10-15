@@ -35,7 +35,6 @@ O2_Need = O2; % Pour AirSeparationUnit
 
 N_H2O = RapH2OCH4 * N_CH4; % [mol/j]
 H2O = M_H2O * N_H2O; % [t/j]
-
 N2_Need = -1;
 
 
@@ -118,7 +117,7 @@ N2_Need = -1;
     X0(1) = 0.7*N_CH4;
     X0(2) = 0.01*N_CH4;
     OPTIONS = optimoptions('fsolve', 'MaxFunEvals', 1000);
-    X=fsolve(@myfun, X0, OPTIONS);
+    X=fsolve(@myfun, X0, OPTIONS)
     
     % Nbre mol sortant de l'atr [mol/j]
     NbreSecParJour = 3600*24;
