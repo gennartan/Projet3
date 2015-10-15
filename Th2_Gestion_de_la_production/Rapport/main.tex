@@ -198,86 +198,122 @@ Tout en gardant les même propriétés physico-chimiques et hypothèses, nos par
 	\end{tabular}
 	\caption{\label{tab:parametres}Paramètres influant le fonctionnement du procédé}
 \end{table}
+
+Nous avons aussi pour chaque molécule présente dans le procédé la masse molaire
+\begin{table}[H]
+	\centering
+	\begin{tabular}{cc}\hline
+		\textbf{Molécule} & \textbf{Masse molaire [\si{\gram\per\mol}]} \\\hline
+		\chemform{O_2} & 32.0 \\
+		\chemform{N_2} & 28.0 \\
+		\chemform{H_2O}& 18.0 \\
+		\chemform{CH_4}& 16.0 \\
+		\chemform{CO_2}& 44.0 \\
+		\chemform{CO}  & 28.0 \\
+		\chemform{H_2} & 2.0  \\
+		\chemform{NH_3}& 17.0 \\\hline
+	\end{tabular}
+	\caption{\label{tab:massemolaires}Masses molaires}
+\end{table}
 \subsection{ATR : zone de combustion}
 \begin{table}[h]
 	\centering\renewcommand{\arraystretch}{1.2}
 	\begin{tabular}{ll|ccccccc}
 		&& \chemform{CH_4} & + & \chemform{2O_2} & $\longrightarrow$ & \chemform{CO_2} & + & \chemform{2H_2O} \\\hline
 		$\dot{m}_i$ & $[\si{\tonne\per\jour}]$ & 800 && 960 && 0 && 1350 \\
-		$\dot{m}_i$ & $[\si{\kilo\gram\per\second}]$ & 9.259\\
-		$\dot{n}_i$ & $[\si{\mol\per\second}]$ & 578.704 && 347.222 && 0  && 868.056  \\\hline	
+		$\dot{m}_i$ & $[\si{\kilo\gram\per\second}]$ & 9.3 && 11.1 && 0 && 15.6 \\
+		$\dot{n}_i$ & $[\si{\mol\per\second}]$ & 578.7 && 347.2 && 0  && 868.1 \\\hline	
 		$\dot{m}_f$ & $[\si{\tonne\per\jour}]$ & 560 && 0 && 660 && 1890 \\
-		$\dot{m}_f$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_f$ & $[\si{\mol\per\second}]$ & 35 && 0 && 15 && 105 \\
+		$\dot{m}_f$ & $[\si{\kilo\gram\per\second}]$ & 6.5 && 0 && 7.6 && 21.9 \\
+		$\dot{n}_f$ & $[\si{\mol\per\second}]$ & 405.1 && 0 && 173.6 && 1215.3 \\
 	\end{tabular}
 	\caption{\label{tab:rcombustion}Résultat de la combustion}
 \end{table}
 
-\subsubsection{Zone de reformage}
-Suite à la résolution des équations nous obtenons les valeurs suivantes pour $\xi$ et $\beta$ :
-$$\begin{cases}\xi &= \SI{28.992}{\mol\per\second}\\ \beta &= \SI{1.025}{\mol\per\second}\end{cases}$$
+\subsection{ATR : zone de reformage}
+Suite à la résolution des équations par la fonction Matlab\textsuperscript{\textregistered} nous obtenons les valeurs suivantes pour $\xi$ et $\beta$ :
+\begin{equation}\begin{cases}\xi &= \SI{335.6}{\mol\per\second}\\ \beta &= \SI{11.9}{\mol\per\second}\end{cases}\end{equation}
 \begin{table}[h]
 	\centering\renewcommand{\arraystretch}{1.2}
 	\begin{tabular}{ll|ccccccc}
 		&& \chemform{CH_4} & + & \chemform{H_2O} & $\rightleftharpoons$ & \chemform{3H_2} & + & \chemform{CO} \\\hline
-		$\dot{m}_i$ & $[\si{\tonne\per\jour}]$ &  &&  &&  &&  \\
-		$\dot{m}_i$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_i$ & $[\si{\mol\per\second}]$ & 35 && 105 && 0  && 0  \\\hline	
-		$\dot{m}_f$ & $[\si{\tonne\per\jour}]$ &  \\
-		$\dot{m}_f$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_f$ & $[\si{\mol\per\second}]$ & 6.008 && 74.983 && 88.001 && 27.967 \\
+		$\dot{m}_i$ & $[\si{\tonne\per\jour}]$ & 560 && 1890 && 0 && 0 \\
+		$\dot{m}_i$ & $[\si{\kilo\gram\per\second}]$ & 6.5 && 21.9 && 0 && 0 \\
+		$\dot{n}_i$ & $[\si{\mol\per\second}]$ & 405.1 && 1215.3 && 0  && 0  \\\hline	
+		$\dot{m}_f$ & $[\si{\tonne\per\jour}]$ & 96.1 && 1349.7 && 176.0 && 783.1 \\
+		$\dot{m}_f$ & $[\si{\kilo\gram\per\second}]$ & 1.1 && 15.6 && 2.0 && 9.1\\
+		$\dot{n}_f$ & $[\si{\mol\per\second}]$ & 69.5 && 867.9 && 1018.5 && 323.7 \\
 	\end{tabular}
-	\caption{\label{tab:rcombustion}Résultat de la combustion}
+	\caption{\label{tab:rreformage1}Résultat du premier équilibre chimique}
 \end{table}
 \begin{table}[h]
 	\centering\renewcommand{\arraystretch}{1.2}
 	\begin{tabular}{ll|ccccccc}
 		&& \chemform{CO} & + & \chemform{H_2O} & $\rightleftharpoons$ & \chemform{H_2} & + & \chemform{CO_2} \\\hline
-		$\dot{m}_i$ & $[\si{\tonne\per\jour}]$ &  &&  &&  &&  \\
-		$\dot{m}_i$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_i$ & $[\si{\mol\per\second}]$ & 0 && 105 && 0  && 15  \\\hline	
-		$\dot{m}_f$ & $[\si{\tonne\per\jour}]$ &  \\
-		$\dot{m}_f$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_f$ & $[\si{\mol\per\second}]$ & 27.967 && 74.983 && 88.001 && 16.025 \\
+		$\dot{m}_i$ & $[\si{\tonne\per\jour}]$ & 0 && 1890 && 0 && 660 \\
+		$\dot{m}_i$ & $[\si{\kilo\gram\per\second}]$ & 0 && 21.9 && 0 && 7.6 \\
+		$\dot{n}_i$ & $[\si{\mol\per\second}]$ & 0 && 1215.3 && 0  && 173.6  \\\hline	
+		$\dot{m}_f$ & $[\si{\tonne\per\jour}]$ & 783.1 && 1349.7 && 176.0 && 705.1\\
+		$\dot{m}_f$ & $[\si{\kilo\gram\per\second}]$ & 9.1 && 15.6 && 2.0 && 8.2\\
+		$\dot{n}_f$ & $[\si{\mol\per\second}]$ & 323.7 && 867.9 && 1018.5 && 185.5 \\
 	\end{tabular}
-	\caption{\label{tab:rcombustion}Résultat de la combustion}
+	\caption{\label{tab:rreformage2}Résultat du deuxième équilibre chimique}
 \end{table}
 \subsection{Water Gas Shift (WGS)}
 \begin{table}[H]
 	\centering\renewcommand{\arraystretch}{1.2}
 	\begin{tabular}{ll|ccccccc}
 		&& \chemform{CO} & + & \chemform{H_2O} & $\longrightarrow$ & \chemform{CO_2} & + & \chemform{H_2} \\\hline
-		$\dot{m}_i$ & $[\si{\tonne\per\jour}]$ & \\
-		$\dot{m}_i$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_i$ & $[\si{\mol\per\second}]$ & 27.967 && 74.983 && 16.025  && 88.001  \\\hline	
-		$\dot{m}_f$ & $[\si{\tonne\per\jour}]$ &  \\
-		$\dot{m}_f$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_f$ & $[\si{\mol\per\second}]$ & 0 && 47.016 && 43.992 && 115.969\\
+		$\dot{m}_i$ & $[\si{\tonne\per\jour}]$ & 783.1 && 1349.7 && 705.1 && 176.0\\
+		$\dot{m}_i$ & $[\si{\kilo\gram\per\second}]$ & 9.1 && 15.6 && 8.2 && 2.0\\
+		$\dot{n}_i$ & $[\si{\mol\per\second}]$ & 323.7 && 867.9 && 185.5 && 1018.5 \\\hline	
+		$\dot{m}_f$ & $[\si{\tonne\per\jour}]$ & 0 && 846.3 && 1935.6 && 231.9\\
+		$\dot{m}_f$ & $[\si{\kilo\gram\per\second}]$ & 0 && 9.8 && 22.4 && 2.7\\
+		$\dot{n}_f$ & $[\si{\mol\per\second}]$ & 0 && 544.2 && 509.2 && 1342.2\\
 	\end{tabular}
-	\caption{\label{tab:rcombustion}Résultat de la combustion}
+	\caption{\label{tab:rwgs}Résultat de la réaction du gaz à l'eau (WGS)}
 \end{table}
 \subsection{Condensation et absorption}
-$$\begin{cases} \dotc{n}{H_2O} &= 47.016 \\ \dotc{n}{CO_2} &= 43.992 \end{cases}$$
+Nous pouvons maintenant dire quelles débits d'\chemform{H_2O} et de \chemform{CO_2} seront retirées du procédé durant l'étape de condensation et d'absorption : 
+\begin{equation}\begin{cases} \dotc{n}{H_2O} &= \SI{544.2}{\mol\per\second} =\SI{846.3}{\tonne\per\jour} =\SI{9.8}{\kilo\gram\per\second}\\ \dotc{n}{CO_2} &= \SI{509.2}{\mol\per\second} =\SI{1935.6}{\tonne\per\jour} =\SI{22.4}{\kilo\gram\per\second} \end{cases}\end{equation}
 \subsection{Synthèse de l'ammoniac}
 \begin{table}[H]
 	\centering\renewcommand{\arraystretch}{1.2}
 	\begin{tabular}{ll|ccccc}
 		&& \chemform{3H_2} & + & \chemform{N_2} & $\longrightarrow$ & \chemform{2NH_3} \\\hline
-		$\dot{m}_i$ & $[\si{\tonne\per\jour}]$ & \\
-		$\dot{m}_i$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_i$ & $[\si{\mol\per\second}]$ & 115.969 && 38.656 && 0 \\\hline	
-		$\dot{m}_f$ & $[\si{\tonne\per\jour}]$ &  \\
-		$\dot{m}_f$ & $[\si{\kilo\gram\per\second}]$ \\
-		$\dot{n}_f$ & $[\si{\mol\per\second}]$ & 0 && 0 && 77.312\\
+		$\dot{m}_i$ & $[\si{\tonne\per\jour}]$ & 231.9 && 1082.4 && 0\\
+		$\dot{m}_i$ & $[\si{\kilo\gram\per\second}]$ & 2.7 && 12.5 && 0\\
+		$\dot{n}_i$ & $[\si{\mol\per\second}]$ & 1342.2 && 447.4 && 0 \\\hline	
+		$\dot{m}_f$ & $[\si{\tonne\per\jour}]$ & 0 && 0 &&  1314.3\\
+		$\dot{m}_f$ & $[\si{\kilo\gram\per\second}]$ & 0 && 0 && 15.2\\
+		$\dot{n}_f$ & $[\si{\mol\per\second}]$ & 0 && 0 && 894.8\\
 	\end{tabular}
-	\caption{\label{tab:rcombustion}Résultat de la combustion}
+	\caption{\label{tab:rsynthese}Résultat de la synthèse de l'ammoniac}
 \end{table}
-\subsection{Calcul des excès}
+\subsection{Unité de séparation de l'air}
 Pour l'\chemform{O_2} nous remarquons que nous n'avons pas d'excès. Car tout l'\chemform{O_2} présent dans l'air réagit dans l'ATR. 
-Par contre pour le \chemform{N_2} la quantité présente dans l'air est de \SI{112.857}{\mol\per\second} et nous n'en utilisons que \SI{38.656}{\mol\per\second}.
-Nous avons donc un excès de \SI{74.201}{\mol\per\second}.
-\newpage
+Par contre pour le \chemform{N_2} le débit molaire est de \SI{1306.2}{\mol\per\second} et nous n'en utilisons que \SI{447.4}{\mol\per\second}.
+Nous avons donc un excès de :
+\begin{equation}\SI{858.8}{\mol\per\second} = \SI{2077.6}{\tonne\per\jour} = \SI{24.0}{\kilo\gram\per\jour}\end{equation}
+\subsection{Tableau récapitulatif}
+Maintenant que nous connaissons tous les débits entre les différentes unités opérationelle, nous pouvons faire un bilan de matière pour tout le procédé. Ce tableau récapitulatif ne reprend que les réactif entrant ou sortant du procédé.
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ll|cccccc}\hline
+		&& Air & \chemform{CH_4} & \chemform{H_2O} & \chemform{CO_2} & \chemform{N_2} & \chemform{NH_3} \\\hline
+		\textbf{Entrée}& \\
+		$\dot{m}_i$ & $[\si{\tonne\per\jour}]$ & 4137.8 & 800 & 1350 & 0 & 0 & 0\\
+		$\dot{m}_i$ & $[\si{\kilo\gram\per\second}]$ & 47.9 & 9.3 & 15.6 & 0 & 0 & 0\\
+		$\dot{n}_i$ & $[\si{\mol\per\second}]$ & 1653.4 & 578.7 & 868.1 & 0 & 0 & 0\\\hline
+		\textbf{Sortie}& \\
+		$\dot{m}_f$ & $[\si{\tonne\per\jour}]$ & 0 & 783.1 & 846.3 & 1935.6 & 2077.6 & 1314.3\\
+		$\dot{m}_f$ & $[\si{\kilo\gram\per\second}]$ & 0 & 1.1 & 9.8 & 22.4 & 24.0 & 15.2 \\
+		$\dot{n}_f$ & $[\si{\mol\per\second}]$ & 0 & 69.5 & 544.2 & 509.2 & 858.8 & 894.8\\\hline
+	\end{tabular}
+	\caption{\label{tab:recap}Tableau récapitulatif}
+\end{table}
 
+\newpage
 \part{Bilan d'énergie dans l'ATR}
 
 \section{Méthode}
