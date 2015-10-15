@@ -260,15 +260,18 @@ Afin de déterminer la température d'entrée, on calcule l'enthalpie totale dé
 	\label{eq:enthalpie}
 \end{equation}
 
-\section{Résulats}
-\subsection{Zone de combustion}
+\section{Résultats}
+\subsection{Calcul de la température d'entrée dans l'ATR}
+\subsubsection*{Zone de combustion}
+On calcule dans un premier temps la variation d'enthalpie totale pour le nombre de moles de \chemform{CH_4} qui réagit.
 \begin{chemeqn}
 	2O_2 + CH_4 \longrightarrow CO_2 + 2H_2O
 \end{chemeqn}
 $$\Delta H^0_\text{\chemform{CH_4}} = \SI{-803}{\kilo\joule\per\mol}$$
-$$\Delta\dot{H} = \SI{-28.105e9}{\kilo\joule\per\jour}$$
+$$\Delta\dot{H} = \SI{-12.045e9}{\kilo\joule\per\jour}$$
 
-\subsection{Zone de reformage}
+\subsubsection*{Zone de reformage}
+On calcule ensuite la variation d'enthalpie pour les deux réactions incomplètes.
 \begin{chemeqn}
 	CH_4 + H_2O \rightleftharpoons 3H_2 + CO
 \end{chemeqn}
@@ -281,13 +284,23 @@ $$\Delta\dot{H} = \SI{6.4942e9}{\kilo\jour\per\jour}$$
 $$\Delta H^0_\text{WGS} = \SI{-37.3}{\kilo\joule\per\mol}$$
 $$\Delta\dot{H} = \SI{-38.2325e6}{\kilo\jour\per\day}$$
 
-\subsection{Total}
+\subsubsection*{Total}
+On somme ensuite toutes les variations d'enthalpie et utilisons la formule \ref{eq:dH}. Ainsi nous trouvons la température d'entrée dans l'ATR. Pour le débit massique total nous faisons la somme de tous les débits massiques entrant dans l'ATR.
 \begin{align*}
 	\Delta\dot{H}_\text{tot} &= \sum\Delta\dot{H}\\
-							 &= \SI{-26.15e9}{\kilo\joule\per\jour} = \SI{-26.15e12}{\joule\per\jour}
+							 &= \SI{-5.589e9}{\kilo\joule\per\jour} = \SI{-5.589e12}{\joule\per\jour}
 \end{align*}
-$$T_i = \frac{-\Delta\dot{H}_\text{tot}+c_{p,g}\dot{m}_\text{tot}T_f}{c_{p,g}\dot{m}_\text{tot}}$$
+\begin{align*}
+T_i &= \frac{-\Delta\dot{H}_\text{tot}+c_{p,g}\dot{m}_\text{tot}T_f}{c_{p,g}\dot{m}_\text{tot}}\\
+&= \SI{1918.8}{\kelvin}
+\end{align*}
 
+\subsection{Calcul de la température finale dans la zone de combustion}
+Dans ce cas ci, nous utilisons la même méthode que pour la température d'entrée. Au lieu de sommer toutes les variations d'enthalpie, nous utilisons celle de la zone de combustion. Le débit massique total reste identique.
+\begin{align*}
+T_f &= \frac{\Delta\dot{H}_\text{\chemform{CH_4}}+c_{p,g}\dot{m}_\text{tot}T_i}{c_{p,g}\dot{m}_\text{tot}}\\
+&= \SI{369.6}{\kelvin}
+\end{align*}
 
 \end{document}
 
