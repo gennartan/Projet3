@@ -330,32 +330,36 @@ Afin de déterminer la température d'entrée, on calcule l'enthalpie totale dé
 \subsection{Calcul de la température d'entrée dans l'ATR}
 \subsubsection*{Zone de combustion}
 On calcule dans un premier temps la variation d'enthalpie totale pour le nombre de moles de \chemform{CH_4} qui réagit.
-\begin{chemeqn}
+\begin{chemmath}
 	2O_2 + CH_4 \longrightarrow CO_2 + 2H_2O
-\end{chemeqn}
-$$\Delta H^0_\text{\chemform{CH_4}} = \SI{-803}{\kilo\joule\per\mol}$$
-$$\Delta\dot{H} = \SI{-12.045e9}{\kilo\joule\per\jour}$$
+\end{chemmath}
+\begin{equation*}\Delta H^0_{\text{\chemform{CH4},comb},\SI{1200}{\kelvin}} = \SI{-803}{\kilo\joule\per\mol}\end{equation*}
+En multipliant cette valeur par le nombre de mol de \chemform{CH_4} ayant réagi durant la combustion, nous obtenons la variation d'enthalpie de la zone de combustion :
+\begin{equation}\Delta\dot{H}_\text{comb} = \SI{-139.4e3}{\kilo\joule\per\second}\end{equation}
 
 \subsubsection*{Zone de reformage}
-On calcule ensuite la variation d'enthalpie pour les deux réactions incomplètes.
-\begin{chemeqn}
+On calcule ensuite la variation d'enthalpie pour les deux réactions incomplètes. On commence par le premier équilibre :
+\begin{chemmath}
 	CH_4 + H_2O \rightleftharpoons 3H_2 + CO
-\end{chemeqn}
-$$\Delta H^0_\text{SMR} = \SI{224.0}{\kilo\joule\per\mol}$$
-$$\Delta\dot{H} = \SI{6.4942e9}{\kilo\jour\per\jour}$$
-
-\begin{chemeqn}
+\end{chemmath}
+\begin{equation*}\Delta H^0_{\text{SMR},\SI{948}{\kelvin}} = \SI{224.0}{\kilo\joule\per\mol}\end{equation*}
+En multipliant cette valeur par la premère solution du système ($\xi$), nous obtenons la variation d'enthalpie du vaporeformage du méthane :
+\begin{equation}\Delta\dot{H}_\text{SMR} = \SI{75.16e3}{\kilo\joule\per\second}\end{equation}
+On passe ensuite au second équilibre :
+\begin{chemmath}
 	CO + H_2O \rightleftharpoons H_2 + CO_2
-\end{chemeqn}
-$$\Delta H^0_\text{WGS} = \SI{-37.3}{\kilo\joule\per\mol}$$
-$$\Delta\dot{H} = \SI{-38.2325e6}{\kilo\jour\per\day}$$
+\end{chemmath}
+\begin{equation*}\Delta H^0_{\text{WGS},\SI{948}{\kelvin}} = \SI{-37.3}{\kilo\joule\per\mol}\end{equation*}
+En multipliant cette valeur par la deuxième solution du système ($\beta$), nous obtenons la variation d'enthalpie de la réaction incomplète du gaz à l'eau : 
+\begin{equation}\Delta\dot{H}_\text{WGS} = \SI{-442.5}{\kilo\jour\per\second}\end{equation}
 
 \subsubsection*{Total}
-On somme ensuite toutes les variations d'enthalpie et utilisons la formule \ref{eq:dH}. Ainsi nous trouvons la température d'entrée dans l'ATR. Pour le débit massique total nous faisons la somme de tous les débits massiques entrant dans l'ATR.
-\begin{align*}
-	\Delta\dot{H}_\text{tot} &= \sum\Delta\dot{H}\\
-							 &= \SI{-5.589e9}{\kilo\joule\per\jour} = \SI{-5.589e12}{\joule\per\jour}
-\end{align*}
+On somme ensuite toutes les variations d'enthalpie et utilisons la formule \ref{eq:enthalpie}. Ainsi nous trouvons la température d'entrée dans l'ATR. Pour le débit massique total nous faisons la somme de tous les débits massiques entrant dans l'ATR.
+\begin{align}
+	\Delta\dot{H}_\text{tot} &= \sum\Delta\dot{H} = \Delta\dot{H}_\text{comb} + \Delta\dot{H}_\text{SMR} + \Delta\dot{H}_\text{WGS}\\
+							 &= \SI{-64.69e3}{\kilo\joule\per\second} = \SI{-64.69e6}{\joule\per\second} \\
+\end{align}
+On trouve une formule de la température initiale en fonction de la variation d'enthalpie totale :
 \begin{align*}
 T_i &= \frac{-\Delta\dot{H}_\text{tot}+c_{p,g}\dot{m}_\text{tot}T_f}{c_{p,g}\dot{m}_\text{tot}}\\
 &= \SI{1918.8}{\kelvin}
