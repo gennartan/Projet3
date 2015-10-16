@@ -71,7 +71,7 @@ Nous commencerons par calculer pour toutes les étapes du procédé les bilans d
 Deuxièmement nous étudierons ce bilan avec des paramètres donnés. 
 
 \section{Méthode de calcul des débits molaires}
-Les débits molaires que nous utilisons dans nos calculs dépendent de l'unité dans laquelle ils sont calculés. Par exemple le $\dotc{n}{CH_4}$ de la zone de combustion n'est pas le même que celui de la zone de reformage. Au début de chaque unité nous reprenons les débits de l'unité précédente. Nous rappelons au lecteur que le symbole $\dot{n}_i$ correspond au débit molaire en entrée (avant réaction) et $\dot{n}_f$ au débit molaire en sortie (après réaction).
+Les débits molaires que nous utilisons dans nos calculs dépendent de l'unité opérationnelle dans laquelle ils sont calculés. Par exemple le $\dotc{n}{CH_4}$ de la zone de combustion n'est pas le même que celui de la zone de reformage. Au début de chaque unité nous reprenons les débits de l'unité précédente. Nous rappelons au lecteur que le symbole $\dot{n}_i$ correspond au débit molaire en entrée (avant réaction) et $\dot{n}_f$ au débit molaire en sortie (après réaction).
 \subsection{ATR : zone de combustion}
 Nous commencons par la zone de combustion où se produit une combustion du méthane dans le dioxygène :
 \begin{chemeqn}
@@ -176,7 +176,7 @@ La dernière étape du procédé consiste à synthétiser l'ammoniac à partir d
 	\end{tabular}
 	\caption{\label{tab:synthese}Avancement de la synthèse de l'ammoniac}
 \end{table}
-Avec des paramètres donnés, nous essayerons d'introduire dans la réaction un débit molaire de \chemform{N_2} égal à celui de l'\chemform{H_2}. Le but étant de n'avoir aucun excès d'\chemform{H_2}.
+Avec des paramètres donnés, nous devons introduire dans la réaction un débit molaire de \chemform{N_2} 3 fois plus faible que celui d'\chemform{H_2}.
 
 \subsection{Air séparation unit}
 Maintenant que nous connaissons les quantités nécessaires de \chemform{N_2} ainsi que celles de \chemform{O_2} qui interviennent dans l'ATR, nous pouvons déterminer la quantité d'air entrant dans l'unité de séparation d'air. Dans cette unité rentre de l'air composé de \chemform{O_2}, \chemform{N_2} et \chemform{H_2O}. En pourcentage cela nous donne : 21\% de \chemform{N_2} et 79\% de \chemform{O_2}. L'eau contenue dans l'air est négligeable et ressort directement après
@@ -299,19 +299,20 @@ Nous avons donc un excès de :
 Maintenant que nous connaissons tous les débits entre les différentes unités opérationelle, nous pouvons faire un bilan de matière pour tout le procédé. Ce tableau récapitulatif ne reprend que les réactif entrant ou sortant du procédé.
 \begin{table}[H]
 	\centering
-	\begin{tabular}{ll|cccccc}\hline
-		&& Air & \chemform{CH_4} & \chemform{H_2O} & \chemform{CO_2} & \chemform{N_2} & \chemform{NH_3} \\\hline
-		\textbf{Entrée}& \\
-		$\dot{m}_i$ & $[\si{\tonne\per\jour}]$ & 4137.8 & 800 & 1350 & 0 & 0 & 0\\
-		$\dot{m}_i$ & $[\si{\kilo\gram\per\second}]$ & 47.9 & 9.3 & 15.6 & 0 & 0 & 0\\
-		$\dot{n}_i$ & $[\si{\mol\per\second}]$ & 1653.4 & 578.7 & 868.1 & 0 & 0 & 0\\\hline
-		\textbf{Sortie}& \\
-		$\dot{m}_f$ & $[\si{\tonne\per\jour}]$ & 0 & 783.1 & 846.3 & 1935.6 & 2077.6 & 1314.3\\
-		$\dot{m}_f$ & $[\si{\kilo\gram\per\second}]$ & 0 & 1.1 & 9.8 & 22.4 & 24.0 & 15.2 \\
-		$\dot{n}_f$ & $[\si{\mol\per\second}]$ & 0 & 69.5 & 544.2 & 509.2 & 858.8 & 894.8\\\hline
+	\begin{tabular}{ll|cccccc|c}\hline
+		&& Air & \chemform{CH_4} & \chemform{H_2O} & \chemform{CO_2} & \chemform{N_2} & \chemform{NH_3} & \textbf{Somme}\\\hline
+		\textbf{Entrée}& &&&&&&&\\
+		$\dot{m}_i$ & $[\si{\tonne\per\jour}]$ & 4137.8 & 800 & 1350 & 0 & 0 & 0 & 6287.8\\
+		$\dot{m}_i$ & $[\si{\kilo\gram\per\second}]$ & 47.9 & 9.3 & 15.6 & 0 & 0 & 0 & 72.8\\
+		$\dot{n}_i$ & $[\si{\mol\per\second}]$ & 1653.4 & 578.7 & 868.1 & 0 & 0 & 0 & \\\hline
+		\textbf{Sortie}& &&&&&&&\\
+		$\dot{m}_f$ & $[\si{\tonne\per\jour}]$ & 0 & 96.1 & 846.3 & 1935.6 & 2077.6 & 1314.3 & 6269.9\\
+		$\dot{m}_f$ & $[\si{\kilo\gram\per\second}]$ & 0 & 1.1 & 9.8 & 22.4 & 24.0 & 15.2 & 72.5\\
+		$\dot{n}_f$ & $[\si{\mol\per\second}]$ & 0 & 69.5 & 544.2 & 509.2 & 858.8 & 894.8 & \\\hline
 	\end{tabular}
 	\caption{\label{tab:recap}Tableau récapitulatif}
 \end{table}
+On remarque que la somme des débits en entrée est sensiblement égal aux débits en sortie. Nos calculs ont une erreur de 0.3\% pour les \si{\tonne\per\jour} et 0.4\% pour les \si{\kilo\gram\per\second}. Ce pourcentage est probablement du aux arrondis qui ont été fait durant les différentes étapes du procédé.
 
 \newpage
 \part{Bilan d'énergie dans l'ATR}
@@ -359,17 +360,19 @@ On somme ensuite toutes les variations d'enthalpie et utilisons la formule \ref{
 	\Delta\dot{H}_\text{tot} &= \sum\Delta\dot{H} = \Delta\dot{H}_\text{comb} + \Delta\dot{H}_\text{SMR} + \Delta\dot{H}_\text{WGS}\\
 							 &= \SI{-64.69e3}{\kilo\joule\per\second} = \SI{-64.69e6}{\joule\per\second} \\
 \end{align}
-On trouve une formule de la température initiale en fonction de la variation d'enthalpie totale :
+On trouve une formule de la température initiale en fonction de la variation d'enthalpie totale. Dans cette formule nous changeons le signe de la variation d'enthalpie totale car l'énergie libérée ne peut sortir de l'ATR et va donc chauffer les produits.
+
 \begin{align*}
-T_i &= \frac{-\Delta\dot{H}_\text{tot}+c_{p,g}\dot{m}_\text{tot}T_f}{c_{p,g}\dot{m}_\text{tot}}\\
-&= \SI{1918.8}{\kelvin}
+T_i &= \frac{\Delta\dot{H}_\text{tot}+c_{p,g}\dot{m}_\text{tot}T_f}{c_{p,g}\dot{m}_\text{tot}}\\
+&= \SI{481.2}{\kelvin}
 \end{align*}
+Avec $T_f = \SI{1200}{\kelvin}$ et $\dot{m}_\text{tot}$ la somme des masses molaires entrant dans l'ATR : $\dot{m}_\text{tot} = \SI{36.0}{\kilo\gram\per\second}$
 
 \subsection{Calcul de la température finale dans la zone de combustion}
-Dans ce cas ci, nous utilisons la même méthode que pour la température d'entrée. Au lieu de sommer toutes les variations d'enthalpie, nous utilisons celle de la zone de combustion. Le débit massique total reste identique.
+Dans ce cas ci, nous utilisons la même méthode que pour la température d'entrée. Au lieu de sommer toutes les variations d'enthalpie, nous utilisons celle de la zone de combustion. Le débit massique total reste identique. Il faut faire attention à ce que la variation d'enthalpie soit en \si{\joule\per\second}.
 \begin{align*}
-T_f &= \frac{\Delta\dot{H}_\text{\chemform{CH_4}}+c_{p,g}\dot{m}_\text{tot}T_i}{c_{p,g}\dot{m}_\text{tot}}\\
-&= \SI{369.6}{\kelvin}
+T_f &= \frac{-\Delta\dot{H}_\text{comb}+c_{p,g}\dot{m}_\text{tot}T_i}{c_{p,g}\dot{m}_\text{tot}}\\
+&= \SI{2030.1}{\kelvin}
 \end{align*}
 
 \end{document}
