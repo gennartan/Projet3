@@ -358,22 +358,22 @@ En multipliant cette valeur par la deuxième solution du système ($\beta$), nou
 On somme ensuite toutes les variations d'enthalpie et utilisons la formule \ref{eq:enthalpie}. Ainsi nous trouvons la température d'entrée dans l'ATR. Pour le débit massique total nous faisons la somme de tous les débits massiques entrant dans l'ATR.
 \begin{align}
 	\Delta\dot{H}_\text{tot} &= \sum\Delta\dot{H} = \Delta\dot{H}_\text{comb} + \Delta\dot{H}_\text{SMR} + \Delta\dot{H}_\text{WGS}\\
-							 &= \SI{-64.69e3}{\kilo\joule\per\second} = \SI{-64.69e6}{\joule\per\second} \\
+							 &= \SI{-64.69e3}{\kilo\joule\per\second} = \SI{-64.69e6}{\joule\per\second}
 \end{align}
 On trouve une formule de la température initiale en fonction de la variation d'enthalpie totale. Dans cette formule nous changeons le signe de la variation d'enthalpie totale car l'énergie libérée ne peut sortir de l'ATR et va donc chauffer les produits.
 
-\begin{align*}
+\begin{align}
 T_i &= \frac{\Delta\dot{H}_\text{tot}+c_{p,g}\dot{m}_\text{tot}T_f}{c_{p,g}\dot{m}_\text{tot}}\\
 &= \SI{481.2}{\kelvin}
-\end{align*}
+\end{align}
 Avec $T_f = \SI{1200}{\kelvin}$ et $\dot{m}_\text{tot}$ la somme des masses molaires entrant dans l'ATR : $\dot{m}_\text{tot} = \SI{36.0}{\kilo\gram\per\second}$
 
 \subsection{Calcul de la température finale dans la zone de combustion}
 Dans ce cas ci, nous utilisons la même méthode que pour la température d'entrée. Au lieu de sommer toutes les variations d'enthalpie, nous utilisons celle de la zone de combustion. Le débit massique total reste identique. Il faut faire attention à ce que la variation d'enthalpie soit en \si{\joule\per\second}.
-\begin{align*}
+\begin{align}
 T_f &= \frac{-\Delta\dot{H}_\text{comb}+c_{p,g}\dot{m}_\text{tot}T_i}{c_{p,g}\dot{m}_\text{tot}}\\
 &= \SI{2030.1}{\kelvin}
-\end{align*}
+\end{align}
 
 \end{document}
 
