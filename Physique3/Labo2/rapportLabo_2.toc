@@ -1,0 +1,13 @@
+\select@language {french}
+\contentsline {section}{\numberline {1}Exp\IeC {\'e}rience num\IeC {\'e}ro 1 : ondes lumineuses (nm)}{1}
+\contentsline {subsection}{\numberline {1.1}Matos}{1}
+\contentsline {subsection}{\numberline {1.2}Exp\IeC {\'e}rience \IeC {\`a} mener}{1}
+\contentsline {subsection}{\numberline {1.3}Mesures et r\IeC {\'e}sultats}{2}
+\contentsline {subsubsection}{\numberline {1.3.1}Calcul de la distance d s\IeC {\'e}parant les fentes}{2}
+\contentsline {subsubsection}{\numberline {1.3.2}Calcul de la longueur d'onde du laser}{2}
+\contentsline {subsubsection}{\numberline {1.3.3}Calcul de la largeur des fentes}{3}
+\contentsline {subsubsection}{\numberline {1.3.4}Observation du cheveux}{3}
+\contentsline {section}{\numberline {2}Exp\IeC {\'e}rience num\IeC {\'e}ro 2 : micro-ondes (cm)}{3}
+\contentsline {subsection}{\numberline {2.1}Matos}{3}
+\contentsline {subsection}{\numberline {2.2}Exp\IeC {\'e}riences a mener}{3}
+\contentsline {section}{\numberline {3}Conclusion}{4}

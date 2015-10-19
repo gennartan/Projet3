@@ -1,0 +1,184 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry} % marges
+
+% French
+\usepackage[utf8x]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+
+% Packages à importer
+
+\usepackage{lmodern, graphicx, tikz, pgfplots}
+\usepackage{graphicx,amssymb,amstext,amsmath}
+\usepackage{siunitx, enumitem, listings, rotating}
+\usepackage{fancyhdr, url, ifthen, multirow}
+
+\begin{document}
+%-----------------------------------------------------------
+% page de couverture
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\fancyhf{} %clear all headers and footers fields
+\fancyhead[R]{\thepage} %prints the page number on the right side of the header
+\fancyhead[L]{Rapport de laboratoire}
+
+
+\pagestyle{fancy}
+\thispagestyle{empty}
+\begin{titlepage}
+\begin{center}
+
+\includegraphics[width=0.15\textwidth]{../images/logo.JPG}~\\[1cm]
+
+\textsc{\LARGE Université Catholique de Louvain}\\[1.5cm]
+
+\textsc{\Large Projet 2}\\[0.5cm]
+
+% Title
+\HRule \\[0.4cm]
+{ \huge \bfseries Rapport de laboratoire \\[0.4cm] }
+
+\HRule \\[1.5cm]
+
+% Author and supervisor
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+Groupe \textsc{11.64} \\
+
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+%\emph{Tuteur:} \\
+%David \textsc{Cordova}
+\end{flushright}
+\end{minipage}
+
+\vfill
+
+% Bottom of the page
+{\large \today}
+\end{center}
+\end{titlepage}
+%-----------------------------------------------------------
+\tableofcontents
+\section{Expérience numéro 1 : ondes lumineuses (nm)}
+\subsection{Matos}
+\begin{enumerate}
+\item d’un laser, de longueur d’onde inconnue ;
+\item d’un réseau formé de longues fentes transparentes gravées dans un fond opaque. La période de répétition des fentes, d, est indiquée sur le réseau, mais est vraisemblablement incorrecte.
+\item d’une source de lumière blanche (tube à décharge plasma rempli de vapeur de Hg). Ce tube, lorsqu’il est mis sous tension (utilisez le ballast a 220V ; attention, les ampoules sont chaudes et fragiles),  émet une série de raies lumineuses dont voici la séquence (les raies intenses sont en italique) : violet 1 (408,6 nm), violet 2 (411,4 nm), bleu (439,7 nm), turquoise (495,9 nm), vert (546,0 nm), jaune 1 (581,8 nm), jaune 2 3(584,6 nm) et orange 1 2 (601,0 nm). D’autres raies peuvent exister, dues au néon contenu dans l’ampoule et servant au démarrage, ou à des dépôts sur les parois ; \label{matos}
+\item d’une lunette de visée montée sur un goniomètre, avec une fente d’entrée. Attention, ne regardez JAMAIS le laser avec la lunette de visée, votre oeil serait définitivement endommagé.
+\item d’un ensemble de plaques percées de fentes et de trous, ainsi que de diapositives portant un réseau hexagonal de trous.
+
+\end{enumerate}
+\subsection{Expérience à mener}
+\begin{enumerate}
+\item Positionnez le réseau au centre du goniomètre, et illuminez-le par la lumière issue de l’ampoule d’Hg à travers la fente (réglée afin d’avoir les raies les plus fines possibles mais une luminosité suffisante). Vous devriez pouvoir effectuer des mesures vous permettant de calculer la période de répétition des fentes du réseau, d. Pensez à vérifier la perpendicularité du réseau par rapport au faisceau incident (comment ?). N’oubliez pas d’estimer les erreurs !
+\item Ceci fait, illuminez le réseau à l’aide du laser, et mesurez les figures d’interférences obtenues sur un écran blanc placé à une distance connue mesurée avec précision. Ceci devrait vous permettre de calculer la longueur d’onde du laser.
+\item Placez dans le faisceau du laser les fentes linéaires d’épaisseur variables. Comment varie la figure de diffraction avec la largeur des fentes ? Déterminez la largeur des fentes à partir de ces figures de diffraction, en effectuant des mesures précises. Ensuite, examinez les figures de diffraction et d’interférence obtenues à partir des ouvertures circulaires ou
+des diapositives portant un réseau hexagonal de trous. Que voyez-vous ? Schématisez et expliquez qualitativement.
+
+\item Pourriez-vous proposer des éléments d’explication pour l’observation du fait qu’un cheveu placé dans le faisceau diffracte
+la lumière de manière identique à une ouverture de même taille placée dans le faisceau ?
+\end{enumerate}
+
+\subsection{Mesures et résultats}
+	\subsubsection{Calcul de la distance d séparant les fentes}
+	Nous envoyons un rayon lumineux possédant plusieurs ondes de différentes longueur d'onde $\lambda$ différentes connues (voir matos \ref{matos}) vers le réseau formé de longues fentes de distance $d$ inconnue. Le réseau est placé perpendiculairement au rayon incident. 
+	
+	A une distance $D$ de ce réseau, on place un panneau blanc (écran) sur lequel on vera les ondes lumineuses réfractées se poser.
+	
+	On va mesurer la distance $x$ qui sépare le rayon ayant continué tout droit  avec celui qui se trouve de la meme couleur le plus proche et à sa droite. Nous allons nommer $\alpha$ l'angle de réfraction.
+	$$ \alpha = \arctan (\frac{x}{D}) $$
+	
+	On peut ensuite calculer la distance $d$ séparant les fentes avec l'aide de la relation suivante :
+	$$ d = \frac{\lambda}{\sin \alpha} $$
+
+
+	\begin{table}[!h]
+	\begin{center}
+	\begin{tabular}{|c|c|c|c|c|}
+	\hline
+		& $\lambda$ [nm] & $x$ [m] & $\alpha$ [deg] & $d$ [$\mu $m] \\
+	\hline
+		Violet 1 & 408.6 & & 11.2 & 2.104\\
+		Violet 2 & 411.4 & & 11.4 & 2.081\\
+		Bleu & 439.7 & & 17.2 & 1.487\\
+		Turquoise & 495.9 & & 19.85 & 1.460\\
+		Vert & 546.0 & & 21.9 & 1.464 \\
+		Jaune 1 & 581.8 & & 23 & 1.489 \\
+		Jaune 2 & 584.6 & & 23.2 & 1.484\\
+		Orange & 601.0 & & 23.8 & 1.489\\
+		Mean & N/A & N/A & N/A &1.6323 \\
+	\hline
+	
+	\end{tabular}
+	\caption{Data measured and calculated}
+	\end{center}
+	\end{table}
+
+\subsubsection{Calcul de la longueur d'onde du laser}
+	Nous utilisons le même procédé qu'utilisé précédement, a l'exception que l'inconnue est différente. Nous mesurons : 
+	$$ x = 0.143 [m]$$
+	$$ D = 0.22 [m]$$
+	$$ \alpha = \arctan (\frac{x}{D}) = 33.02 $$
+	$$ \text{Donc :    }  \lambda = \sin \alpha \cdot d = 889.6 [nm]$$
+	
+\subsubsection{Calcul de la largeur des fentes}
+Nous disposons de trois fentes de largeur d différente.  Nous essayons d'estimer la largeur de chacune de ces fentes, avec 
+$$ D = 1.457 [m]$$
+
+
+\begin{table}[h!]
+\centering 
+\begin{tabular}{|c|c|c|c|}
+\hline
+	Fente & $x$ [m]& $\alpha$ & $d$ [mm] \\
+\hline
+	1 (petite) & 0.014 & 0.5505 & 0.0926 \\
+	2 (moyenne) & 0.0075 & 0.2949 & 0.1728 \\
+	3 (grande\footnote{tout est relatif}) & 0.0035 & 0.1376 & 0.3703 \\
+\hline
+\end{tabular}
+\caption{Bonjour}
+\end{table}
+\subsubsection{Observation du cheveux}
+
+\centering
+\begin{tabular}{|c|c|c|c|}
+	\hline
+	nom & x [m] & $\alpha$ & diametre du cheveux \\
+	\hline
+	Juline & 2.1 \\
+	Adrien & 2.5 \\
+	Pierre & 2.3 \\
+	Antoine & 1.7 \\
+	Anthony & 2 \\
+	Brice & \\
+	\hline
+\end{tabular}
+\section{Expérience numéro 2 : micro-ondes (cm)}
+\subsection{Matos}
+\begin{enumerate}
+	\item évetteur de mirco-ondes polarisées et de son alimentation (de longueur d'onde de quelques centimètres)
+	\item Récepteur micro-ondes incluant un filtre polarisant (à orienter convenablement)
+	\item Deux miroirs micro-ondes (quadrillage métallique serré pratiquement totalement réfléchissant)
+	\item miroir semi-transparent aux micro-ondes
+	\item Plaques avec ou 2 fentes
+	\item supports aimantés permettant de fixer ces dispositifs.
+\end{enumerate}
+
+\subsection{Expériences a mener}
+\begin{enumerate}
+	\item Fabriquer un interféromètre de Michelson en faisant attention a polariser l'onde dans le bon sens.
+	\item Fabriquer un interféromètre de de Fabry-Pérot. Il s'agit de créer une cavité résonnante dans le chemin de lo'nde entre l'émetteur et le récpteur. A cet egget placer simplement les deux plaques réfléchissantes parallèlemnet entre elles permpendiculairement au faisceu entre l'émetteur et le récepteur placés en ligne droite. Les miroirs interrompent la propagation du signal sauf pour certaines distnaces entre eux. Mesurez ces distances, discutez l'origine du phénomène et déterminez à nouveau la longueur d'onde de l'onde.
+	\item A présent placez l'émetteur à quelques centimères du centre du support du dispositif et le récepteur à 20-30 cm de ce centre. Déterminez le diagramme de rayonnemnet de l'émetteur en fonction de l'angle entre la direction d'émission et la direction de réception. Faites de même lorqu'une simple fentre ou une double fente sont placées au centre du dispositif. Déduisez de ces mesures la largeur de la fente et l'intredistnce entre les deux fentes de la double fente, et comparez avec une mesure directe de ces paramètres.
+\end{enumerate}
+
+\section{Conclusion}
+\end{document}
+
+
