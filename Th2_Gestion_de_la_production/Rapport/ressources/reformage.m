@@ -5,9 +5,11 @@ function [ X ] = reformage(Tref_ATR, P_ATR, N_CH4, N_H2O, N_CO2)
     % N_H2O    : debit molaire de CH4 [mol/s]
     % N_CO2    : debit molaire de CH4 [mol/s]
     
+    % Constantes d'équilibre
 	KSMR = 10^((-11650/Tref_ATR)+13.076);
 	KWGS = 10^((1910/Tref_ATR)-1.764);
 
+    % Resolution du systeme : 2 equations 2 inconnues
 	function F = myfun(x)
 		F(1) = (((x(1)-x(2))*(3*x(1)+x(2))^3 * (P_ATR/10^5)^2) / ... 
 		       ((N_CH4+N_H2O+2*x(1)+N_CO2)^2 * (N_H2O-x(1)-x(2))*(N_CH4-x(1))))-KSMR;

@@ -1,8 +1,36 @@
-function main(m_CH4, R_O2_CH4, R_H2O_CH4, T_ATR, p_ATR)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+function [ T_i T_max CH4 O2 N2 H2O CO2 CO H2 NH3]  = main(m_CH4, R_O2_CH4, R_H2O_CH4, T_ATR, p_ATR)
+%MAIN Simule le procédé de synthèse de l'ammoniac avec les paramètres
+%     donnés en entrée. Une interface graphique est aussi disponible pour
+%     l'utilisateur. Le détail des calculs effectués sont disponibles dans
+%     notre rapport de gestion de la production rendu le 16/10/2015
+%     V1.0 -23/10/2015- Groupe 1264, Membres:
+%       Paul Asselberghs, Brice Bertin, Adrien Couplet, Grégory Creupelandt
+%       Anthony Gatin, Antoine Gennart, Juline Gillard, Pierre Martin
+%   === INPUT ===
+%       m_CH4     : le débit d'alimentation de CH4 [t/j]
+%       R_O2_CH4  : Rapport O2/CH4 à l'entrée de l'ATR 
+%       R_H2O_CH4 : Rapport H2O/CH4 à l'entrée de l'ATR
+%       T_ATR     : Température à la sortie de la zone de reforming (ATR) [K]
+%       p_ATR     : La pression d'opération de l'ATR [bar]
+%   
+%   === OUTPUT ===
+%       T_i : Température à l'entrée de l'ATR [K]
+%       T_max : Température maximale dans la zone de combustion [K]
+%       Le reste du output sont des vecteurs exprimant l'évolution du débit
+%       d'un réactif à différentes étapes du procédé. L'unité par défaut
+%       est [mol/s].
+%           CH4(1) : après l'air separation unit
+%           CH4(2) : après la zone de combustion
+%           CH4(3) : après la zone de reformage
+%           CH4(4) : après le water-gas-shift
+%           CH4(5) : après la condensation/absorption
+%           CH4(6) : après la synthèse de l'ammoniac
+%   
     
-    global fig title results params params1_1 params1_2 params1_3 params2_1 params2_2 params2_3 params3_1 params3_2 params3_3 params4_1 params4_2 params4_3 params5_1 params5_2 params5_3;
+    %% Variables Globales
+    % On utilise des variables globales afin que celles-ci soient
+    % accessibles et modifiables n'importe où dans le programme. 
+    global fig titl results params params1_1 params1_2 params1_3 params2_1 params2_2 params2_3 params3_1 params3_2 params3_3 params4_1 params4_2 params4_3 params5_1 params5_2 params5_3;
     global totaux totaux1_1 totaux1_2 totaux1_3 totaux2_1 totaux2_2 totaux2_3 totaux3_1 totaux3_2 totaux3_3 totaux4_1 totaux4_2 totaux4_3 totaux5_1 totaux5_2 totaux5_3 totaux6_1 totaux6_2 totaux6_3 totaux7_1 totaux7_2 totaux7_3 totaux8_1 totaux8_2 totaux8_3 totaux9_1 totaux9_2 totaux9_3 totaux10_1 totaux10_2 totaux10_3;
     global asu asu1_1 asu1_2 asu1_3 asu2_1 asu2_2 asu2_3 asu3_1 asu3_2 asu3_3 asu4_1 asu4_2 asu4_3;
     global comb comb1_1 comb1_2 comb1_3 comb2_1 comb2_2 comb2_3 comb3_1 comb3_2 comb3_3 comb4_1 comb4_2 comb4_3 comb5_1 comb5_2 comb5_3 comb6_1 comb6_2 comb6_3 comb7_1 comb7_2 comb7_3 comb8_1 comb8_2 comb8_3 comb9_1 comb9_2 comb9_3;
@@ -11,25 +39,31 @@ function main(m_CH4, R_O2_CH4, R_H2O_CH4, T_ATR, p_ATR)
     global conabs conabs1_1 conabs1_2 conabs1_3 conabs2_1 conabs2_2 conabs2_3;
     global synth synth1_1 synth1_2 synth1_3 synth2_1 synth2_2 synth2_3 synth3_1 synth3_2 synth3_3 synth4_1 synth4_2 synth4_3 synth5_1 synth5_2 synth5_3 synth6_1 synth6_2 synth6_3;
     global btn_simul panel_select panel_text units_select units_text;
+    global plotpanel plot_text plot1 plot2 plot3 plot4 plot5 plot6 plot7 plot8 plot_btn; 
     global R_O2_Air R_N2_Air SecPerDay;
     global M_Air M_CH4 M_CO M_CO2 M_H2 M_H2O M_N2 M_NH3 M_O2;
     global n_CH4 n_O2 n_H2O n_Air n_N2 n_CO2 n_CO n_H2 n_NH3;
-    global dH_CH4 dH_SMR dH_WGS dH_comb dH_reform c m_tot T_i T_max;
-    global CH4 O2 N2 H2O CO2 CO H2 NH3;
+    global dH_CH4 dH_SMR dH_WGS dH_comb dH_reform c m_tot;
     global currentUnits;
-        
-    R_O2_Air = 0.21; R_N2_Air = 0.79; SecPerDay = 86400;
-    M_O2  = 32.0; M_N2  = 28.0; M_H2O = 18.0; M_CH4 = 16.0; M_CO2 = 44.0; M_CO  = 28.0; M_H2  = 2.0 ; M_NH3 = 17.0; M_Air = 28.97;
-    dH_CH4 = -803000; dH_SMR = 224000; dH_WGS = -37300; c = 2500;
-    currentUnits = 1;
+    
+    %% Variables constantes
+    R_O2_Air = 0.21; R_N2_Air = 0.79; % Composition de l'air
+    SecPerDay = 86400; % Nombre de secondes par jour [s/jour]
+    M_O2  = 32.0; M_N2  = 28.0; M_H2O = 18.0; M_CH4 = 16.0; M_CO2 = 44.0; M_CO  = 28.0; M_H2  = 2.0 ; M_NH3 = 17.0; M_Air = 28.97; % Masses molaires [g/mol]
+    dH_CH4 = -803000; dH_SMR = 224000; dH_WGS = -37300; % Variation d'enthalpie [J/mol]
+    c = 2500; % Capacité thermique [J/kgK]
+    currentUnits = 1; % Unité utilisé [mol/s]
     
     function createGui()
+    %% CREATEGUI Crée l'interface graphique du programme, chaque
+     %              élément est une variable globale qui pourra être
+     %              modifiée pendant l'exécution du programme.
         fig = figure('Visible','off','Position',[100,100,800,500],'Name','Gestion de la production d''ammoniac Groupe 1264','ToolBar','none','MenuBar','none','NumberTitle','off');
-        title  = uicontrol('Style','text','Fontsize',20,'String','Gestion de la production d''ammoniac','Position',[0,470,800,30]);
+        titl  = uicontrol('Style','text','Fontsize',20,'String','Gestion de la production d''ammoniac','Position',[0,470,800,30]);
         params = uipanel('Parent',fig,'Title','Paramètres','FontSize',12,'FontWeight','bold','Visible','on','Units','pixels','Position',[5, 340,350,130]);
             params1_1  = uicontrol('Parent',params,'Style','text','BackgroundColor',[1 1 1],'String','Débit d''alimentation de CH4','HorizontalAlignment','left','Position',[5,90,250,15]);
             params1_2 = uicontrol('Parent',params,'Style','edit','BackgroundColor',[1 1 1],'String','FILL','HorizontalAlignment','center','Position',[255,90,50,15]);
-            params1_3  = uicontrol('Parent',params,'Style','text','BackgroundColor',[1 1 1],'String','T/j','HorizontalAlignment','right','Position',[305,90,40,15]);
+            params1_3  = uicontrol('Parent',params,'Style','text','BackgroundColor',[1 1 1],'String','t/j','HorizontalAlignment','right','Position',[305,90,40,15]);
             params2_1  = uicontrol('Parent',params,'Style','text','BackgroundColor',[1 1 1],'String','Rapport O2/CH4 à l''entrée de l''ATR','HorizontalAlignment','left','Position',[5,70,250,15]);
             params2_2 = uicontrol('Parent',params,'Style','edit','BackgroundColor',[1 1 1],'String','FILL','HorizontalAlignment','center','Position',[255,70,50,15]);
             params2_3  = uicontrol('Parent',params,'Style','text','BackgroundColor',[1 1 1],'String','','HorizontalAlignment','right','Position',[305,70,40,15]);
@@ -219,19 +253,27 @@ function main(m_CH4, R_O2_CH4, R_H2O_CH4, T_ATR, p_ATR)
         panel_text   = uicontrol('Style','text','BackgroundColor',[1 1 1],'HorizontalAlignment','left','String','Sélectionnez une unité opérationelle :','Position',[15,275,330,15]);
         panel_select = uicontrol('Style','popupmenu','String', {'Totaux','Air Separation Unit','ATR : combustion','ATR : reformage','Water Gas Shift','Condensation/Absorption','Synthèse de l''ammoniac'},'Callback', @setpanel,'Position',[15,250,330,25]);
         units_text   = uicontrol('Style','text','BackgroundColor',[1 1 1],'HorizontalAlignment','left','String','Sélectionnez l''unité désirée :','Position',[15,225,330,15]);
-        units_select = uicontrol('Style','popupmenu','String', {'mol/s','kg/s','T/s'},'Callback',@setunit,'Position',[15,200,330,25]);
+        units_select = uicontrol('Style','popupmenu','String', {'mol/s','kg/s','t/j'},'Callback',@setunit,'Position',[15,200,330,25]);
+        plotpanel = uipanel('Parent',fig,'Title','Graphe','FontSize',12,'FontWeight','bold','Visible','on','Units','pixels','Position',[5, 5,350,190]);
+            plot_text = uicontrol('Style','text','Parent',plotpanel,'BackgroundColor',[1 1 1],'HorizontalAlignment','left','String','Sélectionnez les réactifs :','Position',[10,140,200,15]);
+            plot1     = uicontrol('Style','checkbox','Parent',plotpanel,'String','CH4','Value',0,'Position',[10, 120, 100, 20]);
+            plot2     = uicontrol('Style','checkbox','Parent',plotpanel,'String','O2','Value',0,'Position',[10, 100, 100, 20]);
+            plot3     = uicontrol('Style','checkbox','Parent',plotpanel,'String','N2','Value',0,'Position',[10, 80, 100, 20]);
+            plot4     = uicontrol('Style','checkbox','Parent',plotpanel,'String','H2O','Value',0,'Position',[10, 60, 100, 20]);
+            plot5     = uicontrol('Style','checkbox','Parent',plotpanel,'String','CO2','Value',0,'Position',[110, 120, 100, 20]);
+            plot6     = uicontrol('Style','checkbox','Parent',plotpanel,'String','CO','Value',0,'Position',[110, 100, 100, 20]);
+            plot7     = uicontrol('Style','checkbox','Parent',plotpanel,'String','H2','Value',0,'Position',[110, 80, 100, 20]);
+            plot8     = uicontrol('Style','checkbox','Parent',plotpanel,'String','NH3','Value',0,'Position',[110, 60, 100, 20]);
+            plot_btn  = uicontrol('Style','pushbutton','Parent',plotpanel,'String','Plot','FontSize',12,'FontWeight','bold','HorizontalAlignment','center','Callback',@plotReactif,'Position',[150,30,180,25]);
         set(fig,'Visible','on');
     end 
 
     function preprocess()
-        % Fill params
-        set(params1_2,'String',m_CH4);
-        set(params2_2,'String',R_O2_CH4);
-        set(params3_2,'String',R_H2O_CH4);
-        set(params4_2,'String',T_ATR);
-        set(params5_2,'String',p_ATR);
-        
-        % Calculate
+    %% PREPROCESS Calculs avant le début du procédé.
+     %               Calcule les variables qui peuvent déjà l'être.
+     %               Rempli l'interface graphique de ce qui a déjà pu être
+     %               calculé.
+        % Tous les calculs avant le début du procédé
         n_CH4 = m_CH4*(10^6)/M_CH4/SecPerDay;
         n_O2  = R_O2_CH4 * n_CH4;
         n_H2O = R_H2O_CH4 * n_CH4;
@@ -246,7 +288,12 @@ function main(m_CH4, R_O2_CH4, R_H2O_CH4, T_ATR, p_ATR)
         H2(1) = 0;
         NH3(1) = 0;
         
-        % Fill
+        % Rempli l'interface graphique
+        set(params1_2,'String',m_CH4);
+        set(params2_2,'String',R_O2_CH4);
+        set(params3_2,'String',R_H2O_CH4);
+        set(params4_2,'String',T_ATR);
+        set(params5_2,'String',p_ATR);
         set(totaux1_2,'String',n_Air);
         set(totaux2_2,'String',n_CH4);
         set(totaux3_2,'String',n_H2O);
@@ -258,7 +305,13 @@ function main(m_CH4, R_O2_CH4, R_H2O_CH4, T_ATR, p_ATR)
         set(asu3_2,'String',n_N2);
     end
     function combustion()
-        % Calcul
+    %% COMBUSTION Calculs dans la zone de combustion
+     %               Calcule les variables qui peuvent déjà l'être.
+     %               Rempli l'interface graphique de ce qui a déjà pu être
+     %               calculé.
+     %               CH4     +    2* O2     -->   CO2     +     2* H2O
+     
+        % Calculs dans la zone de combustion
         m_tot = ((n_O2*M_O2)+(n_CH4*M_CH4)+(n_H2O*M_H2O))/1000;
         n_reac = min(n_CH4, n_O2/2); % [mol/s] nombre de mol reagissant (par unité de mole de CO2 produite)
         n_O2 = n_O2 - 2*n_reac; % [mol/s]
@@ -275,7 +328,7 @@ function main(m_CH4, R_O2_CH4, R_H2O_CH4, T_ATR, p_ATR)
         H2(2) = 0;
         NH3(2) = 0;
         
-        % Fill
+        % Rempli l'interface graphique
         set(comb4_2,'String',n_CH4);
         set(comb5_2,'String',n_O2);
         set(comb6_2,'String',n_CO2);
@@ -285,8 +338,17 @@ function main(m_CH4, R_O2_CH4, R_H2O_CH4, T_ATR, p_ATR)
         set(reform3_2,'String',n_CO2);
     end
     function reformage()
+    %% REFORMAGE Calculs dans la zone de reformage
+     %               Calcule les variables qui peuvent déjà l'être.
+     %               Rempli l'interface graphique de ce qui a déjà pu être
+     %               calculé.
+     % 1e équilibre  CH4    +      H2O      <-->    3* H2    +    CO
+     % 2e équilibre  CO     +      2* H2O   <-->    H2       +    CO2   
+     
+        % Constantes d'équilibre
         KSMR = 10^((-11650/T_ATR)+13.076);
         KWGS = 10^((1910/T_ATR)-1.764);
+        % Resolution du systeme : 2 equations 2 inconnues
         function F = myfun(x)
     		F(1) = (((x(1)-x(2))*(3*x(1)+x(2))^3 * (p_ATR)^2) / ... 
     		       ((n_CH4+n_H2O+2*x(1)+n_CO2)^2 * (n_H2O-x(1)-x(2))*(n_CH4-x(1))))-KSMR;
@@ -296,6 +358,8 @@ function main(m_CH4, R_O2_CH4, R_H2O_CH4, T_ATR, p_ATR)
     	X0(2) = 0.05*n_CH4;
     	OPTIONS = optimoptions('fsolve', 'Display','none','MaxFunEvals', 1000);
     	X = fsolve(@myfun, X0, OPTIONS);
+        % X(1) : degre d'avancement de la premiere reaction [mol/s]
+        % X(2) : degre d'avancement de la seconde reaction [mol/s]
         
         n_CH4 = (n_CH4-X(1));
         n_H2O = (n_H2O-X(1)-X(2));
@@ -314,6 +378,7 @@ function main(m_CH4, R_O2_CH4, R_H2O_CH4, T_ATR, p_ATR)
         H2(3) = n_H2;
         NH3(3) = 0;
         
+        % Rempli l'interface graphique
         set(comb8_2,'String',T_i);
         set(comb9_2,'String',T_max);
         set(reform4_2,'String',X(1));
@@ -335,6 +400,11 @@ function main(m_CH4, R_O2_CH4, R_H2O_CH4, T_ATR, p_ATR)
         set(totaux10_2,'String',T_max);
     end
     function watergasshift()
+    %% WATERGASSHIFT Calculs dans la réaction de WGS
+     %               Calcule les variables qui peuvent déjà l'être.
+     %               Rempli l'interface graphique de ce qui a déjà pu être
+     %               calculé.
+     %               CO     +     H2O    -->    H2     +   CO2
         n_reac=min(n_CO, n_H2O);
         n_H2O = n_H2O-n_reac;
         n_CO = n_CO-n_reac;
@@ -349,6 +419,7 @@ function main(m_CH4, R_O2_CH4, R_H2O_CH4, T_ATR, p_ATR)
         H2(4) = n_H2; H2(5) = n_H2;
         NH3(4) = 0; NH3(5) = 0;
         
+        % Rempli l'interface graphique
         set(wgs5_2,'String',n_CO);
         set(wgs6_2,'String',n_H2O);
         set(wgs7_2,'String',n_CO2);
@@ -361,6 +432,11 @@ function main(m_CH4, R_O2_CH4, R_H2O_CH4, T_ATR, p_ATR)
         set(synth2_2,'String',n_N2);
     end
     function synthese()
+    %% SYNTHESE Calculs dans la réaction de synthèse
+     %               Calcule les variables qui peuvent déjà l'être.
+     %               Rempli l'interface graphique de ce qui a déjà pu être
+     %               calculé.
+     %               3* H2     +     N2     -->    2* NH3   
         n_reac=min(n_N2, n_H2/3);
         n_H2 = n_H2-3*n_reac;
         n_N2 = n_N2-n_reac; 
@@ -374,6 +450,7 @@ function main(m_CH4, R_O2_CH4, R_H2O_CH4, T_ATR, p_ATR)
         H2(6) = n_H2;
         NH3(6) = n_NH3;
         
+        % Rempli l'interface graphique
         set(asu4_2,'String',n_N2);
         set(synth3_2,'String',n_H2);
         set(synth4_2,'String',n_N2);
@@ -383,6 +460,9 @@ function main(m_CH4, R_O2_CH4, R_H2O_CH4, T_ATR, p_ATR)
     end
 
     function simulate(source,callbackdata)
+    %% SIMULATE fonction de simulation
+     %             Relance la fonction principale avec les paramètres de
+     %             l'interface graphique..
         setunit(1,1);
         main(str2num(get(params1_2,'String')), ...
              str2num(get(params2_2,'String')), ...
@@ -393,6 +473,7 @@ function main(m_CH4, R_O2_CH4, R_H2O_CH4, T_ATR, p_ATR)
 
      %===== Graphical Functions =====
     function setpanel(source,callbackdata)
+    %% SETPANEL Sélection des panneaux d'informations.
         set(totaux,'Visible','off'); set(asu,'Visible','off'); set(comb,'Visible','off'); set(reform,'Visible','off'); set(wgs,'Visible','off'); set(conabs,'Visible','off'); set(synth,'Visible','off'); 
         switch(get(source,'Value'))
             case 1 
@@ -415,6 +496,9 @@ function main(m_CH4, R_O2_CH4, R_H2O_CH4, T_ATR, p_ATR)
     end
 
     function setunit(source,callbackdata)
+    %% SETUNIT Modifie les unités utilisées dans l'interface 
+     %            graphique. Cette fonction est capable de convertir les
+     %            unités [mol/s],[kg/s],[t/j] en [mol/s],[kg/s],[t/j]
         function OneS(ui)
             set(ui,'String','mol/s');
         end
@@ -458,7 +542,7 @@ function main(m_CH4, R_O2_CH4, R_H2O_CH4, T_ATR, p_ATR)
                 TwoS(conabs1_3); TwoS(conabs2_3);
                 OneTwo(synth1_2,M_H2); OneTwo(synth2_2,M_N2); OneTwo(synth3_2,M_H2); OneTwo(synth4_2,M_N2); OneTwo(synth5_2,M_NH3); OneTwo(synth6_2,M_CH4);
                 TwoS(synth1_3); TwoS(synth2_3); TwoS(synth3_3); TwoS(synth4_3); TwoS(synth5_3); TwoS(synth6_3);
-                CH4*M_CH4/1000; O2*M_CO2/1000; N2*M_N2/1000; H2O*M_H2O/1000; CO2*M_CO2/1000; CO*M_CO/1000; H2*M_H2/1000; NH3*M_NH3/1000;
+                CH4 = CH4*M_CH4/1000; O2 = O2*M_CO2/1000; N2 = N2*M_N2/1000; H2O = H2O*M_H2O/1000; CO2 = CO2*M_CO2/1000; CO = CO*M_CO/1000; H2 = H2*M_H2/1000; NH3 = NH3*M_NH3/1000;
                 currentUnits = 2;
             elseif currentUnits == 1 && get(source,'Value') == 3 % [mol/s] ---> [t/j]
                 OneThree(totaux1_2,M_Air); OneThree(totaux2_2,M_CH4); OneThree(totaux3_2,M_H2O); OneThree(totaux4_2,M_CH4); OneThree(totaux5_2,M_H2O); OneThree(totaux6_2,M_CO2); OneThree(totaux7_2,M_N2); OneThree(totaux8_2,M_NH3);
@@ -475,7 +559,7 @@ function main(m_CH4, R_O2_CH4, R_H2O_CH4, T_ATR, p_ATR)
                 ThreeS(conabs1_3); ThreeS(conabs2_3);
                 OneThree(synth1_2,M_H2); OneThree(synth2_2,M_N2); OneThree(synth3_2,M_H2); OneThree(synth4_2,M_N2); OneThree(synth5_2,M_NH3); OneThree(synth6_2,M_CH4);
                 ThreeS(synth1_3); ThreeS(synth2_3); ThreeS(synth3_3); ThreeS(synth4_3); ThreeS(synth5_3); ThreeS(synth6_3);
-                CH4*M_CH4/1000/1000*SecPerDay; O2*M_CO2/1000/1000*SecPerDay; N2*M_N2/1000/1000*SecPerDay; H2O*M_H2O/1000/1000*SecPerDay; CO2*M_CO2/1000/1000*SecPerDay; CO*M_CO/1000/1000*SecPerDay; H2*M_H2/1000/1000*SecPerDay; NH3*M_NH3/1000/1000*SecPerDay;
+                CH4 = CH4*M_CH4/1000/1000*SecPerDay; O2 = O2*M_CO2/1000/1000*SecPerDay; N2 = N2*M_N2/1000/1000*SecPerDay; H2O = H2O*M_H2O/1000/1000*SecPerDay; CO2 = CO2*M_CO2/1000/1000*SecPerDay; CO = CO*M_CO/1000/1000*SecPerDay; H2 = H2*M_H2/1000/1000*SecPerDay; NH3 = NH3*M_NH3/1000/1000*SecPerDay;
                 currentUnits = 3;
             elseif currentUnits == 2 && get(source,'Value') == 1 % [kg/s] ---> [mol/s]
                 TwoOne(totaux1_2,M_Air); TwoOne(totaux2_2,M_CH4); TwoOne(totaux3_2,M_H2O); TwoOne(totaux4_2,M_CH4); TwoOne(totaux5_2,M_H2O); TwoOne(totaux6_2,M_CO2); TwoOne(totaux7_2,M_N2); TwoOne(totaux8_2,M_NH3);
@@ -492,7 +576,7 @@ function main(m_CH4, R_O2_CH4, R_H2O_CH4, T_ATR, p_ATR)
                 OneS(conabs1_3); OneS(conabs2_3);
                 TwoOne(synth1_2,M_H2); TwoOne(synth2_2,M_N2); TwoOne(synth3_2,M_H2); TwoOne(synth4_2,M_N2); TwoOne(synth5_2,M_NH3); TwoOne(synth6_2,M_CH4);
                 OneS(synth1_3); OneS(synth2_3); OneS(synth3_3); OneS(synth4_3); OneS(synth5_3); OneS(synth6_3);
-                CH4/M_CH4*1000; O2/M_CO2*1000; N2/M_N2*1000; H2O/M_H2O*1000; CO2/M_CO2*1000; CO/M_CO*1000; H2/M_H2*1000; NH3/M_NH3*1000;
+                CH4 = CH4/M_CH4*1000; O2 = O2/M_CO2*1000; N2 = N2/M_N2*1000; H2O = H2O/M_H2O*1000; CO2 = CO2/M_CO2*1000; CO = CO/M_CO*1000; H2 = H2/M_H2*1000; NH3 = NH3/M_NH3*1000;
                 currentUnits = 1;
             elseif currentUnits == 2 && get(source,'Value') == 3 % [kg/s] ---> [t/j]
                 TwoThree(totaux1_2,M_Air); TwoThree(totaux2_2,M_CH4); TwoThree(totaux3_2,M_H2O); TwoThree(totaux4_2,M_CH4); TwoThree(totaux5_2,M_H2O); TwoThree(totaux6_2,M_CO2); TwoThree(totaux7_2,M_N2); TwoThree(totaux8_2,M_NH3);
@@ -509,7 +593,7 @@ function main(m_CH4, R_O2_CH4, R_H2O_CH4, T_ATR, p_ATR)
                 ThreeS(conabs1_3); ThreeS(conabs2_3);
                 TwoThree(synth1_2,M_H2); TwoThree(synth2_2,M_N2); TwoThree(synth3_2,M_H2); TwoThree(synth4_2,M_N2); TwoThree(synth5_2,M_NH3); TwoThree(synth6_2,M_CH4);
                 ThreeS(synth1_3); ThreeS(synth2_3); ThreeS(synth3_3); ThreeS(synth4_3); ThreeS(synth5_3); ThreeS(synth6_3);
-                CH4*M_CH4/1000*SecPerDay; O2*M_CO2/1000*SecPerDay; N2*M_N2/1000*SecPerDay; H2O*M_H2O/1000*SecPerDay; CO2*M_CO2/1000*SecPerDay; CO*M_CO/1000*SecPerDay; H2*M_H2/1000*SecPerDay; NH3*M_NH3/1000*SecPerDay;
+                CH4 = CH4*M_CH4/1000*SecPerDay; O2 = O2*M_CO2/1000*SecPerDay; N2 = N2*M_N2/1000*SecPerDay; H2O = H2O*M_H2O/1000*SecPerDay; CO2 = CO2*M_CO2/1000*SecPerDay; CO = CO*M_CO/1000*SecPerDay; H2 = H2*M_H2/1000*SecPerDay; NH3 = NH3*M_NH3/1000*SecPerDay;
                 currentUnits = 3;
             elseif currentUnits == 3 && get(source,'Value') == 1 % [t/j] ---> [mol/s]
                 ThreeOne(totaux1_2,M_Air); ThreeOne(totaux2_2,M_CH4); ThreeOne(totaux3_2,M_H2O); ThreeOne(totaux4_2,M_CH4); ThreeOne(totaux5_2,M_H2O); ThreeOne(totaux6_2,M_CO2); ThreeOne(totaux7_2,M_N2); ThreeOne(totaux8_2,M_NH3);
@@ -526,7 +610,7 @@ function main(m_CH4, R_O2_CH4, R_H2O_CH4, T_ATR, p_ATR)
                 OneS(conabs1_3); OneS(conabs2_3);
                 ThreeOne(synth1_2,M_H2); ThreeOne(synth2_2,M_N2); ThreeOne(synth3_2,M_H2); ThreeOne(synth4_2,M_N2); ThreeOne(synth5_2,M_NH3); ThreeOne(synth6_2,M_CH4);
                 OneS(synth1_3); OneS(synth2_3); OneS(synth3_3); OneS(synth4_3); OneS(synth5_3); OneS(synth6_3);
-                CH4/M_CH4*1000*1000/SecPerDay; O2/M_CO2*1000*1000/SecPerDay; N2/M_N2*1000*1000/SecPerDay; H2O/M_H2O*1000*1000/SecPerDay; CO2/M_CO2*1000*1000/SecPerDay; CO/M_CO*1000*1000/SecPerDay; H2/M_H2*1000*1000/SecPerDay; NH3/M_NH3*1000*1000/SecPerDay;
+                CH4 = CH4/M_CH4*1000*1000/SecPerDay; O2 = O2/M_CO2*1000*1000/SecPerDay; N2 = N2/M_N2*1000*1000/SecPerDay; H2O = H2O/M_H2O*1000*1000/SecPerDay; CO2 = CO2/M_CO2*1000*1000/SecPerDay; CO = CO/M_CO*1000*1000/SecPerDay; H2 = H2/M_H2*1000*1000/SecPerDay; NH3 = NH3/M_NH3*1000*1000/SecPerDay;
                 currentUnits = 1;
             elseif currentUnits == 3 && get(source,'Value') == 2 % [t/j] ---> [kg/s]
                 ThreeTwo(totaux1_2,M_Air); ThreeTwo(totaux2_2,M_CH4); ThreeTwo(totaux3_2,M_H2O); ThreeTwo(totaux4_2,M_CH4); ThreeTwo(totaux5_2,M_H2O); ThreeTwo(totaux6_2,M_CO2); ThreeTwo(totaux7_2,M_N2); ThreeTwo(totaux8_2,M_NH3);
@@ -543,7 +627,7 @@ function main(m_CH4, R_O2_CH4, R_H2O_CH4, T_ATR, p_ATR)
                 TwoS(conabs1_3); TwoS(conabs2_3);
                 ThreeTwo(synth1_2,M_H2); ThreeTwo(synth2_2,M_N2); ThreeTwo(synth3_2,M_H2); ThreeTwo(synth4_2,M_N2); ThreeTwo(synth5_2,M_NH3); ThreeTwo(synth6_2,M_CH4);
                 TwoS(synth1_3); TwoS(synth2_3); TwoS(synth3_3); TwoS(synth4_3); TwoS(synth5_3); TwoS(synth6_3);
-                CH4*1000/SecPerDay; O2*1000/SecPerDay; N2*1000/SecPerDay; H2O*1000/SecPerDay; CO2*1000/SecPerDay; CO*1000/SecPerDay; H2*1000/SecPerDay; NH3*1000/SecPerDay;
+                CH4 = CH4*1000/SecPerDay; O2 = O2*1000/SecPerDay; N2 = N2*1000/SecPerDay; H2O = H2O*1000/SecPerDay; CO2 = CO2*1000/SecPerDay; CO = CO*1000/SecPerDay; H2 = H2*1000/SecPerDay; NH3 = NH3*1000/SecPerDay;
                 currentUnits = 2;
             end
         catch ME
@@ -559,19 +643,80 @@ function main(m_CH4, R_O2_CH4, R_H2O_CH4, T_ATR, p_ATR)
         end   
     end
 
+    function plotReactif(source,callbackdata)
+    %% PLOTREACTIF Crée un graphe des réactifs sélectionnés dans
+     %            l'interface graphique.
+        plotfig = figure(); hold on;
+        ax = gca;
+        ax.XTickLabel = {'ASU' 'COMB','REFORM','WGS','CON/ABS','SYNTH'};
+        xlabel('Étapes');
+        if currentUnits == 1
+            ylabel('Débits molaires [mol/s]');
+        elseif currentUnits == 2
+            ylabel('Débits massiques [kg/s]');
+        else
+            ylabel('Débits massiques [t/j]');
+        end
+        
+        title('Débits après chaque étape du procédé')
+        i = 1;
+        if get(plot1,'Value')==1
+            plot(CH4);
+            legendInfo{i} = ['CH4']; 
+            i = i + 1;
+        end
+        if get(plot2,'Value')==1
+            plot(O2);
+            legendInfo{i} = ['O2']; 
+            i = i + 1;
+        end
+        if get(plot3,'Value')==1
+            plot(N2);
+            legendInfo{i} = ['N2']; 
+            i = i + 1;
+        end
+        if get(plot4,'Value')==1
+            plot(H2O);
+            legendInfo{i} = ['H2O']; 
+            i = i + 1;
+        end
+        if get(plot5,'Value')==1
+            plot(CO2);
+            legendInfo{i} = ['CO2']; 
+            i = i + 1;
+        end
+        if get(plot6,'Value')==1
+            plot(CO);
+            legendInfo{i} = ['CO']; 
+            i = i + 1;
+        end
+        if get(plot7,'Value')==1
+            plot(H2);
+            legendInfo{i} = ['H2']; 
+            i = i + 1;
+        end
+        if get(plot8,'Value')==1
+            plot(NH3);
+            legendInfo{i} = ['NH3']; 
+            i = i + 1;
+        end
+        legend(legendInfo);
+    end
+
+    % Afin de ne pas créer une nouvelle interface graphique à chaque
+    % simulation, le programme vérifie d'abord si l'interface existe déjà
+    % avant d'en créer une nouvelle.
     try
-        title.Visible;
+        titl.Visible;
     catch ME
         createGui();
     end
     
+    % Exécute toutes les étapes du procédé.
     preprocess();
     combustion();
     reformage();
     watergasshift();
     synthese();
-    
-   
-
 end
 
